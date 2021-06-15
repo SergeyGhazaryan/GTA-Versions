@@ -6,8 +6,8 @@ const VersionInformation = () => {
   let { id } = useParams();
 
   const information = useMemo(() => {
-    if (!data[id].information) return;
-    return data[id].information;
+    if (!data[id - 1].information) return;
+    return data[id - 1].information;
   }, [id]);
 
   return information;

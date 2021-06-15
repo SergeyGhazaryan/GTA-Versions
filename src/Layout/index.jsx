@@ -14,7 +14,7 @@ const Layout = () => {
             <GtaVersions
               imageLink={v.imageLink}
               versionName={v.versionName}
-              id={i}
+              id={i + 1}
             />
           ))}
         </div>
