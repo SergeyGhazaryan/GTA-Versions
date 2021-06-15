@@ -1,6 +1,6 @@
 import React from 'react';
-import { gtaData } from '../data/data';
-import { GtaVersions } from '../components/gtaVersions/index';
+import { data } from '../data';
+import { GtaVersions } from '../components/gtaVersions';
 
 import './styles.scss';
 
@@ -10,7 +10,7 @@ const Layout = () => {
       <div className='header'>GTA Versions</div>
       <div className='gta-version'>
         <div className='version-component'>
-          {gtaData.map((v, i) => (
+          {data.map((v, i) => (
             <GtaVersions
               imageLink={v.imageLink}
               versionName={v.versionName}

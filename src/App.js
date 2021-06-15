@@ -8,7 +8,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path='/' component={Layout} />
-        <Route path='/gta/:id' component={VersionInformation} />
+        <Route exact path='/gta/:id' component={VersionInformation} />
       </Switch>
     </Router>
   );
