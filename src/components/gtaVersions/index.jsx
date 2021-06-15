@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './styles.css';
+import './styles.scss';
 
 export const GtaVersions = ({ imageLink, versionName, id }) => {
   return (
