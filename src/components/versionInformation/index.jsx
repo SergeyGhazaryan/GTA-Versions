@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { data } from '../data';
+import { data } from '../../data';
 
 const VersionInformation = () => {
   let { id } = useParams();
@@ -11,7 +11,7 @@ const VersionInformation = () => {
     return necessaryData.information;
   }, [id]);
 
-  return information;
+  return <div>{information}</div>;
 };
 
 export default VersionInformation;

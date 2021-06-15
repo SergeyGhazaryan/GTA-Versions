@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './layout';
-import VersionInformation from './versionInformation';
+import VersionInformation from './components/versionInformation';
 
 const App = () => {
   return (
