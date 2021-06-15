@@ -1,5 +1,6 @@
 export const data = [
   {
+    id: 1,
     imageLink:
       'https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fgrand-theft-auto-v%2Fhome%2FGTAV_EGS_Artwork_1920x1080_Hero-Carousel_V06-1920x1080-1503e4b1320d5652dd4f57466c8bcb79424b3fc0.jpg',
     versionName: 'Grand Theft Auto',
@@ -12,6 +13,7 @@ export const data = [
     The series has been critically acclaimed and commercially successful, having shipped more than 280 million units with an estimated gross revenue of over $9 billion,[4][5] making it the fourth-highest selling video game franchise of all time, behind Nintendo's Mario and Pokémon franchises,[6] and Tetris.[7] In 2006, Grand Theft Auto was featured in a list of British design icons in the Great British Design Quest organised by the BBC and the Design Museum.[8] In 2013, The Telegraph ranked Grand Theft Auto among Britain's most successful exports.[9] The series has also been controversial for its adult nature and violent themes.`,
   },
   {
+    id: 2,
     imageLink:
       'https://www.liveabout.com/thmb/Br05vyJOq_nRXVudAhfFbPArA2I=/1024x768/filters:no_upscale():max_bytes(150000):strip_icc()/Grand-Theft-Auto-3-56aba0695f9b58b7d009ccb9.jpg',
     versionName: 'Grand Theft Auto III',
@@ -22,6 +24,7 @@ export const data = [
     Grand Theft Auto III received critical acclaim, with praise particularly directed at its concept and gameplay. However, the game also generated controversy, with criticism directed at its depictions of violence and sex. It became the best-selling video game of 2001, and has sold over 14.5 million copies since. Considered by many critics as one of the most significant titles of the sixth generation of video games and a landmark game in the open world concept, it is often listed among the greatest video games. It won several year-end accolades, including Game of the Year awards from several gaming publications. Since its release, it has received ports to many different gaming platforms. An enhanced version of the game was released on mobile platforms in 2011, for the game's tenth anniversary. Its successor, Grand Theft Auto: Vice City, was released in October 2002, and two prequels, Advance and Liberty City Stories, were released in 2004 and 2005, respectively.`,
   },
   {
+    id: 3,
     imageLink:
       'http://www.essentiallysports.com/wp-content/uploads/2243596.jpg',
     versionName: 'Vice City',
@@ -32,6 +35,7 @@ export const data = [
     Upon release, Vice City received critical acclaim, with praise particularly directed at its music, gameplay and open world design. However, the game also generated controversy over its depiction of violence and racial groups, sparking lawsuits and protests. Vice City became the best-selling video game of 2002 and has sold over 17.5 million copies. Considered one of the most significant titles of the sixth generation of video games and one of the greatest video games ever made, it won numerous year-end accolades including Game of the Year awards from several gaming publications. Since its release, the game has received numerous ports to many gaming platforms. An enhanced version was released for mobile platforms in 2012 for the game's tenth anniversary. Its successor, Grand Theft Auto: San Andreas, was released in 2004, and a prequel, Vice City Stories, was released in 2006.`,
   },
   {
+    id: 4,
     imageLink:
       'https://image.api.playstation.com/cdn/UP1004/CUSA03506_00/ApbiYazPxRotK7mHO7itkpZeTMsGjoen.png',
     versionName: 'San Andreas',
@@ -42,6 +46,7 @@ export const data = [
     Considered by many reviewers to be one of the greatest video games ever made, San Andreas received critical acclaim upon release, with praise directed at its music, story and gameplay, and criticism for its graphics and some aspects of its controls. It was the best-selling video game of 2004, and with over 27.5 million copies sold worldwide as of 2011, it is the best-selling PlayStation 2 game and one of best-selling video games of all time.[3] Like its predecessors, San Andreas is cited as a landmark in video games for its far-reaching influence within the industry. The game's violence and sexual content was the source of much public concern and controversy. In particular, a player-made software patch, dubbed the "Hot Coffee mod", unlocked a previously hidden sexual scene. A high-definition remastered version of the game was released for both Xbox 360 and PlayStation 3 in 2015. In June 2018, the game was added to the Xbox One Backward Compatible library. San Andreas has been ported to various other platforms and services, such as OS X,[4][5] Xbox Live, PlayStation Network[6] and mobile devices (iOS, Android, Windows Phone and Fire OS).[7] The next main entry in the series, Grand Theft Auto IV, was released in April 2008.`,
   },
   {
+    id: 5,
     imageLink:
       'https://images-na.ssl-images-amazon.com/images/I/71cLP04HFgL._AC_SL1160_.jpg',
     versionName: 'Grand Theft Auto IV',
@@ -54,6 +59,7 @@ export const data = [
     It was released for the PlayStation 3 and Xbox 360 consoles in April 2008, and for Microsoft Windows in December. Upon release, the game received critical acclaim, with praise particularly directed at the narrative and open world design. Grand Theft Auto IV broke industry sales records and became the fastest-selling entertainment product in history at the time, earning US$310 million in its first day and US$500 million in its first week. Considered one of the most significant titles of the seventh generation of video games, and by many critics as one of the greatest video games of all time, it won year-end accolades, including Game of the Year awards from several gaming publications. It is among the best-selling video games with over 25 million copies sold by 2013. The game also generated controversy, with criticism directed at the game's depiction of violence and players' ability to drive under the influence of alcohol. Its successor, Grand Theft Auto V, was released in September 2013.`,
   },
   {
+    id: 6,
     imageLink:
       'https://cdn.jwplayer.com/v2/media/8JaQjAHX/poster.jpg?width=720',
     versionName: 'The Lost and Damned',
@@ -64,6 +70,7 @@ export const data = [
     The game received very positive reviews upon release and is retrospectively considered to be among the best downloadable content packs on record.`,
   },
   {
+    id: 7,
     imageLink:
       'https://www.rockstargames.com/chinatownwars/img/en_us/_site/3.0/fob.gif',
     versionName: 'Chinatown Wars',
@@ -72,6 +79,7 @@ export const data = [
     The game was fundamentally designed for players to have notable interactions with objects on the DS and smartphone systems via their touch-screen controls, while offering unique elements of gameplay not found in other entries within the Grand Theft Auto series. The most notable element, the ability to buy drugs from suppliers and sell them to dealers to make money, proved controversial following the game's release. Despite this, the game received largely positive reviews from critics.`,
   },
   {
+    id: 8,
     imageLink:
       'https://images-na.ssl-images-amazon.com/images/I/91T0XQv8gEL._SL1500_.jpg',
     versionName: 'Grand Theft Auto V',

@@ -10,11 +10,11 @@ const Layout = () => {
       <div className='header'>GTA Versions</div>
       <div className='gta-version'>
         <div className='version-component'>
-          {data.map((v, i) => (
+          {data.map((v) => (
             <GtaVersions
               imageLink={v.imageLink}
               versionName={v.versionName}
-              id={i + 1}
+              id={v.id}
             />
           ))}
         </div>

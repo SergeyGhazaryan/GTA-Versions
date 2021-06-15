@@ -6,8 +6,9 @@ const VersionInformation = () => {
   let { id } = useParams();
 
   const information = useMemo(() => {
-    if (!data[id - 1].information) return;
-    return data[id - 1].information;
+    const necessaryData = data.find((d) => d.id == id);
+    if (!necessaryData) return;
+    return necessaryData.information;
   }, [id]);
 
   return information;
