@@ -2,7 +2,7 @@ import React from 'react';
 import { data } from '../data';
 import { GtaVersions } from '../components/gtaVersions';
 
-import './styles.scss';
+import './styles.css';
 
 const Layout = () => {
   return (
