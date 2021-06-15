@@ -1,20 +1,20 @@
 import React from 'react';
-import { gtaModel } from '../constants/gtaModel';
-import { GtaVersions } from '../Components';
+import { gtaData } from '../data/data';
+import { GtaVersions } from '../components/gtaVersions/index';
 
-import '../Styles/styles.css';
+import './styles.scss';
 
 const Layout = () => {
   return (
     <>
       <div className='header'>GTA Versions</div>
-      <div className='gtaVersion'>
-        <div className='versionComponent'>
-          {gtaModel.map((v, i) => (
+      <div className='gta-version'>
+        <div className='version-component'>
+          {gtaData.map((v, i) => (
             <GtaVersions
               imageLink={v.imageLink}
               versionName={v.versionName}
-              index={i}
+              id={i}
             />
           ))}
         </div>

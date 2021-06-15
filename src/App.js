@@ -1,16 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Layout from './Layout';
-import VersionInformation from './VersionInformation';
-
-import './Styles/styles.css';
+import Layout from './layout';
+import VersionInformation from './versionInformation';
 
 const App = () => {
   return (
     <Router>
       <Switch>
+        <Route exact path='/' component={Layout} />
         <Route path='/gta/:id' component={VersionInformation} />
-        <Route path='/' component={Layout} />
       </Switch>
     </Router>
   );

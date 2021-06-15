@@ -1,4 +1,4 @@
-export const gtaModel = [
+export const gtaData = [
   {
     imageLink:
       'https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fgrand-theft-auto-v%2Fhome%2FGTAV_EGS_Artwork_1920x1080_Hero-Carousel_V06-1920x1080-1503e4b1320d5652dd4f57466c8bcb79424b3fc0.jpg',
@@ -8,7 +8,7 @@ export const gtaModel = [
     Gameplay focuses on an open world where the player can complete missions to progress an overall story, as well as engage in various side activities. Most of the gameplay revolves around driving and shooting, with occasional role-playing and stealth elements. The series also has elements of the earlier beat 'em up games from the 16-bit era. The games in the Grand Theft Auto series are set in fictional locales modelled after real-life cities, at various points in time from the early 1960s to the 2010s. The original game's map encompassed three cities—Liberty City (based on New York City), San Andreas (based on San Francisco),[a] and Vice City (based on Miami)—but later titles tend to focus on a single setting; usually one of the original three locales, albeit remodelled and significantly expanded. The series centers on different protagonists who attempt to rise through the ranks of the criminal underworld, although their motives for doing so vary in each title. The antagonists are commonly characters who have betrayed the protagonist or their organisation, or characters who have the most impact impeding the protagonist's progress. Several film and music veterans have voiced characters in the games, including Ray Liotta, Dennis Hopper, Samuel L. Jackson, James Woods, Debbie Harry, Axl Rose and Peter Fonda.[3]
     
     DMA Design began the series in 1997, with the release of the Grand Theft Auto. As of 2020, the series consists of seven standalone titles and four expansion packs. The third main title, Grand Theft Auto III, released in 2001, is considered a landmark game, as it brought the series to a three-dimensional (3D) setting and more immersive experience. Subsequent titles have followed and built upon the concept established in Grand Theft Auto III, and received significant acclaim. They have influenced other open-world action games, and led to the label Grand Theft Auto clone on similar titles.
-    
+  
     The series has been critically acclaimed and commercially successful, having shipped more than 280 million units with an estimated gross revenue of over $9 billion,[4][5] making it the fourth-highest selling video game franchise of all time, behind Nintendo's Mario and Pokémon franchises,[6] and Tetris.[7] In 2006, Grand Theft Auto was featured in a list of British design icons in the Great British Design Quest organised by the BBC and the Design Museum.[8] In 2013, The Telegraph ranked Grand Theft Auto among Britain's most successful exports.[9] The series has also been controversial for its adult nature and violent themes.`,
   },
   {
