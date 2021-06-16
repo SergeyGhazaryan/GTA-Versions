@@ -5,13 +5,13 @@ import { data } from '../../data';
 const GtaVersionInfo = () => {
   const { id } = useParams();
 
-  const information = useMemo(() => {
+  const information = () => {
     const selectedVersion = data.find((d) => d.id.toString() === id);
     if (!selectedVersion) return;
     return selectedVersion.information;
-  }, [id]);
+  };
 
-  return <div>{information}</div>;
+  return <div>{information()}</div>;
 };
 
 export default GtaVersionInfo;
