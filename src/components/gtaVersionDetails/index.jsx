@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { SELECTED_VERSION_URL } from '../../constants/urls';
 
 import './styles.scss';
 
-export const SelectedVersion = () => {
+const url = process.env.REACT_APP_API_URL;
+
+export const GTAVersionDetails = () => {
   const { id } = useParams();
 
-  const [selectedVersion, setSelectedVersion] = useState({});
+  const [gtaVersionDetails, setGTAVersionDetails] = useState({});
 
   useEffect(() => {
     getVersionAsync();
@@ -16,9 +17,9 @@ export const SelectedVersion = () => {
 
   const getVersionAsync = async () => {
     try {
-      const result = await axios.get(`${SELECTED_VERSION_URL}${id}`);
+      const result = await axios.get(`${url}GTAVersions/${id}`);
       const data = result.data;
-      setSelectedVersion(data);
+      setGTAVersionDetails(data);
     } catch (error) {
       console.log(error);
     }
@@ -27,9 +28,9 @@ export const SelectedVersion = () => {
   return (
     <div className='general'>
       <div>
-        <h1 className='version-name'>{selectedVersion.versionName}</h1>
-        <img src={selectedVersion.imageLink} className='image' />
-        <div>{selectedVersion.information}</div>
+        <h1 className='version-name'>{gtaVersionDetails.versionName}</h1>
+        <img src={gtaVersionDetails.imageLink} className='image' />
+        <div>{gtaVersionDetails.information}</div>
       </div>
     </div>
   );

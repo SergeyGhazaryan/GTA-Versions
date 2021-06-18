@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { GtaVersion } from '../components/gtaVersions';
+import { GtaVersion } from '../components/gtaVersion';
 import axios from 'axios';
-import { MAIN_URL } from '../constants/urls';
 
 import './styles.scss';
+
+const url = process.env.REACT_APP_API_URL;
 
 const Layout = () => {
   const [versions, setVersions] = useState([]);
@@ -14,10 +15,11 @@ const Layout = () => {
 
   const getAllVersionsAsync = async () => {
     try {
-      const result = await axios.get(MAIN_URL);
+      const result = await axios.get(`${url}GTAVersions`);
       const data = result.data;
       setVersions(data);
     } catch (error) {
+      console.log(url);
       console.log(error);
     }
   };
