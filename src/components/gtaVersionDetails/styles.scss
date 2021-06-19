@@ -1,6 +1,7 @@
 .general {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .image {
@@ -9,6 +10,12 @@
 }
 
 .version-name {
-  font-size: 25px;
+  font-size: 20px;
   font-family: monospace;
+}
+
+.details-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }

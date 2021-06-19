@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getVersion } from '../../services/gtaVersionsService';
+import { Button } from 'antd';
+import { UpdateVersionModal } from '../../modals/updateVersionModal/updateVersionModal';
 
 import './styles.scss';
-
-const url = process.env.REACT_APP_API_URL;
 
 export const GTAVersionDetails = () => {
   const { id } = useParams();
 
   const [gtaVersionDetails, setGTAVersionDetails] = useState({});
+  const [updateModalVisible, setUpdateModalVisible] = useState(false);
+
+  const closeUpdateDialog = () => {
+    setUpdateModalVisible(false);
+  };
 
   useEffect(() => {
-    getVersionAsync();
-  }, []);
-
-  const getVersionAsync = async () => {
-    try {
-      const result = await axios.get(`${url}GTAVersions/${id}`);
-      const data = result.data;
+    getVersion(id).then((data) => {
       setGTAVersionDetails(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    });
+  }, []);
 
   return (
     <div className='general'>
       <div>
-        <h1 className='version-name'>{gtaVersionDetails.versionName}</h1>
+        <div className='details-header'>
+          <h1 className='version-name'>{gtaVersionDetails.versionName}</h1>
+          <Button
+            onClick={() => setUpdateModalVisible(true)}
+            variant='contained'
+          >
+            UPDATE VERSION
+          </Button>
+          {updateModalVisible && (
+            <UpdateVersionModal
+              id={id}
+              isOpen={updateModalVisible}
+              onCancel={closeUpdateDialog}
+            />
+          )}
+        </div>
         <img src={gtaVersionDetails.imageLink} className='image' />
         <div>{gtaVersionDetails.information}</div>
       </div>

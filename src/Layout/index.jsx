@@ -1,33 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { GtaVersion } from '../components/gtaVersion';
-import axios from 'axios';
+import { getAllVersions } from '../services';
+import { Button } from 'antd';
+import { AddVersionModal } from '../modals/addVersionModal/addVersionModal';
 
 import './styles.scss';
 
-const url = process.env.REACT_APP_API_URL;
-
 const Layout = () => {
   const [versions, setVersions] = useState([]);
+  const [addVersionActive, setAddVersionActive] = useState(false);
 
   useEffect(() => {
-    getAllVersionsAsync();
+    getAllVersions().then((data) => {
+      setVersions(data);
+    });
   }, []);
 
-  const getAllVersionsAsync = async () => {
-    try {
-      const result = await axios.get(`${url}GTAVersions`);
-      const data = result.data;
-      setVersions(data);
-    } catch (error) {
-      console.log(url);
-      console.log(error);
-    }
+  const closeDialog = () => {
+    setAddVersionActive(false);
   };
 
   return (
     <>
       <div className='header'>GTA Versions</div>
       <div className='version-container'>
+        <div className='add-button'>
+          <Button onClick={() => setAddVersionActive(true)} variant='contained'>
+            ADD VERSION
+          </Button>
+          {addVersionActive && (
+            <AddVersionModal isOpen={addVersionActive} onCancel={closeDialog} />
+          )}
+        </div>
         <div className='gta-version'>
           {versions.map((v) => (
             <GtaVersion
