@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { GtaVersion } from '../components/gtaVersion';
 import { getAllVersions } from '../services';
-import { Button } from 'antd';
-import { AddVersionModal } from '../modals/addVersionModal/addVersionModal';
+import { Button } from '../components/modal/button';
+import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
+import { GtaVersion } from '../components/gtaVersion';
 
 import './styles.scss';
 
@@ -25,12 +25,12 @@ const Layout = () => {
       <div className='header'>GTA Versions</div>
       <div className='version-container'>
         <div className='add-button'>
-          <Button onClick={() => setAddVersionActive(true)} variant='contained'>
-            ADD VERSION
-          </Button>
-          {addVersionActive && (
-            <AddVersionModal isOpen={addVersionActive} onCancel={closeDialog} />
-          )}
+          <Button
+            onClick={() => setAddVersionActive(true)}
+            variant='contained'
+            text={'ADD VERSION'}
+          />
+          <AddVersionModal isOpen={addVersionActive} onCancel={closeDialog} />
         </div>
         <div className='gta-version'>
           {versions.map((v) => (

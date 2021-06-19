@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVersion } from '../../services/gtaVersionsService';
-import { Button } from 'antd';
-import { UpdateVersionModal } from '../../modals/updateVersionModal/updateVersionModal';
+import { UpdateVersionModal } from '../shared/updateVersionModal/updateVersionModal';
+import { Button } from '../modal/button';
 
 import './styles.scss';
 
@@ -30,9 +30,8 @@ export const GTAVersionDetails = () => {
           <Button
             onClick={() => setUpdateModalVisible(true)}
             variant='contained'
-          >
-            UPDATE VERSION
-          </Button>
+            text={'UPDATE VERSION'}
+          />
           {updateModalVisible && (
             <UpdateVersionModal
               id={id}
