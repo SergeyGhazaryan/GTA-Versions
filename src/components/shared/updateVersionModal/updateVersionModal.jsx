@@ -4,35 +4,46 @@ import { Modal } from '../../modal/modal';
 import { InputFields } from '../../modal/inputFields';
 
 export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
-  const [imageLinkValue, setImageLinkValue] = useState('');
+  const [image, setImage] = useState('');
   const [versionNameValue, setVersionNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
   const [warning, setWarning] = useState(false);
 
+  const onFileSelect = (filesArray) => {
+    const file = filesArray[0];
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+  };
+
   const inputFields = [
     {
-      name: 'imageLink',
-      label: 'Image link',
-      setItemValue: setImageLinkValue,
-      itemValue: imageLinkValue,
+      name: 'image',
+      label: 'Image',
+      onChange: onFileSelect,
+      itemValue: image,
     },
     {
       name: 'versionName',
       label: 'Version name',
-      setItemValue: setVersionNameValue,
+      onChange: setVersionNameValue,
       itemValue: versionNameValue,
     },
     {
       name: 'information',
       label: 'Information',
-      setItemValue: setInformationValue,
+      onChange: setInformationValue,
       itemValue: informationValue,
     },
   ];
 
   const handleUpdate = () => {
-    if (id && imageLinkValue && versionNameValue && informationValue) {
-      updateVersion(id, imageLinkValue, versionNameValue, informationValue);
+    if (id && image && versionNameValue && informationValue) {
+      updateVersion(id, image, versionNameValue, informationValue);
       onCancel();
     } else {
       setWarning(true);

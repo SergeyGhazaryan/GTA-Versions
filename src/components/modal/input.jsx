@@ -4,14 +4,21 @@ import { Item } from './item';
 
 import './styles.scss';
 
-export const Input = ({ name, label, setItemValue, itemValue, inputType }) => {
+export const Input = ({ name, label, onChange, itemValue, inputType }) => {
+  const handleChange = (e) => {
+    if (inputType == 'file') {
+      return onChange(e.target.files);
+    }
+    return onChange(e.target.value);
+  };
+
   return (
     <div className='input'>
       <Item name={name} label={label}>
         <DefaultInput
           type={inputType}
-          onChange={(e) => setItemValue(e.target.value)}
-          value={itemValue || ''}
+          onChange={handleChange}
+          value={itemValue}
         />
       </Item>
     </div>

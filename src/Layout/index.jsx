@@ -17,7 +17,7 @@ const Layout = () => {
   }, []);
 
   const closeDialog = () => {
-    setAddModalVisible(false);
+    setAddModalVisible(!addModalVisible);
   };
 
   return (
@@ -30,15 +30,13 @@ const Layout = () => {
             variant='contained'
             text={'ADD VERSION'}
           />
-          <AddVersionModal isOpen={addModalVisible} onCancel={closeDialog} />
+          {addModalVisible && (
+            <AddVersionModal isOpen={addModalVisible} onCancel={closeDialog} />
+          )}
         </div>
         <div className='gta-version'>
           {versions.map((v) => (
-            <GtaVersion
-              imageLink={v.imageLink}
-              versionName={v.versionName}
-              id={v.id}
-            />
+            <GtaVersion image={v.image} versionName={v.versionName} id={v.id} />
           ))}
         </div>
       </div>

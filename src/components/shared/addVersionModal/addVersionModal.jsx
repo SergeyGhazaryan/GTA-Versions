@@ -4,35 +4,46 @@ import { Modal } from '../../modal/modal';
 import { InputFields } from '../../modal/inputFields';
 
 export const AddVersionModal = ({ isOpen, onCancel }) => {
-  const [imageLinkValue, setImageLinkValue] = useState('');
+  const [image, setImage] = useState('');
   const [versionNameValue, setVersionNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
   const [warning, setWarning] = useState(false);
 
+  const onFileSelect = (filesArray) => {
+    const file = filesArray[0];
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+  };
+
   const inputFields = [
     {
-      name: 'imageLink',
-      label: 'Image link',
-      setItemValue: setImageLinkValue,
-      itemValue: imageLinkValue,
+      name: 'image',
+      label: 'Image',
+      onChange: onFileSelect,
+      itemValue: image,
     },
     {
       name: 'versionName',
       label: 'Version name',
-      setItemValue: setVersionNameValue,
+      onChange: setVersionNameValue,
       itemValue: versionNameValue,
     },
     {
       name: 'information',
       label: 'Information',
-      setItemValue: setInformationValue,
+      onChange: setInformationValue,
       itemValue: informationValue,
     },
   ];
 
   const handleAdd = () => {
-    if (imageLinkValue && versionNameValue && informationValue) {
-      createVersion(imageLinkValue, versionNameValue, informationValue);
+    if (image && versionNameValue && informationValue) {
+      createVersion(image, versionNameValue, informationValue);
       onCancel();
     } else {
       setWarning(true);

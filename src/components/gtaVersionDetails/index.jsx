@@ -13,7 +13,7 @@ export const GTAVersionDetails = () => {
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
 
   const closeUpdateDialog = () => {
-    setUpdateModalVisible(false);
+    setUpdateModalVisible(!updateModalVisible);
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const GTAVersionDetails = () => {
             />
           )}
         </div>
-        <img src={gtaVersionDetails.imageLink} className='image' />
+        <img src={gtaVersionDetails.image} className='image' />
         <div>{gtaVersionDetails.information}</div>
       </div>
     </div>

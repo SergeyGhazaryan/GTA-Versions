@@ -8,9 +8,9 @@ export const InputFields = ({ fieldsArray }) => {
         <Input
           name={v.name}
           label={v.label}
-          setItemValue={v.setItemValue}
+          onChange={v.onChange}
           itemValue={v.itemValue}
-          inputType={v.name == 'imageLink' ? 'file' : 'text'}
+          inputType={v.name == 'image' ? 'file' : 'text'}
         />
       ))}
     </div>

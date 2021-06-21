@@ -20,10 +20,10 @@ export const getVersion = async (id) => {
   }
 };
 
-export const createVersion = async (imageLink, versionName, information) => {
+export const createVersion = async (image, versionName, information) => {
   try {
     const result = await axios.post('gtaversions', {
-      imageLink: imageLink,
+      image: image,
       versionName: versionName,
       information: information,
     });
@@ -33,15 +33,10 @@ export const createVersion = async (imageLink, versionName, information) => {
   }
 };
 
-export const updateVersion = async (
-  id,
-  imageLink,
-  versionName,
-  information
-) => {
+export const updateVersion = async (id, image, versionName, information) => {
   try {
     const result = await axios.put(`gtaversions/${id}`, {
-      imageLink: imageLink,
+      image: image,
       versionName: versionName,
       information: information,
     });
