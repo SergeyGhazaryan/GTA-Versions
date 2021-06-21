@@ -1,17 +1,19 @@
 import React from 'react';
 import { Input as DefaultInput } from 'antd';
-import { Form } from './form';
+import { Item } from './item';
 
 import './styles.scss';
 
-export const Input = ({ name, label, setItemValue, itemValue }) => {
+export const Input = ({ name, label, setItemValue, itemValue, inputType }) => {
   return (
     <div className='input'>
-      <Form name={name} label={label} />
-      <DefaultInput
-        onChange={(e) => setItemValue(e.target.value)}
-        value={itemValue || ''}
-      />
+      <Item name={name} label={label}>
+        <DefaultInput
+          type={inputType}
+          onChange={(e) => setItemValue(e.target.value)}
+          value={itemValue || ''}
+        />
+      </Item>
     </div>
   );
 };

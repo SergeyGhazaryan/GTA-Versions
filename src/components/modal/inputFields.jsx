@@ -10,6 +10,7 @@ export const InputFields = ({ fieldsArray }) => {
           label={v.label}
           setItemValue={v.setItemValue}
           itemValue={v.itemValue}
+          inputType={v.name == 'imageLink' ? 'file' : 'text'}
         />
       ))}
     </div>
