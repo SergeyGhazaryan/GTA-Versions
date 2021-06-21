@@ -16,7 +16,7 @@ const Layout = () => {
     });
   }, []);
 
-  const closeDialog = () => {
+  const toggleAddDialog = () => {
     setAddModalVisible(!addModalVisible);
   };
 
@@ -28,10 +28,13 @@ const Layout = () => {
           <Button
             onClick={() => setAddModalVisible(true)}
             variant='contained'
-            text={'ADD VERSION'}
+            text='ADD VERSION'
           />
           {addModalVisible && (
-            <AddVersionModal isOpen={addModalVisible} onCancel={closeDialog} />
+            <AddVersionModal
+              isOpen={addModalVisible}
+              onCancel={toggleAddDialog}
+            />
           )}
         </div>
         <div className='gta-version'>

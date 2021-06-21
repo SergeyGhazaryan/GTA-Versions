@@ -13,9 +13,9 @@ export const Modal = ({
 }) => {
   return (
     <DefaultModal visible={isOpen} onCancel={onCancel} onOk={onOk}>
-      <div>{header}</div>
+      <div className='title'>{header}</div>
       <div className='modal-header'></div>
-      {children}
+      {isOpen && children}
       {warning && (
         <div className='modal-warning'>You must fill in all the fields</div>
       )}

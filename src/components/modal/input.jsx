@@ -13,7 +13,7 @@ export const Input = ({ name, label, onChange, itemValue, inputType }) => {
   };
 
   return (
-    <div className='input'>
+    <div>
       <Item name={name} label={label}>
         <DefaultInput
           type={inputType}

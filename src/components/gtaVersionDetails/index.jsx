@@ -12,7 +12,7 @@ export const GTAVersionDetails = () => {
   const [gtaVersionDetails, setGTAVersionDetails] = useState({});
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
 
-  const closeUpdateDialog = () => {
+  const toggleUpdateDialog = () => {
     setUpdateModalVisible(!updateModalVisible);
   };
 
@@ -23,20 +23,20 @@ export const GTAVersionDetails = () => {
   }, []);
 
   return (
-    <div className='general'>
+    <div className='details-container'>
       <div>
         <div className='details-header'>
           <h1 className='version-name'>{gtaVersionDetails.versionName}</h1>
           <Button
             onClick={() => setUpdateModalVisible(true)}
             variant='contained'
-            text={'UPDATE VERSION'}
+            text='UPDATE VERSION'
           />
           {updateModalVisible && (
             <UpdateVersionModal
               id={id}
               isOpen={updateModalVisible}
-              onCancel={closeUpdateDialog}
+              onCancel={toggleUpdateDialog}
             />
           )}
         </div>
