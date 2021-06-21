@@ -8,7 +8,7 @@ import './styles.scss';
 
 const Layout = () => {
   const [versions, setVersions] = useState([]);
-  const [addVersionActive, setAddVersionActive] = useState(false);
+  const [addModalVisible, setAddModalVisible] = useState(false);
 
   useEffect(() => {
     getAllVersions().then((data) => {
@@ -17,7 +17,7 @@ const Layout = () => {
   }, []);
 
   const closeDialog = () => {
-    setAddVersionActive(false);
+    setAddModalVisible(false);
   };
 
   return (
@@ -26,11 +26,11 @@ const Layout = () => {
       <div className='version-container'>
         <div className='add-button'>
           <Button
-            onClick={() => setAddVersionActive(true)}
+            onClick={() => setAddModalVisible(true)}
             variant='contained'
             text={'ADD VERSION'}
           />
-          <AddVersionModal isOpen={addVersionActive} onCancel={closeDialog} />
+          <AddVersionModal isOpen={addModalVisible} onCancel={closeDialog} />
         </div>
         <div className='gta-version'>
           {versions.map((v) => (

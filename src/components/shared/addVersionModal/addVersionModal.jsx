@@ -1,13 +1,34 @@
 import React, { useState } from 'react';
 import { createVersion } from '../../../services';
 import { Modal } from '../../modal/modal';
-import { Input } from '../../modal/input';
+import { InputFields } from '../../modal/inputs';
 
 export const AddVersionModal = ({ isOpen, onCancel }) => {
   const [imageLinkValue, setImageLinkValue] = useState('');
   const [versionNameValue, setVersionNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
   const [warning, setWarning] = useState(false);
+
+  const inputFields = [
+    {
+      name: 'imageLink',
+      label: 'Image link',
+      setItemValue: setImageLinkValue,
+      itemValue: imageLinkValue,
+    },
+    {
+      name: 'versionName',
+      label: 'Version name',
+      setItemValue: setVersionNameValue,
+      itemValue: versionNameValue,
+    },
+    {
+      name: 'information',
+      label: 'Information',
+      setItemValue: setInformationValue,
+      itemValue: informationValue,
+    },
+  ];
 
   const handleAdd = () => {
     if (imageLinkValue && versionNameValue && informationValue) {
@@ -26,24 +47,7 @@ export const AddVersionModal = ({ isOpen, onCancel }) => {
       header='Add new version'
       warning={warning}
     >
-      <Input
-        name='imageLink'
-        label='Image link'
-        setItemValue={setImageLinkValue}
-        itemValue={imageLinkValue}
-      />
-      <Input
-        name='versionName'
-        label='Version name'
-        setItemValue={setVersionNameValue}
-        itemValue={versionNameValue}
-      />
-      <Input
-        name='information'
-        label='Information'
-        setItemValue={setInformationValue}
-        itemValue={informationValue}
-      />
+      <InputFields fieldsArray={inputFields} />
     </Modal>
   );
 };
