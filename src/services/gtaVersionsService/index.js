@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllVersions = async () => {
   try {
-    const result = await axios.get('GTAVersions');
+    const result = await axios.get('gtaversions');
     const data = result.data;
     return data;
   } catch (error) {
@@ -12,7 +12,7 @@ export const getAllVersions = async () => {
 
 export const getVersion = async (id) => {
   try {
-    const result = await axios.get(`GTAVersions/${id}`);
+    const result = await axios.get(`gtaversions/${id}`);
     const data = result.data;
     return data;
   } catch (error) {
@@ -22,7 +22,7 @@ export const getVersion = async (id) => {
 
 export const createVersion = async (imageLink, versionName, information) => {
   try {
-    const result = await axios.post('GTAVersions', {
+    const result = await axios.post('gtaversions', {
       imageLink: imageLink,
       versionName: versionName,
       information: information,
@@ -40,7 +40,7 @@ export const updateVersion = async (
   information
 ) => {
   try {
-    const result = await axios.put(`GTAVersions/${id}`, {
+    const result = await axios.put(`gtaversions/${id}`, {
       imageLink: imageLink,
       versionName: versionName,
       information: information,
@@ -53,7 +53,7 @@ export const updateVersion = async (
 
 export const deleteVersion = async (id) => {
   try {
-    const result = await axios.delete(`GTAVersions/${id}`);
+    const result = await axios.delete(`gtaversions/${id}`);
     return result;
   } catch (error) {
     console.log(error);
