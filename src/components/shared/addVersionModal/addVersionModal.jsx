@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createVersion } from '../../../services';
 import { Modal } from '../../modal/modal';
-import { InputFields } from '../../modal/inputs';
+import { InputFields } from '../../modal/inputFields';
 
 export const AddVersionModal = ({ isOpen, onCancel }) => {
   const [imageLinkValue, setImageLinkValue] = useState('');
