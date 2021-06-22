@@ -16,10 +16,9 @@ export const GTAVersionDetails = () => {
     setUpdateModalVisible(!updateModalVisible);
   };
 
-  useEffect(() => {
-    getVersion(id).then((data) => {
-      setGTAVersionDetails(data);
-    });
+  useEffect(async () => {
+    const data = await getVersion(id);
+    setGTAVersionDetails(data);
   }, []);
 
   return (

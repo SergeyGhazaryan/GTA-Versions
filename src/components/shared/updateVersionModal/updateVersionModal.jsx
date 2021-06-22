@@ -45,9 +45,8 @@ export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
     if (id && image && versionNameValue && informationValue) {
       updateVersion(id, image, versionNameValue, informationValue);
       onCancel();
-    } else {
-      setWarning(true);
     }
+    setWarning(true);
   };
 
   return (

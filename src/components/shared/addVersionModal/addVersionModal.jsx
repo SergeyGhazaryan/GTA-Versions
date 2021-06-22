@@ -12,7 +12,7 @@ export const AddVersionModal = ({ isOpen, onCancel }) => {
   const onFileSelect = (filesArray) => {
     const file = filesArray[0];
 
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(file);
 
     reader.onload = () => {
@@ -45,9 +45,8 @@ export const AddVersionModal = ({ isOpen, onCancel }) => {
     if (image && versionNameValue && informationValue) {
       createVersion(image, versionNameValue, informationValue);
       onCancel();
-    } else {
-      setWarning(true);
     }
+    setWarning(true);
   };
 
   return (

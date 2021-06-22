@@ -10,10 +10,9 @@ const Layout = () => {
   const [versions, setVersions] = useState([]);
   const [addModalVisible, setAddModalVisible] = useState(false);
 
-  useEffect(() => {
-    getAllVersions().then((data) => {
-      setVersions(data);
-    });
+  useEffect(async () => {
+    const data = await getAllVersions();
+    setVersions(data);
   }, []);
 
   const toggleAddDialog = () => {
