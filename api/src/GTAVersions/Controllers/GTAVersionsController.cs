@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using GTAVersions.Domain.DTO;
 using GTAVersions.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GTAVersions.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/gta-versions")]
     [ApiController]
     public class GTAVersionsController : ControllerBase
     {
@@ -35,25 +37,25 @@ namespace GTAVersions.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateGTAVersion([FromBody] CreateGTAVersionDTO createGTAVersionDTO)
         {
-            var createdGTAVersion = await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
+            await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
 
-            return Ok(createdGTAVersion);
+            return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, CreateGTAVersionDTO createGTAVersionDTO)
         {
-            var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
+            await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
 
-            return Ok(updatedGTAVersion);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGTAVersion([FromRoute] string id)
         {
-            var deletedGTAVersion = await _gtaVersionService.DeleteGTAVersion(id);
+            await _gtaVersionService.DeleteGTAVersion(id);
 
-            return Ok(deletedGTAVersion);
+            return Ok();
         }
     }
 }

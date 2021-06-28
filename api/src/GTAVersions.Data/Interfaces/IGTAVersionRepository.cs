@@ -8,8 +8,8 @@ namespace GTAVersions.Data.Interfaces
     {
         Task<GTAVersion> GetGTAVersion(string Id);
         Task<IEnumerable<GTAVersion>> GetGTAVersions();
-        Task<int> CreateGTAVersion(GTAVersion gtaVersion);
-        Task<GTAVersion> UpdateGTAVersion(string id, GTAVersion gtaVersion);
-        Task<GTAVersion> DeleteGTAVersion(string id);
+        Task CreateGTAVersion(GTAVersion gtaVersion);
+        Task UpdateGTAVersion(string id, GTAVersion gtaVersion);
+        Task DeleteGTAVersion(string id);
     }
 }

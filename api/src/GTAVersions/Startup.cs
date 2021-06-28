@@ -1,13 +1,13 @@
 using System.Data;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens.Jwt;
 using GTAVersions.Data;
-using GTAVersions.Data.Entities;
 using GTAVersions.Data.Interfaces;
 using GTAVersions.Data.Repositories;
-using GTAVersions.Domain.DTO;
 using GTAVersions.Domain.Interfaces;
+using GTAVersions.Domain.JWT;
 using GTAVersions.Domain.Services;
-using Mapster;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,11 +37,35 @@ namespace GTAVersions
             string dbConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
             services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
 
-            services.AddControllers();
-
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IGTAVersionRepository, GTAVersionRepository>();
             services.AddTransient<IGTAVersionService, GTAVersionService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<JWTTokenHandler>();
+            services.AddControllers();
+
+            using var provider = services.BuildServiceProvider();
+            var jwtTokenHandler = provider.GetService<JWTTokenHandler>();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = jwtTokenHandler.GetValidationParameters();
+            });
+            services.AddAuthorization();
+
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,6 +81,7 @@ namespace GTAVersions
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

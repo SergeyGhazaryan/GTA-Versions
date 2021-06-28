@@ -7,8 +7,8 @@ namespace GTAVersions.Data.Interfaces
     {
         Task<T> GetAsync(string query, object param = null);
         Task<IEnumerable<T>> GetAllAsync(string query, object param = null);
-        Task<int> CreateAsync(string query, T model = null);
-        Task<T> UpdateAsync(string query, T model = null);
-        Task<T> DeleteAsync(string query, object param = null);
+        Task CreateAsync(string query, T model = null);
+        Task UpdateAsync(string query, T model = null);
+        Task DeleteAsync(string query, object param = null);
     }
 }

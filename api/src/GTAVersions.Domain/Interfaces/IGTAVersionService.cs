@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GTAVersions.Domain.DTO;
-using Microsoft.VisualBasic;
 
 namespace GTAVersions.Domain.Interfaces
 {
@@ -9,8 +8,8 @@ namespace GTAVersions.Domain.Interfaces
     {
         Task<GTAVersionDTO> GetGTAVersion(string id);
         Task<List<GTAVersionDTO>> GetGTAVersions();
-        Task<int> CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO);
-        Task<GTAVersionDTO> UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO);
-        Task<GTAVersionDTO> DeleteGTAVersion(string id);
+        Task CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO);
+        Task UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO);
+        Task DeleteGTAVersion(string id);
     }
 }

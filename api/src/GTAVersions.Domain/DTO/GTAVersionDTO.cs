@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GTAVersions.Domain.DTO
+﻿namespace GTAVersions.Domain.DTO
 {
     public class GTAVersionDTO
     {

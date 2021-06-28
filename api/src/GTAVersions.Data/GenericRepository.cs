@@ -27,22 +27,20 @@ namespace GTAVersions.Data
             return result;
         }
 
-        public async Task<int> CreateAsync(string query, T model = null)
+        public async Task CreateAsync(string query, T model = null)
         {
-            var id = await _connection.ExecuteScalarAsync<int>(query, model);
-            return id;
+            await _connection.ExecuteScalarAsync<int>(query, model);
         }
 
-        public async Task<T> UpdateAsync(string query, T model = null)
+        public async Task UpdateAsync(string query, T model = null)
         {
-            var result = await _connection.ExecuteScalarAsync<T>(query, model);
-            return result;
+            await _connection.ExecuteScalarAsync<T>(query, model);
+            return;
         }
 
-        public async Task<T> DeleteAsync(string query, object param = null)
+        public async Task DeleteAsync(string query, object param = null)
         {
-            var result = await _connection.ExecuteScalarAsync<T>(query, param);
-            return result;
+            await _connection.ExecuteScalarAsync<T>(query, param);
         }
     }
 }
