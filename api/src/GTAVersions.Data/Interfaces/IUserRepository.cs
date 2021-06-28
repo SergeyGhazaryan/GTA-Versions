@@ -9,5 +9,6 @@ namespace GTAVersions.Data.Interfaces
         Task Update(User user);
         Task<bool> CheckPasswordSignInAsync(string password);
         Task DeleteUserToken(string token);
+        Task Create(User user);
     }
 }

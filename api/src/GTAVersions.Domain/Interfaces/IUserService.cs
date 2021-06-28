@@ -10,5 +10,6 @@ namespace GTAVersions.Domain.Interfaces
         Task<bool> CheckPasswordSignInAsync(string password);
         Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO);
         Task DeleteUserToken(SignOutUserDTO request);
+        Task CreateUser(SignInUserDTO signInUserDTO);
     }
 }

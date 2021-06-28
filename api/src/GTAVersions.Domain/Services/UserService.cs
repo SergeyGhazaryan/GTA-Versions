@@ -47,5 +47,10 @@ namespace GTAVersions.Domain.Services
         {
             await _userRepository.DeleteUserToken(request.Token);
         }
+
+        public async Task CreateUser(SignInUserDTO signInUserDTO)
+        {
+            await _userRepository.Create(signInUserDTO.Adapt<User>());
+        }
     }
 }

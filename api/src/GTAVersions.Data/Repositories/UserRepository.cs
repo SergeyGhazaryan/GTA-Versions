@@ -39,5 +39,11 @@ namespace GTAVersions.Data.Repositories
             var query = $"UPDATE Users SET token = '{null}' WHERE token = '{token}'";
             await _genericRepository.UpdateAsync(query);
         }
+
+        public async Task Create(User user)
+        {
+            var query = $"INSERT INTO Users (username, password) VALUES ('{user.Username}', '{user.Password}');";
+            await _genericRepository.CreateAsync(query);
+        }
     }
 }
