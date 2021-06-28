@@ -24,12 +24,11 @@ export const getVersion = async (id) => {
 
 export const createVersion = async (image, versionName, information) => {
   try {
-    const result = await axios.post(baseUrl, {
+    await axios.post(baseUrl, {
       image: image,
       versionName: versionName,
       information: information,
     });
-    return result;
   } catch (error) {
     console.log(error);
   }
@@ -37,12 +36,11 @@ export const createVersion = async (image, versionName, information) => {
 
 export const updateVersion = async (id, image, versionName, information) => {
   try {
-    const result = await axios.put(`${baseUrl}/${id}`, {
+    await axios.put(`${baseUrl}/${id}`, {
       image: image,
       versionName: versionName,
       information: information,
     });
-    return result;
   } catch (error) {
     console.log(error);
   }
@@ -50,8 +48,7 @@ export const updateVersion = async (id, image, versionName, information) => {
 
 export const deleteVersion = async (id) => {
   try {
-    const result = await axios.delete(`${baseUrl}/${id}`);
-    return result;
+    await axios.delete(`${baseUrl}/${id}`);
   } catch (error) {
     console.log(error);
   }
