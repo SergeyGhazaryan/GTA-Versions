@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { updateVersion } from '../../../services';
-import { Modal } from '../../modal/modal';
-import { InputFields } from '../../modal/inputFields';
+import { Modal } from '../../antdItems/modal';
+import { InputFields } from '../../antdItems/inputFields';
 
 export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
   const [image, setImage] = useState('');

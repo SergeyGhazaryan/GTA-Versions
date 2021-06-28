@@ -16,8 +16,9 @@ namespace GTAVersions.Data.Repositories
 
         public async Task<GTAVersion> GetGTAVersion(string id)
         {
-            var query = $"SELECT * FROM GTAVersions WHERE id = '{id}'";
-            var result = await _genericRepository.GetAsync(query);
+            var query = "SELECT * FROM GTAVersions WHERE Id = @Id";
+            var param = new { Id = id };
+            var result = await _genericRepository.GetAsync(query, param);
             return result;
         }
 
@@ -28,24 +29,27 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task CreateGTAVersion(GTAVersion gtaVersion)
+        public async Task<GTAVersion> CreateGTAVersion(GTAVersion gtaVersion)
         {
-            var query = $"INSERT INTO GTAVersions (Image, VersionName, Information) " +
-                        $"OUTPUT INSERTED.Id " +
-                        $"VALUES('{gtaVersion.Image}', '{gtaVersion.VersionName}', '{gtaVersion.Information}')";
-            await _genericRepository.CreateAsync(query, gtaVersion);
+            var query = $"INSERT INTO GTAVersions (Image, VersionName, Information) VALUES(@Image, @VersionName, @Information)";
+            var param = new { Image = gtaVersion.Image, VersionName = gtaVersion.VersionName, Information = gtaVersion.Information };
+            var result = await _genericRepository.CreateAsync(query, param);
+            return result;
         }
 
-        public async Task UpdateGTAVersion(string id, GTAVersion gtaVersion)
+        public async Task<GTAVersion> UpdateGTAVersion(string id, GTAVersion gtaVersion)
         {
-            var query = $"UPDATE GTAVersions SET image = '{gtaVersion.Image}', versionName = '{gtaVersion.VersionName}', information = '{gtaVersion.Information}' WHERE id = '{id}'";
-            await _genericRepository.UpdateAsync(query);
+            var query = "UPDATE GTAVersions SET Image = @Image, VersionName = @VersionName, Information = @Information WHERE Id = @Id";
+            var param = new { Id = id, Image = gtaVersion.Image, VersionName = gtaVersion.VersionName, Information = gtaVersion.Information };
+            var result = await _genericRepository.UpdateAsync(query, param);
+            return result;
         }
 
         public async Task DeleteGTAVersion(string id)
         {
-            var query = $"DELETE FROM GTAVersions WHERE Id = '{id}'";
-            await _genericRepository.DeleteAsync(query);
+            var query = "DELETE FROM GTAVersions WHERE Id = @Id";
+            var param = new { Id = id };
+            await _genericRepository.DeleteAsync(query, param);
         }
     }
 }

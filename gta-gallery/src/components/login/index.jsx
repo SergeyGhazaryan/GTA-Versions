@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { InputFields } from '../modal/inputFields';
-import { Button } from '../modal/button';
-import { Warning } from '../modal/warning';
+import { InputFields } from '../antdItems/inputFields';
+import { Button } from '../antdItems/button';
+import { Warning } from '../antdItems/warning';
 import { login } from '../../services';
 
 import './styles.scss';

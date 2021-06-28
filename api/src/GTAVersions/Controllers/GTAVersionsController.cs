@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GTAVersions.Controllers
 {
     [Authorize]
-    [Route("api/gta-versions")]
+    [Route("api/[controller]")]
     [ApiController]
     public class GTAVersionsController : ControllerBase
     {
@@ -37,7 +37,7 @@ namespace GTAVersions.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateGTAVersion([FromBody] CreateGTAVersionDTO createGTAVersionDTO)
         {
-            await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
+            var createdGTAVersion = await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
 
             return Ok();
         }
@@ -45,7 +45,7 @@ namespace GTAVersions.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, CreateGTAVersionDTO createGTAVersionDTO)
         {
-            await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
+            var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
 
             return Ok();
         }

@@ -1,18 +1,8 @@
 import React from 'react';
 import { Input } from './input';
+import { getInputType } from '../../functions';
 
 export const InputFields = ({ fieldsArray }) => {
-  const getInputType = (inputName) => {
-    switch (inputName) {
-      case 'image':
-        return 'file';
-      case 'password':
-        return 'password';
-      default:
-        return 'text';
-    }
-  };
-
   return (
     <div>
       {(fieldsArray || []).map((v) => (

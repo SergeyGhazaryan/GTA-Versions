@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GTAVersions.Controllers
 {
     [Authorize]
-    [Route("api/user")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {

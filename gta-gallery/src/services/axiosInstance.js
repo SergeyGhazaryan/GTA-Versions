@@ -9,12 +9,12 @@ const defaultOptions = {
   },
 };
 
-const instance = axios.create(defaultOptions);
+const axiosInstance = axios.create(defaultOptions);
 
-instance.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-export default instance;
+export default axiosInstance;

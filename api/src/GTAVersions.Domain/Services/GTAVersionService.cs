@@ -29,16 +29,16 @@ namespace GTAVersions.Domain.Services
             return gtaVersions.Adapt<List<GTAVersionDTO>>();
         }
 
-        public async Task CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<GTAVersionDTO> CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO)
         {
-            var gtaVersion = createGTAVersionDTO.Adapt<GTAVersion>();
-            await _gtaVersionRepository.CreateGTAVersion(gtaVersion);
+            var gtaVersion = await _gtaVersionRepository.CreateGTAVersion(createGTAVersionDTO.Adapt<GTAVersion>());
+            return gtaVersion.Adapt<GTAVersionDTO>();
         }
 
-        public async Task UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<GTAVersionDTO> UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO)
         {
-            var gtaVersion = createGTAVersionDTO.Adapt<GTAVersion>();
-            await _gtaVersionRepository.UpdateGTAVersion(id, gtaVersion);
+            var gtaVersion = await _gtaVersionRepository.UpdateGTAVersion(id, createGTAVersionDTO.Adapt<GTAVersion>());
+            return gtaVersion.Adapt<GTAVersionDTO>();
         }
 
         public async Task DeleteGTAVersion(string id)

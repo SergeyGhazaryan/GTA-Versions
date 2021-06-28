@@ -1,10 +1,10 @@
-import axios from '../instance';
+import axios from '../axiosInstance';
 
-const baseUrl = 'user';
+const apiUrl = 'user';
 
 export const createUser = async (username, password) => {
   try {
-    await axios.post(baseUrl, {
+    await axios.post(apiUrl, {
       username,
       password,
     });

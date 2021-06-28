@@ -1,10 +1,10 @@
-import axios from '../instance';
+import axios from '../axiosInstance';
 
-const baseUrl = 'gta-versions';
+const apiUrl = 'gtaversions';
 
 export const getAllVersions = async () => {
   try {
-    const result = await axios.get(baseUrl);
+    const result = await axios.get(apiUrl);
     const data = result.data;
     return data;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getAllVersions = async () => {
 
 export const getVersion = async (id) => {
   try {
-    const result = await axios.get(`${baseUrl}/${id}`);
+    const result = await axios.get(`${apiUrl}/${id}`);
     const data = result.data;
     return data;
   } catch (error) {
@@ -24,11 +24,12 @@ export const getVersion = async (id) => {
 
 export const createVersion = async (image, versionName, information) => {
   try {
-    await axios.post(baseUrl, {
+    var result = await axios.post(apiUrl, {
       image,
       versionName,
       information,
     });
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -36,7 +37,7 @@ export const createVersion = async (image, versionName, information) => {
 
 export const updateVersion = async (id, image, versionName, information) => {
   try {
-    await axios.put(`${baseUrl}/${id}`, {
+    await axios.put(`${apiUrl}/${id}`, {
       image,
       versionName,
       information,
@@ -48,7 +49,7 @@ export const updateVersion = async (id, image, versionName, information) => {
 
 export const deleteVersion = async (id) => {
   try {
-    await axios.delete(`${baseUrl}/${id}`);
+    await axios.delete(`${apiUrl}/${id}`);
   } catch (error) {
     console.log(error);
   }
