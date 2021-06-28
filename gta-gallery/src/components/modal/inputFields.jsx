@@ -2,6 +2,17 @@ import React from 'react';
 import { Input } from './input';
 
 export const InputFields = ({ fieldsArray }) => {
+  const getInputType = (inputName) => {
+    switch (inputName) {
+      case 'image':
+        return 'file';
+      case 'password':
+        return 'password';
+      default:
+        return 'text';
+    }
+  };
+
   return (
     <div>
       {(fieldsArray || []).map((v) => (
@@ -10,7 +21,7 @@ export const InputFields = ({ fieldsArray }) => {
           label={v.label}
           onChange={v.onChange}
           itemValue={v.itemValue}
-          inputType={v.name == 'image' ? 'file' : 'text'}
+          inputType={getInputType(v.name)}
         />
       ))}
     </div>

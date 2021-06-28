@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal as DefaultModal } from 'antd';
+import { Warning } from './warning';
 
 import './styles.scss';
 
@@ -16,9 +17,7 @@ export const Modal = ({
       <div className='title'>{header}</div>
       <div className='modal-header'></div>
       {children}
-      {warning && (
-        <div className='modal-warning'>You must fill in all the fields</div>
-      )}
+      {warning && <Warning text='You must fill in all the fields' />}
     </DefaultModal>
   );
 };

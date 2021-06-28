@@ -12,6 +12,11 @@
   margin: 30px;
 }
 
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .gta-version {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,28 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.login {
+  padding: 50px;
+  border: 5px solid #1c90be;
+  border-radius: 10px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
+
+.login-warning {
+  margin-top: 20px;
+}
+
+.login-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
