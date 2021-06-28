@@ -41,10 +41,14 @@ export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
     },
   ];
 
+  const toggleUpdateModal = () => {
+    onCancel();
+  };
+
   const handleUpdate = () => {
     if (id && image && versionNameValue && informationValue) {
       updateVersion(id, image, versionNameValue, informationValue);
-      onCancel();
+      toggleUpdateModal();
     }
     setWarning(true);
   };

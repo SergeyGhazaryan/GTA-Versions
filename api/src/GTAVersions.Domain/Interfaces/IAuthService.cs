@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GTAVersions.Data.Entities;
 using GTAVersions.Domain.DTO;
+using GTAVersions.Domain.Entities;
 
 namespace GTAVersions.Domain.Interfaces
 {

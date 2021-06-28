@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GTAVersions.Data.Entities;
 using GTAVersions.Domain.DTO;
+using GTAVersions.Domain.Entities;
 
 namespace GTAVersions.Domain.Interfaces
 {
@@ -10,6 +10,6 @@ namespace GTAVersions.Domain.Interfaces
         Task<bool> CheckPasswordSignInAsync(string password);
         Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO);
         Task DeleteUserToken(SignOutUserDTO request);
-        Task CreateUser(SignInUserDTO signInUserDTO);
+        Task<UserDTO> CreateUser(SignInUserDTO signInUserDTO);
     }
 }

@@ -23,10 +23,14 @@ export const CreateUserModal = ({ isOpen, onCancel }) => {
     },
   ];
 
+  const toggleCreateModal = () => {
+    onCancel();
+  };
+
   const handleCreate = () => {
     if (usernameValue && passwordValue) {
       createUser(usernameValue, passwordValue);
-      onCancel();
+      toggleCreateModal();
     }
     setWarning(true);
   };

@@ -41,10 +41,14 @@ export const AddVersionModal = ({ isOpen, onCancel }) => {
     },
   ];
 
+  const toggleAddModal = () => {
+    onCancel();
+  };
+
   const handleAdd = () => {
     if (image && versionNameValue && informationValue) {
       createVersion(image, versionNameValue, informationValue);
-      onCancel();
+      toggleAddModal();
     }
     setWarning(true);
   };

@@ -1,4 +1,4 @@
-﻿namespace GTAVersions.Data.Entities
+﻿namespace GTAVersions.Domain.Entities
 {
     public class AccessToken
     {

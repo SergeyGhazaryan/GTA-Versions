@@ -21,13 +21,6 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task Update(User user)
-        {
-            var query = "UPDATE Users SET Token = @Token";
-            var param = new { Token = user.Token };
-            await _genericRepository.UpdateAsync(query, param);
-        }
-
         public async Task<bool> CheckPasswordSignInAsync(string password)
         {
             var query = "SELECT * FROM Users WHERE Password = @Password";
@@ -44,11 +37,12 @@ namespace GTAVersions.Data.Repositories
             await _genericRepository.UpdateAsync(query, param);
         }
 
-        public async Task Create(User user)
+        public async Task<User> Create(User user)
         {
             var query = "INSERT INTO Users (username, password) VALUES (@Username, @Password');";
             var param = new { Username = user.Username, Password = user.Password };
-            await _genericRepository.CreateAsync(query,param);
+            var result = await _genericRepository.CreateAsync(query, param);
+            return result;
         }
     }
 }

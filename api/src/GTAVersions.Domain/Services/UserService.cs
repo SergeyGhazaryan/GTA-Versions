@@ -2,6 +2,7 @@
 using GTAVersions.Data.Entities;
 using GTAVersions.Data.Interfaces;
 using GTAVersions.Domain.DTO;
+using GTAVersions.Domain.Entities;
 using GTAVersions.Domain.Interfaces;
 using GTAVersions.Domain.JWT;
 using Mapster;
@@ -34,8 +35,6 @@ namespace GTAVersions.Domain.Services
         public async Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO)
         {
             var token = await _jwtTokenHandler.GenerateToken(userDTO.Adapt<User>());
-            userDTO.Token = token;
-            await _userRepository.Update(userDTO.Adapt<User>());
 
             return new AccessToken
             {
@@ -48,9 +47,10 @@ namespace GTAVersions.Domain.Services
             await _userRepository.DeleteUserToken(request.Token);
         }
 
-        public async Task CreateUser(SignInUserDTO signInUserDTO)
+        public async Task<UserDTO> CreateUser(SignInUserDTO signInUserDTO)
         {
-            await _userRepository.Create(signInUserDTO.Adapt<User>());
+            var user = await _userRepository.Create(signInUserDTO.Adapt<User>());
+            return user.Adapt<UserDTO>();
         }
     }
 }

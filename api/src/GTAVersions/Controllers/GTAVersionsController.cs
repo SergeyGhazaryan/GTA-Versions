@@ -39,7 +39,7 @@ namespace GTAVersions.Controllers
         {
             var createdGTAVersion = await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
 
-            return Ok();
+            return Ok(createdGTAVersion);
         }
 
         [HttpPut("{id}")]
@@ -47,7 +47,7 @@ namespace GTAVersions.Controllers
         {
             var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
 
-            return Ok();
+            return Ok(updatedGTAVersion);
         }
 
         [HttpDelete("{id}")]

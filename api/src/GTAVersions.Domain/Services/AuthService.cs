@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using GTAVersions.Data.Entities;
 using GTAVersions.Domain.DTO;
+using GTAVersions.Domain.Entities;
 using GTAVersions.Domain.Interfaces;
 
 namespace GTAVersions.Domain.Services
