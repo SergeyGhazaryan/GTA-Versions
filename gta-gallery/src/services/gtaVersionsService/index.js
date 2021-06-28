@@ -25,9 +25,9 @@ export const getVersion = async (id) => {
 export const createVersion = async (image, versionName, information) => {
   try {
     await axios.post(baseUrl, {
-      image: image,
-      versionName: versionName,
-      information: information,
+      image,
+      versionName,
+      information,
     });
   } catch (error) {
     console.log(error);
@@ -37,9 +37,9 @@ export const createVersion = async (image, versionName, information) => {
 export const updateVersion = async (id, image, versionName, information) => {
   try {
     await axios.put(`${baseUrl}/${id}`, {
-      image: image,
-      versionName: versionName,
-      information: information,
+      image,
+      versionName,
+      information,
     });
   } catch (error) {
     console.log(error);

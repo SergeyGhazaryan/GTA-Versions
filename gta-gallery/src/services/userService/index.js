@@ -5,8 +5,8 @@ const baseUrl = 'user';
 export const createUser = async (username, password) => {
   try {
     await axios.post(baseUrl, {
-      username: username,
-      password: password,
+      username,
+      password,
     });
   } catch (error) {
     console.log(error);
