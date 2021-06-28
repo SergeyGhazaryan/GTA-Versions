@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { deleteVersion } from '../../services';
-import { PopConfirm } from '../modal/popConfirm';
+import { PopConfirm } from '../antdItems/popConfirm';
 
 import './styles.scss';
 

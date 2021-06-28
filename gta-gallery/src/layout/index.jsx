@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllVersions } from '../services';
-import { Button } from '../components/modal/button';
+import { Button } from '../components/antdItems/button';
 import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
 import { CreateUserModal } from '../components/shared/createUserModal/createUserModal';
 import { GtaVersion } from '../components/gtaVersion';

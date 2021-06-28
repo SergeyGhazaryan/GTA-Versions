@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../../../services/userService';
-import { Modal } from '../../modal/modal';
-import { InputFields } from '../../modal/inputFields';
+import { Modal } from '../../antdItems/modal';
+import { InputFields } from '../../antdItems/inputFields';
 
 export const CreateUserModal = ({ isOpen, onCancel }) => {
   const [usernameValue, setUsernameValue] = useState('');
