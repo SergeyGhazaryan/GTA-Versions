@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { updateVersion } from '../../../services';
-import { Modal } from '../../antdItems/modal';
-import { InputFields } from '../../antdItems/inputFields';
+import { Modal } from '../../modal';
+import { InputFields } from '../../inputFields';
 
 export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
   const [image, setImage] = useState('');
@@ -41,14 +41,14 @@ export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
     },
   ];
 
-  const toggleUpdateModal = () => {
+  const closeUpdateModal = () => {
     onCancel();
   };
 
   const handleUpdate = () => {
     if (id && image && versionNameValue && informationValue) {
       updateVersion(id, image, versionNameValue, informationValue);
-      toggleUpdateModal();
+      closeUpdateModal();
     }
     setWarning(true);
   };

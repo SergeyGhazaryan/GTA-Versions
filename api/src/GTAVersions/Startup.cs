@@ -2,6 +2,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using GTAVersions.Data;
+using GTAVersions.Data.Entities;
 using GTAVersions.Data.Interfaces;
 using GTAVersions.Data.Repositories;
 using GTAVersions.Domain.Interfaces;
@@ -34,9 +35,11 @@ namespace GTAVersions
                        .AllowAnyHeader();
             }));
 
+            services.AddControllers();
+            services.Configure<JWTOption>(Configuration.GetSection("Jwt"));
             string dbConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
-            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
 
+            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IGTAVersionRepository, GTAVersionRepository>();
@@ -44,7 +47,6 @@ namespace GTAVersions
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<JWTTokenHandler>();
-            services.AddControllers();
 
             using var provider = services.BuildServiceProvider();
             var jwtTokenHandler = provider.GetService<JWTTokenHandler>();
@@ -63,8 +65,8 @@ namespace GTAVersions
                 options.SaveToken = true;
                 options.TokenValidationParameters = jwtTokenHandler.GetValidationParameters();
             });
-            services.AddAuthorization();
 
+            services.AddAuthorization();
 
         }
 
@@ -79,9 +81,10 @@ namespace GTAVersions
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

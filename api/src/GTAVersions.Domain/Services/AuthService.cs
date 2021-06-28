@@ -22,26 +22,22 @@ namespace GTAVersions.Domain.Services
 
             if (userDTO == null)
             {
-                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            bool signInResult = false;
-
-            if (userDTO.Password == request.Password) signInResult = true;
-
-            if (!signInResult)
+            if (userDTO.Password != request.Password)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
             var token = await _userService.UpdateAndReturnUserToken(userDTO);
 
-            return token;
-        }
+            if (token == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
 
-        public async Task Logout(SignOutUserDTO request)
-        {
-            await _userService.DeleteUserToken(request);
+            return token;
         }
     }
 }

@@ -21,8 +21,7 @@ namespace GTAVersions.Domain.JWT
 
         public Task<string> GenerateToken(User user)
         {
-
-            string issuer = "https://localhost:5001";
+            string issuer = _jwtOptions.Issuer;
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
@@ -31,7 +30,7 @@ namespace GTAVersions.Domain.JWT
                 new Claim(JwtRegisteredClaimNames.NameId, user.Username),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("6c547e89-fdbc-4d0b-8c48-5a69ba2decab"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.UtcNow.AddSeconds(3000);
 
@@ -71,7 +70,7 @@ namespace GTAVersions.Domain.JWT
 
         public TokenValidationParameters GetValidationParameters()
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("6c547e89-fdbc-4d0b-8c48-5a69ba2decab"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
             string issuer = _jwtOptions.Issuer;
             bool validateIssuer = _jwtOptions.ValidateIssuer;
 

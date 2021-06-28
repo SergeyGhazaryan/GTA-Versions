@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { InputFields } from '../antdItems/inputFields';
-import { Button } from '../antdItems/button';
-import { Warning } from '../antdItems/warning';
+import { InputFields } from '../inputFields';
+import { Button } from '../button';
+import { Warning } from '../warning';
 import { login } from '../../services';
 
 import './styles.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from './input';
-import { getInputType } from '../../functions';
+import { getInputType } from '../functions/index';
 
 export const InputFields = ({ fieldsArray }) => {
   return (

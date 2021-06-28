@@ -26,12 +26,6 @@ namespace GTAVersions.Domain.Services
             return user.Adapt<UserDTO>();
         }
 
-        public async Task<bool> CheckPasswordSignInAsync(string password)
-        {
-            var result = await _userRepository.CheckPasswordSignInAsync(password);
-            return result;
-        }
-
         public async Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO)
         {
             var token = await _jwtTokenHandler.GenerateToken(userDTO.Adapt<User>());
@@ -40,11 +34,6 @@ namespace GTAVersions.Domain.Services
             {
                 Token = token
             };
-        }
-
-        public async Task DeleteUserToken(SignOutUserDTO request)
-        {
-            await _userRepository.DeleteUserToken(request.Token);
         }
 
         public async Task<UserDTO> CreateUser(SignInUserDTO signInUserDTO)

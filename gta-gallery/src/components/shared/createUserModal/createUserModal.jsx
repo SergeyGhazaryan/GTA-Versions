@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../../../services/userService';
-import { Modal } from '../../antdItems/modal';
-import { InputFields } from '../../antdItems/inputFields';
+import { Modal } from '../../modal';
+import { InputFields } from '../../inputFields';
 
 export const CreateUserModal = ({ isOpen, onCancel }) => {
   const [usernameValue, setUsernameValue] = useState('');
@@ -23,14 +23,14 @@ export const CreateUserModal = ({ isOpen, onCancel }) => {
     },
   ];
 
-  const toggleCreateModal = () => {
+  const closeCreateModal = () => {
     onCancel();
   };
 
   const handleCreate = () => {
     if (usernameValue && passwordValue) {
       createUser(usernameValue, passwordValue);
-      toggleCreateModal();
+      closeCreateModal();
     }
     setWarning(true);
   };

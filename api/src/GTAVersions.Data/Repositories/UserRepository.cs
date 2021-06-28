@@ -30,13 +30,6 @@ namespace GTAVersions.Data.Repositories
             return true;
         }
 
-        public async Task DeleteUserToken(string token)
-        {
-            var query = $"UPDATE Users SET token = '{null}' WHERE Token = @Token";
-            var param = new { Token = token };
-            await _genericRepository.UpdateAsync(query, param);
-        }
-
         public async Task<User> Create(User user)
         {
             var query = "INSERT INTO Users (username, password) VALUES (@Username, @Password');";

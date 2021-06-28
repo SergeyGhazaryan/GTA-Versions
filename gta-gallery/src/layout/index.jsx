@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getAllVersions } from '../services';
-import { Button } from '../components/antdItems/button';
+import { Button } from '../components/button';
 import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
 import { CreateUserModal } from '../components/shared/createUserModal/createUserModal';
 import { GtaVersion } from '../components/gtaVersion';
-import { logout } from '../services';
 import { useHistory } from 'react-router-dom';
 
 import './styles.scss';
@@ -35,7 +34,6 @@ const Layout = () => {
   };
 
   const handleLogout = async () => {
-    await logout();
     localStorage.setItem('token', '');
     history.push('/login');
   };

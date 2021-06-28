@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVersion } from '../../services/gtaVersionsService';
 import { UpdateVersionModal } from '../shared/updateVersionModal/updateVersionModal';
-import { Button } from '../antdItems/button';
+import { Button } from '../button';
 
 import './styles.scss';
 

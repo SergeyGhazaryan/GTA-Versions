@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createVersion } from '../../../services';
-import { Modal } from '../../antdItems/modal';
-import { InputFields } from '../../antdItems/inputFields';
+import { Modal } from '../../modal';
+import { InputFields } from '../../inputFields';
 
 export const AddVersionModal = ({ isOpen, onCancel }) => {
   const [image, setImage] = useState('');
@@ -41,14 +41,14 @@ export const AddVersionModal = ({ isOpen, onCancel }) => {
     },
   ];
 
-  const toggleAddModal = () => {
+  const closeAddModal = () => {
     onCancel();
   };
 
   const handleAdd = () => {
     if (image && versionNameValue && informationValue) {
       createVersion(image, versionNameValue, informationValue);
-      toggleAddModal();
+      closeAddModal();
     }
     setWarning(true);
   };

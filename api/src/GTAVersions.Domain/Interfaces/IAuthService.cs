@@ -7,6 +7,5 @@ namespace GTAVersions.Domain.Interfaces
     public interface IAuthService
     {
         Task<AccessToken> Login(SignInUserDTO request);
-        Task Logout(SignOutUserDTO request);
     }
 }
