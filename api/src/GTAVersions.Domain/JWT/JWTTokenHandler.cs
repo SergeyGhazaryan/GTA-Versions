@@ -69,11 +69,6 @@ namespace GTAVersions.Domain.JWT
             return principal;
         }
 
-        public bool IsTokenValid(string accessToken)
-        {
-            return GetClaimsPrincipal(accessToken) != null;
-        }
-
         public TokenValidationParameters GetValidationParameters()
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("6c547e89-fdbc-4d0b-8c48-5a69ba2decab"));
