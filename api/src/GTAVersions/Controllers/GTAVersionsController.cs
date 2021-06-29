@@ -53,9 +53,9 @@ namespace GTAVersions.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGTAVersion([FromRoute] string id)
         {
-            await _gtaVersionService.DeleteGTAVersion(id);
+            var deletedGTAVersion = await _gtaVersionService.DeleteGTAVersion(id);
 
-            return Ok();
+            return Ok(deletedGTAVersion);
         }
     }
 }

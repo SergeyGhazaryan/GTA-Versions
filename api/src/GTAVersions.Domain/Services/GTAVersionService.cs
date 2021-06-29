@@ -41,9 +41,10 @@ namespace GTAVersions.Domain.Services
             return gtaVersion.Adapt<GTAVersionDTO>();
         }
 
-        public async Task DeleteGTAVersion(string id)
+        public async Task<GTAVersionDTO> DeleteGTAVersion(string id)
         {
-            await _gtaVersionRepository.DeleteGTAVersion(id);
+            var gtaVersion = await _gtaVersionRepository.DeleteGTAVersion(id);
+            return gtaVersion.Adapt<GTAVersionDTO>();
         }
     }
 }

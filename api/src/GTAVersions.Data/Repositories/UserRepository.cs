@@ -32,7 +32,7 @@ namespace GTAVersions.Data.Repositories
 
         public async Task<User> Create(User user)
         {
-            var query = "INSERT INTO Users (username, password) VALUES (@Username, @Password');";
+            var query = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password)";
             var param = new { Username = user.Username, Password = user.Password };
             var result = await _genericRepository.CreateAsync(query, param);
             return result;

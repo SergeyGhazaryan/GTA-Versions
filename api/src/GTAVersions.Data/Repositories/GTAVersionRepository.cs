@@ -45,11 +45,12 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task DeleteGTAVersion(string id)
+        public async Task<GTAVersion> DeleteGTAVersion(string id)
         {
             var query = "DELETE FROM GTAVersions WHERE Id = @Id";
             var param = new { Id = id };
-            await _genericRepository.DeleteAsync(query, param);
+            var result = await _genericRepository.DeleteAsync(query, param);
+            return result;
         }
     }
 }

@@ -39,9 +39,10 @@ namespace GTAVersions.Data
             return result;
         }
 
-        public async Task DeleteAsync(string query, object param = null)
+        public async Task<T> DeleteAsync(string query, object param = null)
         {
-            await _connection.ExecuteScalarAsync<T>(query, param);
+            var result = await _connection.ExecuteScalarAsync<T>(query, param);
+            return result;
         }
     }
 }
