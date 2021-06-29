@@ -19,9 +19,9 @@ namespace GTAVersions.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] SignInUserDTO signInUserDTO)
+        public async Task<IActionResult> CreateUser([FromBody] SignUpUserDTO signUpUserDTO)
         {
-            var createdUser = await _userService.CreateUser(signInUserDTO);
+            var createdUser = await _userService.CreateUserAsync(signUpUserDTO);
 
             return Ok(createdUser);
         }

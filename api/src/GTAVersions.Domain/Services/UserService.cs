@@ -20,13 +20,20 @@ namespace GTAVersions.Domain.Services
             _jwtTokenHandler = jwtTokenHandler;
         }
 
-        public async Task<UserDTO> FindByUsernameAsync(string username)
+        public async Task<UserDTO> GetUserByUsernameAsync(string username)
         {
             var user = await _userRepository.GetUserByUsername(username);
             return user.Adapt<UserDTO>();
         }
 
-        public async Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO)
+        public async Task<UserDTO> GetUserByIdAsync(int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+
+            return user.Adapt<UserDTO>();
+        }
+
+        public async Task<AccessToken> UpdateAndReturnUserTokenAsync(UserDTO userDTO)
         {
             var token = await _jwtTokenHandler.GenerateToken(userDTO.Adapt<User>());
 
@@ -36,10 +43,10 @@ namespace GTAVersions.Domain.Services
             };
         }
 
-        public async Task<UserDTO> CreateUser(SignInUserDTO signInUserDTO)
+        public async Task<int> CreateUserAsync(SignUpUserDTO signUpUserDTO)
         {
-            var user = await _userRepository.Create(signInUserDTO.Adapt<User>());
-            return user.Adapt<UserDTO>();
+            var userid = await _userRepository.Create(signUpUserDTO.Adapt<User>());
+            return userid;
         }
     }
 }

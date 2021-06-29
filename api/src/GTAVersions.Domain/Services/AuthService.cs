@@ -18,7 +18,7 @@ namespace GTAVersions.Domain.Services
 
         public async Task<AccessToken> Login(SignInUserDTO request)
         {
-            var userDTO = await _userService.FindByUsernameAsync(request.Username);
+            var userDTO = await _userService.GetUserByUsernameAsync(request.Username);
 
             if (userDTO == null)
             {
@@ -30,7 +30,23 @@ namespace GTAVersions.Domain.Services
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
-            var token = await _userService.UpdateAndReturnUserToken(userDTO);
+            var token = await _userService.UpdateAndReturnUserTokenAsync(userDTO);
+
+            if (token == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
+
+            return token;
+        }
+
+        public async Task<AccessToken> Signup(SignUpUserDTO request)
+        {
+            var createdUserId = await _userService.CreateUserAsync(request);
+
+            var createdUser = await _userService.GetUserByIdAsync(createdUserId);
+
+            var token = await _userService.UpdateAndReturnUserTokenAsync(createdUser);
 
             if (token == null)
             {

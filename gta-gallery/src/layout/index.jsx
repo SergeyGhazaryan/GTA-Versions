@@ -75,12 +75,7 @@ const Layout = () => {
         </div>
         <div className='gta-version'>
           {(versions || []).map((v) => (
-            <GtaVersion
-              key={v.id}
-              image={v.image}
-              versionName={v.versionName}
-              id={v.id}
-            />
+            <GtaVersion key={v.id} image={v.image} name={v.name} id={v.id} />
           ))}
         </div>
       </div>

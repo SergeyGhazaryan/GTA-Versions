@@ -21,7 +21,15 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<bool> CheckPasswordSignInAsync(string password)
+        public async Task<User> GetUserById(int id)
+        {
+            var query = "SELECT * FROM Users WHERE Id = @Id";
+            var param = new { Id = id };
+            var result = await _genericRepository.GetAsync(query, param);
+            return result;
+        }
+
+        public async Task<bool> CheckPasswordSignIn(string password)
         {
             var query = "SELECT * FROM Users WHERE Password = @Password";
             var param = new { Password = password };
@@ -30,9 +38,9 @@ namespace GTAVersions.Data.Repositories
             return true;
         }
 
-        public async Task<User> Create(User user)
+        public async Task<int> Create(User user)
         {
-            var query = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password)";
+            var query = "INSERT INTO Users (Username, Password) OUTPUT INSERTED.Id VALUES (@Username, @Password)";
             var param = new { Username = user.Username, Password = user.Password };
             var result = await _genericRepository.CreateAsync(query, param);
             return result;

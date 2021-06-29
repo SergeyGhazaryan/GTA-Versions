@@ -5,7 +5,7 @@ import { InputFields } from '../../inputFields';
 
 export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
   const [image, setImage] = useState('');
-  const [versionNameValue, setVersionNameValue] = useState('');
+  const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
   const [warning, setWarning] = useState(false);
 
@@ -28,10 +28,10 @@ export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
       itemValue: image,
     },
     {
-      name: 'versionName',
-      label: 'Version name',
-      onChange: setVersionNameValue,
-      itemValue: versionNameValue,
+      name: 'name',
+      label: 'Name',
+      onChange: setNameValue,
+      itemValue: nameValue,
     },
     {
       name: 'information',
@@ -46,8 +46,8 @@ export const UpdateVersionModal = ({ id, isOpen, onCancel }) => {
   };
 
   const handleUpdate = () => {
-    if (id && image && versionNameValue && informationValue) {
-      updateVersion(id, image, versionNameValue, informationValue);
+    if (id && image && nameValue && informationValue) {
+      updateVersion(id, image, nameValue, informationValue);
       closeUpdateModal();
     }
     setWarning(true);

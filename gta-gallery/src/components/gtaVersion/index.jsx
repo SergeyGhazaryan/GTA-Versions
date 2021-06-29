@@ -5,7 +5,7 @@ import { PopConfirm } from '../popConfirm';
 
 import './styles.scss';
 
-export const GtaVersion = ({ image, versionName, id }) => {
+export const GtaVersion = ({ image, name, id }) => {
   const onDelete = () => {
     if (!id) return;
     deleteVersion(id);
@@ -14,7 +14,7 @@ export const GtaVersion = ({ image, versionName, id }) => {
   return (
     <div className='container'>
       <div className='version-header'>
-        <h1 className='name'>{versionName}</h1>
+        <h1 className='name'>{name}</h1>
         <PopConfirm title='Are you sure？' onConfirm={onDelete} text='X' />
       </div>
       <NavLink to={`/gta/${id}`} className='nav-link'>

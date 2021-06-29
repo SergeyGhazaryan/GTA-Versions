@@ -1,8 +1,6 @@
 ﻿namespace GTAVersions.Domain.DTO
 {
-    public class SignInUserDTO
+    public class SignInUserDTO : BaseRegistrationDTO
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

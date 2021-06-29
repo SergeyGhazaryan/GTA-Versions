@@ -11,3 +11,15 @@ export const login = async (username, password) => {
     console.log(error);
   }
 };
+
+export const signup = async (username, password) => {
+  try {
+    const result = await axios.post('auth/signup', {
+      username,
+      password,
+    });
+    return result.data.token;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -27,9 +27,9 @@ namespace GTAVersions.Data
             return result;
         }
 
-        public async Task<T> CreateAsync(string query, object param = null)
+        public async Task<int> CreateAsync(string query, object param = null)
         {
-            var result = await _connection.ExecuteScalarAsync<T>(query, param);
+            var result = await _connection.ExecuteScalarAsync<int>(query, param);
             return result;
         }
 

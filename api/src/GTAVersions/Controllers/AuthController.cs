@@ -23,5 +23,13 @@ namespace GTAVersions.Controllers
 
             return Ok(token);
         }
+
+        [HttpPost("signup")]
+        public async Task<IActionResult> Signup([FromBody] SignUpUserDTO model)
+        {
+            var token = await _authService.Signup(model);
+
+            return Ok(token);
+        }
     }
 }

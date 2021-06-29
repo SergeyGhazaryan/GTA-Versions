@@ -4,6 +4,7 @@ import { InputFields } from '../inputFields';
 import { Button } from '../button';
 import { Warning } from '../warning';
 import { login } from '../../services';
+import { NavLink } from 'react-router-dom';
 
 import './styles.scss';
 
@@ -31,11 +32,13 @@ export const Login = () => {
   ];
 
   const handleLogin = async () => {
-    if (usernameValue && passwordValue) {
+    if (usernameValue && passwordValue && usernameValue !== passwordValue) {
       setWarning(false);
       const token = await login(usernameValue, passwordValue);
-      localStorage.setItem('token', token);
-      history.push('/');
+      if (token) {
+        localStorage.setItem('token', token);
+        history.push('/');
+      }
     } else {
       setWarning(true);
       if (!usernameValue && !passwordValue) {
@@ -58,6 +61,11 @@ export const Login = () => {
         <div className='login-button'>
           <Button onClick={handleLogin} variant='contained' text='Login' />
         </div>
+        <NavLink to='/signup'>
+          <div className='signup-button'>
+            <Button variant='contained' text='Signup' />
+          </div>
+        </NavLink>
         <div className='login-warning'>
           {warning && <Warning text={`Please write your ${warningTextPart}`} />}
         </div>

@@ -3,6 +3,7 @@ export const getInputType = (inputName) => {
     case 'image':
       return 'file';
     case 'password':
+    case 'repeatPassword':
       return 'password';
     default:
       return 'text';
