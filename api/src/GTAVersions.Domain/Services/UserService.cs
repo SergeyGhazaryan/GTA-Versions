@@ -23,6 +23,7 @@ namespace GTAVersions.Domain.Services
         public async Task<UserDTO> GetUserByUsernameAsync(string username)
         {
             var user = await _userRepository.GetUserByUsername(username);
+
             return user.Adapt<UserDTO>();
         }
 
@@ -43,9 +44,10 @@ namespace GTAVersions.Domain.Services
             };
         }
 
-        public async Task<int> CreateUserAsync(SignUpUserDTO signUpUserDTO)
+        public async Task<int> CreateUserAsync(string username, string hash)
         {
-            var userid = await _userRepository.Create(signUpUserDTO.Adapt<User>());
+            var userid = await _userRepository.Create(username, hash);
+
             return userid;
         }
     }

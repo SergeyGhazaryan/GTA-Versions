@@ -7,6 +7,7 @@ using GTAVersions.Data.Interfaces;
 using GTAVersions.Data.Repositories;
 using GTAVersions.Domain.Interfaces;
 using GTAVersions.Domain.JWT;
+using GTAVersions.Domain.PasswordHasher;
 using GTAVersions.Domain.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,7 @@ namespace GTAVersions
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<JWTTokenHandler>();
+            services.AddTransient<IPasswordHasher, PasswordHasher>();
 
             using var provider = services.BuildServiceProvider();
             var jwtTokenHandler = provider.GetService<JWTTokenHandler>();

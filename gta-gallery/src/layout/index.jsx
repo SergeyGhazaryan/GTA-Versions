@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getAllVersions } from '../services';
 import { Button } from '../components/button';
 import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
-import { CreateUserModal } from '../components/shared/createUserModal/createUserModal';
 import { GtaVersion } from '../components/gtaVersion';
 import { useHistory } from 'react-router-dom';
 
@@ -13,7 +12,6 @@ const Layout = () => {
 
   const [versions, setVersions] = useState([]);
   const [addModalVisible, setAddModalVisible] = useState(false);
-  const [createModalVisible, setCreateModalVisible] = useState(false);
 
   const getData = async () => {
     const data = await getAllVersions();
@@ -27,10 +25,6 @@ const Layout = () => {
 
   const toggleAddDialog = () => {
     setAddModalVisible(!addModalVisible);
-  };
-
-  const toggleCreateDialog = () => {
-    setCreateModalVisible(!createModalVisible);
   };
 
   const handleLogout = async () => {
@@ -53,19 +47,6 @@ const Layout = () => {
               <AddVersionModal
                 isOpen={addModalVisible}
                 onCancel={toggleAddDialog}
-              />
-            )}
-          </div>
-          <div>
-            <Button
-              onClick={() => setCreateModalVisible(true)}
-              variant='contained'
-              text='CREATE USER'
-            />
-            {createModalVisible && (
-              <CreateUserModal
-                isOpen={createModalVisible}
-                onCancel={toggleCreateDialog}
               />
             )}
           </div>

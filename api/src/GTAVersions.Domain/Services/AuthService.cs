@@ -10,10 +10,12 @@ namespace GTAVersions.Domain.Services
     public class AuthService : IAuthService
     {
         private readonly IUserService _userService;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public AuthService(IUserService userService)
+        public AuthService(IUserService userService, IPasswordHasher passwordHasher)
         {
             _userService = userService;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<AccessToken> Login(SignInUserDTO request)
@@ -25,7 +27,9 @@ namespace GTAVersions.Domain.Services
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            if (userDTO.Password != request.Password)
+            var verified = _passwordHasher.Check(userDTO.Hash, request.Password);
+
+            if (!verified)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
@@ -37,13 +41,15 @@ namespace GTAVersions.Domain.Services
 
         public async Task<AccessToken> Signup(SignUpUserDTO request)
         {
-            var createdUserId = await _userService.CreateUserAsync(request);
+            var hashedPassword = _passwordHasher.Hash(request.Password);
+
+            var createdUserId = await _userService.CreateUserAsync(request.Username, hashedPassword);
 
             if(createdUserId == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-
+ 
             var createdUser = await _userService.GetUserByIdAsync(createdUserId);
 
             var token = await _userService.UpdateAndReturnUserTokenAsync(createdUser);

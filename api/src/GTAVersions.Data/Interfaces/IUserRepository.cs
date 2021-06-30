@@ -7,7 +7,6 @@ namespace GTAVersions.Data.Interfaces
     {
         Task<User> GetUserByUsername(string username);
         Task<User> GetUserById(int id);
-        Task<bool> CheckPasswordSignIn(string password);
-        Task<int> Create(User user);
+        Task<int> Create(string username, string hash);
     }
 }
