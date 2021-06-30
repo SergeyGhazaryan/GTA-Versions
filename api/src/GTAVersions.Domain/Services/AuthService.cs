@@ -32,11 +32,6 @@ namespace GTAVersions.Domain.Services
 
             var token = await _userService.UpdateAndReturnUserTokenAsync(userDTO);
 
-            if (token == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.Unauthorized);
-            }
-
             return token;
         }
 
@@ -44,14 +39,14 @@ namespace GTAVersions.Domain.Services
         {
             var createdUserId = await _userService.CreateUserAsync(request);
 
+            if(createdUserId == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
             var createdUser = await _userService.GetUserByIdAsync(createdUserId);
 
             var token = await _userService.UpdateAndReturnUserTokenAsync(createdUser);
-
-            if (token == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.Unauthorized);
-            }
 
             return token;
         }

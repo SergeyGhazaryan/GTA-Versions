@@ -35,7 +35,7 @@ namespace GTAVersions.Domain.Services
             return gtaVersion.Adapt<GTAVersionDTO>();
         }
 
-        public async Task<GTAVersionDTO> UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<GTAVersionDTO> UpdateGTAVersion(string id, UpdateGTAVersionDTO createGTAVersionDTO)
         {
             var gtaVersion = await _gtaVersionRepository.UpdateGTAVersion(id, createGTAVersionDTO.Adapt<GTAVersion>());
             return gtaVersion.Adapt<GTAVersionDTO>();

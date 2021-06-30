@@ -9,7 +9,7 @@ namespace GTAVersions.Domain.Interfaces
         Task<GTAVersionDTO> GetGTAVersion(string id);
         Task<List<GTAVersionDTO>> GetGTAVersions();
         Task<GTAVersionDTO> CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO);
-        Task<GTAVersionDTO> UpdateGTAVersion(string id, CreateGTAVersionDTO createGTAVersionDTO);
+        Task<GTAVersionDTO> UpdateGTAVersion(string id, UpdateGTAVersionDTO createGTAVersionDTO);
         Task<GTAVersionDTO> DeleteGTAVersion(string id);
     }
 }

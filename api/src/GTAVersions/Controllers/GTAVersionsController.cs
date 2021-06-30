@@ -43,7 +43,7 @@ namespace GTAVersions.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, [FromBody] CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, [FromBody] UpdateGTAVersionDTO createGTAVersionDTO)
         {
             var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
 
