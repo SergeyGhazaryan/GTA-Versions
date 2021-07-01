@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-family: cursive;
+  text-decoration: underline;
+  font-size: 25px;
+}
+
+.version-container {
+  margin: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gta-version {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.add-button {
+  margin-left: 10px;
+}

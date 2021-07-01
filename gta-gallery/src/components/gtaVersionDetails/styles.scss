@@ -1,0 +1,23 @@
+.details-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  align-items: center;
+  height: 100vh;
+}
+
+.image {
+  width: 400px;
+  height: 200px;
+}
+
+.version-name {
+  font-size: 20px;
+  font-family: monospace;
+}
+
+.details-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
