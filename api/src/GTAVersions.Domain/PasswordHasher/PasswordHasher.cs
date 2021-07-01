@@ -19,7 +19,7 @@ namespace GTAVersions.Domain.PasswordHasher
             Options = options.Value;
         }
 
-        public string Hash(string password)
+        public string PasswordHash(string password)
         {
             using (var algorithm = new Rfc2898DeriveBytes(
                 password,
@@ -34,9 +34,9 @@ namespace GTAVersions.Domain.PasswordHasher
             }
         }
 
-        public bool Check(string hash, string password)
+        public bool Check(string passwordHash, string password)
         {
-            var parts = hash.Split('.', 3);
+            var parts = passwordHash.Split('.', 3);
 
             if (parts.Length != 3)
             {

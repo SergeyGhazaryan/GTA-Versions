@@ -29,10 +29,10 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<int> Create(string username, string hash)
+        public async Task<int> Create(string username, string passwordHash)
         {
-            var query = "INSERT INTO Users (Username, Hash) OUTPUT INSERTED.Id VALUES (@Username, @Hash)";
-            var param = new { Username = username, Hash = hash };
+            var query = "INSERT INTO Users (Username, PasswordHash) OUTPUT INSERTED.Id VALUES (@Username, @PasswordHash)";
+            var param = new { Username = username, PasswordHash = passwordHash };
             var result = await _genericRepository.CreateAsync(query, param);
             return result;
         }

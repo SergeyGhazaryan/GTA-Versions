@@ -45,29 +45,6 @@ namespace GTAVersions.Domain.JWT
             return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        public ClaimsPrincipal GetClaimsPrincipal(string accessToken)
-        {
-            var tokenTypeIndex = accessToken.IndexOf(' ');
-            if (tokenTypeIndex != -1)
-            {
-                accessToken = accessToken.Substring(tokenTypeIndex + 1, accessToken.Length - tokenTypeIndex - 1);
-            }
-
-            var tokenValidationParameters = GetValidationParameters();
-            tokenValidationParameters.ValidateLifetime = false;
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            ClaimsPrincipal principal = tokenHandler.ValidateToken(accessToken, tokenValidationParameters, out var securityToken);
-
-            if (!(securityToken is JwtSecurityToken jwtSecurityToken) ||
-                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return null;
-            }
-
-            return principal;
-        }
-
         public TokenValidationParameters GetValidationParameters()
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));

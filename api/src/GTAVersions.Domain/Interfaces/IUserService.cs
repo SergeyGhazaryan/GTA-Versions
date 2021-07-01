@@ -9,6 +9,6 @@ namespace GTAVersions.Domain.Interfaces
         Task<UserDTO> GetUserByUsernameAsync(string username);
         Task<UserDTO> GetUserByIdAsync(int id);
         Task<AccessToken> UpdateAndReturnUserTokenAsync(UserDTO userDTO);
-        Task<int> CreateUserAsync(string username, string hash);
+        Task<int> CreateUserAsync(string username, string passwordHash);
     }
 }

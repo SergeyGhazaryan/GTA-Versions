@@ -44,9 +44,9 @@ namespace GTAVersions.Domain.Services
             };
         }
 
-        public async Task<int> CreateUserAsync(string username, string hash)
+        public async Task<int> CreateUserAsync(string username, string passwordHash)
         {
-            var userid = await _userRepository.Create(username, hash);
+            var userid = await _userRepository.Create(username, passwordHash);
 
             return userid;
         }

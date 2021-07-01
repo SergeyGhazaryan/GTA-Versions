@@ -27,7 +27,7 @@ namespace GTAVersions.Domain.Services
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            var verified = _passwordHasher.Check(userDTO.Hash, request.Password);
+            var verified = _passwordHasher.Check(userDTO.PasswordHash, request.Password);
 
             if (!verified)
             {
@@ -41,9 +41,9 @@ namespace GTAVersions.Domain.Services
 
         public async Task<AccessToken> Signup(SignUpUserDTO request)
         {
-            var hashedPassword = _passwordHasher.Hash(request.Password);
+            var passwordHash = _passwordHasher.PasswordHash(request.Password);
 
-            var createdUserId = await _userService.CreateUserAsync(request.Username, hashedPassword);
+            var createdUserId = await _userService.CreateUserAsync(request.Username, passwordHash);
 
             if(createdUserId == null)
             {
