@@ -27,7 +27,7 @@ const Layout = () => {
     setAddModalVisible(!addModalVisible);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     localStorage.setItem('token', '');
     history.push('/login');
   };
