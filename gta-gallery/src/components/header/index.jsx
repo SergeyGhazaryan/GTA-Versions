@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { EditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
 import { getCurrentUser } from '../../services/userService';
+import { isEmpty } from 'lodash';
 
 import './styles.scss';
 
@@ -33,8 +34,14 @@ export const Header = () => {
     history.push('/');
   };
 
+  const userInfo = useMemo(() => {
+    if (isEmpty(currentUser)) return;
+    return `${currentUser.firstName.charAt(0)} ${currentUser.lastName.charAt(
+      0
+    )}`;
+  }, [currentUser]);
+
   useEffect(() => {
-    if (!currentUser) return;
     getUser();
   }, []);
 
@@ -60,9 +67,7 @@ export const Header = () => {
       <Dropdown.Button
         overlay={menu}
         placement='bottomCenter'
-        icon={`${
-          currentUser.firstName ? currentUser.firstName.charAt(0) : ''
-        } ${currentUser.lastName ? currentUser.lastName.charAt(0) : ''}`}
+        icon={userInfo}
       />
     </div>
   );
