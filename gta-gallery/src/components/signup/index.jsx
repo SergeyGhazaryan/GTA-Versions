@@ -9,11 +9,25 @@ import './styles.scss';
 export const Signup = () => {
   const history = useHistory();
 
+  const [firstNameValue, setFirstNameValue] = useState('');
+  const [lastNameValue, setLastNameValue] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
 
   const inputFields = [
+    {
+      name: 'firstName',
+      label: 'First name',
+      onChange: setFirstNameValue,
+      itemValue: firstNameValue,
+    },
+    {
+      name: 'lastName',
+      label: 'Last name',
+      onChange: setLastNameValue,
+      itemValue: lastNameValue,
+    },
     {
       name: 'username',
       label: 'Username',
@@ -39,10 +53,17 @@ export const Signup = () => {
       usernameValue &&
       passwordValue &&
       repeatPasswordValue &&
+      firstNameValue &&
+      lastNameValue &&
       passwordValue === repeatPasswordValue &&
       usernameValue !== passwordValue
     ) {
-      const token = await signup(usernameValue, passwordValue);
+      const token = await signup(
+        firstNameValue,
+        lastNameValue,
+        usernameValue,
+        passwordValue
+      );
       if (token) {
         localStorage.setItem('token', token);
         history.push('/');
@@ -59,7 +80,7 @@ export const Signup = () => {
           <InputFields fieldsArray={inputFields} />
         </div>
         <div className='signup-button'>
-          <Button onClick={handleSignup} variant='contained' text='Signup' />
+          <Button onClick={handleSignup} text='Signup' />
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using GTAVersions.Domain.DTO;
 using GTAVersions.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GTAVersions.Controllers
@@ -30,6 +33,17 @@ namespace GTAVersions.Controllers
             var token = await _authService.Signup(model);
 
             return Ok(token);
+        }
+
+        [Authorize]
+        [HttpPut("settings")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO model)
+        {
+            var currentUserId = HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+            var changedPassword = await _authService.ChangePassword(model, currentUserId);
+
+            return Ok(changedPassword);
         }
     }
 }

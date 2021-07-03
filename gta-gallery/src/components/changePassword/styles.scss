@@ -1,0 +1,24 @@
+.password-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.password {
+  padding: 50px;
+  border: 5px solid #ff0000;
+  border-radius: 10px;
+}
+
+.password-button {
+  display: flex;
+  justify-content: center;
+}
+
+.password-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

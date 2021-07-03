@@ -3,13 +3,11 @@ import { getAllVersions } from '../services';
 import { Button } from '../components/button';
 import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
 import { GtaVersion } from '../components/gtaVersion';
-import { useHistory } from 'react-router-dom';
+import { Header } from '../components/header';
 
 import './styles.scss';
 
 const Layout = () => {
-  const history = useHistory();
-
   const [versions, setVersions] = useState([]);
   const [addModalVisible, setAddModalVisible] = useState(false);
 
@@ -27,20 +25,14 @@ const Layout = () => {
     setAddModalVisible(!addModalVisible);
   };
 
-  const handleLogout = () => {
-    localStorage.setItem('token', '');
-    history.push('/login');
-  };
-
   return (
     <>
-      <div className='header'>GTA Versions</div>
+      <Header />
       <div className='version-container'>
         <div className='button-container'>
           <div className='add-button'>
             <Button
               onClick={() => setAddModalVisible(true)}
-              variant='contained'
               text='ADD VERSION'
             />
             {addModalVisible && (
@@ -49,9 +41,6 @@ const Layout = () => {
                 onCancel={toggleAddDialog}
               />
             )}
-          </div>
-          <div>
-            <Button onClick={handleLogout} variant='contained' text='Logout' />
           </div>
         </div>
         <div className='gta-version'>

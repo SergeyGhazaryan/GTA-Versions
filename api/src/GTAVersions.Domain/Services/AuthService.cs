@@ -20,7 +20,7 @@ namespace GTAVersions.Domain.Services
 
         public async Task<AccessToken> Login(SignInUserDTO request)
         {
-            var userDTO = await _userService.GetUserByUsernameAsync(request.Username);
+            var userDTO = await _userService.GetUserByUsername(request.Username);
 
             if (userDTO == null)
             {
@@ -34,7 +34,7 @@ namespace GTAVersions.Domain.Services
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
-            var token = await _userService.UpdateAndReturnUserTokenAsync(userDTO);
+            var token = await _userService.UpdateAndReturnUserToken(userDTO);
 
             return token;
         }
@@ -43,18 +43,38 @@ namespace GTAVersions.Domain.Services
         {
             var passwordHash = _passwordHasher.PasswordHash(request.Password);
 
-            var createdUserId = await _userService.CreateUserAsync(request.Username, passwordHash);
+            var createdUserId = await _userService.CreateUser(request.FirstName, request.LastName, request.Username, passwordHash);
 
-            if(createdUserId == null)
+            if (createdUserId == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
- 
-            var createdUser = await _userService.GetUserByIdAsync(createdUserId);
 
-            var token = await _userService.UpdateAndReturnUserTokenAsync(createdUser);
+            var createdUser = await _userService.GetUserById(createdUserId);
+
+            var token = await _userService.UpdateAndReturnUserToken(createdUser);
 
             return token;
+        }
+
+        public async Task<UserDTO> ChangePassword(ChangePasswordDTO request, string currentUserId)
+        {
+            var id = int.Parse(currentUserId);
+
+            var currentUser = await _userService.GetUserById(id);
+
+            var verified = _passwordHasher.Check(currentUser.PasswordHash, request.OldPassword);
+
+            if (!verified)
+            {
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            }
+
+            var passwordHash = _passwordHasher.PasswordHash(request.NewPassword);
+
+            var changedPassword = await _userService.ChangePassword(id, passwordHash);
+
+            return changedPassword;
         }
     }
 }

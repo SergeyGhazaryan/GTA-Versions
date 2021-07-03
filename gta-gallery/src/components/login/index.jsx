@@ -59,11 +59,11 @@ export const Login = () => {
           <InputFields fieldsArray={inputFields} />
         </div>
         <div className='login-button'>
-          <Button onClick={handleLogin} variant='contained' text='Login' />
+          <Button onClick={handleLogin} text='Login' />
         </div>
         <NavLink to='/signup'>
           <div className='signup-button'>
-            <Button variant='contained' text='Signup' />
+            <Button text='Signup' />
           </div>
         </NavLink>
         <div className='login-warning'>

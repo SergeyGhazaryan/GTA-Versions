@@ -29,11 +29,35 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<int> Create(string username, string passwordHash)
+        public async Task<int> CreateUser(string firstName, string lastName, string username, string passwordHash)
         {
-            var query = "INSERT INTO Users (Username, PasswordHash) OUTPUT INSERTED.Id VALUES (@Username, @PasswordHash)";
-            var param = new { Username = username, PasswordHash = passwordHash };
+            var query = "INSERT INTO Users (FirstName, LastName, Username, PasswordHash) OUTPUT INSERTED.Id VALUES (@FirstName, @LastName, @Username, @PasswordHash)";
+            var param = new { FirstName = firstName, LastName = lastName, Username = username, PasswordHash = passwordHash };
             var result = await _genericRepository.CreateAsync(query, param);
+            return result;
+        }
+
+        public async Task<User> EditUser(string firstName, string lastName, string username, int id)
+        {
+            var query = "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, Username = @Username WHERE Id = @Id";
+            var param = new { Id = id, FirstName = firstName, LastName = lastName, Username = username };
+            var result = await _genericRepository.UpdateAsync(query, param);
+            return result;
+        }
+
+        public async Task<User> ChangePassword(int id, string passwordHash)
+        {
+            var query = "UPDATE Users SET PasswordHash = @PasswordHash WHERE Id = @Id";
+            var param = new { Id = id, PasswordHash = passwordHash };
+            var result = await _genericRepository.UpdateAsync(query, param);
+            return result;
+        }
+
+        public async Task<User> GetCurrentUser(int id)
+        {
+            var query = "SELECT * FROM Users WHERE Id = @Id";
+            var param = new { Id = id };
+            var result = await _genericRepository.GetAsync(query, param);
             return result;
         }
     }

@@ -8,5 +8,6 @@ namespace GTAVersions.Domain.Interfaces
     {
         Task<AccessToken> Login(SignInUserDTO request);
         Task<AccessToken> Signup(SignUpUserDTO request);
+        Task<UserDTO> ChangePassword(ChangePasswordDTO request, string currentUserId);
     }
 }

@@ -1,0 +1,24 @@
+.edit-user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.edit-user {
+  padding: 50px;
+  border: 5px solid #2b8d6c;
+  border-radius: 10px;
+}
+
+.edit-user-button {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-user-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

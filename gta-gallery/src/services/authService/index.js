@@ -12,13 +12,27 @@ export const login = async (username, password) => {
   }
 };
 
-export const signup = async (username, password) => {
+export const signup = async (firstName, lastName, username, password) => {
   try {
     const result = await axios.post('auth/signup', {
+      firstName,
+      lastName,
       username,
       password,
     });
     return result.data.token;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changePassword = async (newPassword, oldPassword) => {
+  try {
+    const result = await axios.put('auth/settings', {
+      newPassword,
+      oldPassword,
+    });
+    return result.data;
   } catch (error) {
     console.log(error);
   }
