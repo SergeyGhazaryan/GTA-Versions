@@ -41,13 +41,13 @@ export const Header = () => {
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={handleEditPage} icon={<UserOutlined />}>
-        Edit user
+        <div className='dropdown-field'>Edit user</div>
       </Menu.Item>
       <Menu.Item key='2' onClick={handleChangePassword} icon={<EditOutlined />}>
-        Change password
+        <div className='dropdown-field'>Change password</div>
       </Menu.Item>
       <Menu.Item key='3' onClick={handleLogout} icon={<LogoutOutlined />}>
-        Logout
+        <div className='dropdown-field'>Logout</div>
       </Menu.Item>
     </Menu>
   );
