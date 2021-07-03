@@ -42,7 +42,6 @@ namespace GTAVersions.Domain.Services
         public async Task<AccessToken> Signup(SignUpUserDTO request)
         {
             var passwordHash = _passwordHasher.PasswordHash(request.Password);
-
             var createdUserId = await _userService.CreateUser(request.FirstName, request.LastName, request.Username, passwordHash);
 
             if (createdUserId == null)
@@ -51,7 +50,6 @@ namespace GTAVersions.Domain.Services
             }
 
             var createdUser = await _userService.GetUserById(createdUserId);
-
             var token = await _userService.UpdateAndReturnUserToken(createdUser);
 
             return token;
@@ -60,7 +58,6 @@ namespace GTAVersions.Domain.Services
         public async Task<UserDTO> ChangePassword(ChangePasswordDTO request, string currentUserId)
         {
             var id = int.Parse(currentUserId);
-
             var currentUser = await _userService.GetUserById(id);
 
             var verified = _passwordHasher.Check(currentUser.PasswordHash, request.OldPassword);
@@ -71,7 +68,6 @@ namespace GTAVersions.Domain.Services
             }
 
             var passwordHash = _passwordHasher.PasswordHash(request.NewPassword);
-
             var changedPassword = await _userService.ChangePassword(id, passwordHash);
 
             return changedPassword;

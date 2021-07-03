@@ -36,7 +36,7 @@ namespace GTAVersions.Controllers
         }
 
         [Authorize]
-        [HttpPut("settings")]
+        [HttpPatch("settings")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO model)
         {
             var currentUserId = HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub);

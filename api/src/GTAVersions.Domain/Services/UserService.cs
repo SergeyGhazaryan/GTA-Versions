@@ -54,7 +54,6 @@ namespace GTAVersions.Domain.Services
         public async Task<UserDTO> EditUser(EditUserDTO editUserDTO, string currentUserId)
         {
             var id = int.Parse(currentUserId);
-
             var editedUser = await _userRepository.EditUser(editUserDTO.FirstName, editUserDTO.LastName, editUserDTO.Username, id);
 
             return editedUser.Adapt<UserDTO>();
@@ -70,7 +69,6 @@ namespace GTAVersions.Domain.Services
         public async Task<UserDTO> GetCurrentUser(string currentUserid)
         {
             var id = int.Parse(currentUserid);
-
             var currentUser = await _userRepository.GetCurrentUser(id);
 
             return currentUser.Adapt<UserDTO>();

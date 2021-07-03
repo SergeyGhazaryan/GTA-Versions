@@ -24,7 +24,6 @@ namespace GTAVersions.Controllers
         public async Task<IActionResult> EditUser([FromBody] EditUserDTO editUserDTO)
         {
             var currentUserId = HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-
             var editedUser = await _userService.EditUser(editUserDTO, currentUserId);
 
             return Ok(editedUser);
@@ -34,7 +33,6 @@ namespace GTAVersions.Controllers
         public async Task<IActionResult> GetCurrentUser()
         {
             var currentUserId = HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-
             var currentUser = await _userService.GetCurrentUser(currentUserId);
 
             return Ok(currentUser);

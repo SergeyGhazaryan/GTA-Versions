@@ -28,7 +28,7 @@ export const signup = async (firstName, lastName, username, password) => {
 
 export const changePassword = async (newPassword, oldPassword) => {
   try {
-    const result = await axios.put('auth/settings', {
+    const result = await axios.patch('auth/settings', {
       newPassword,
       oldPassword,
     });
