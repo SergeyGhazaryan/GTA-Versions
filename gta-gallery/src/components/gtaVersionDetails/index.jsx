@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVersion } from '../../services/gtaVersionsService';
 import { UpdateVersionModal } from '../shared/updateVersionModal/updateVersionModal';
-import { Header } from '../header';
 import { Button } from '../button';
 
 import './styles.scss';
@@ -27,28 +26,25 @@ export const GTAVersionDetails = () => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <div className='details-container'>
-        <div>
-          <div className='details-header'>
-            <h1 className='version-name'>{gtaVersionDetails.name}</h1>
-            <Button
-              onClick={() => setUpdateModalVisible(true)}
-              text='UPDATE VERSION'
+    <div className='details-container'>
+      <div>
+        <div className='details-header'>
+          <h1 className='version-name'>{gtaVersionDetails.name}</h1>
+          <Button
+            onClick={() => setUpdateModalVisible(true)}
+            text='UPDATE VERSION'
+          />
+          {updateModalVisible && (
+            <UpdateVersionModal
+              id={id}
+              isOpen={updateModalVisible}
+              onCancel={toggleUpdateDialog}
             />
-            {updateModalVisible && (
-              <UpdateVersionModal
-                id={id}
-                isOpen={updateModalVisible}
-                onCancel={toggleUpdateDialog}
-              />
-            )}
-          </div>
-          <img src={gtaVersionDetails.image} className='image' />
-          <div>{gtaVersionDetails.information}</div>
+          )}
         </div>
+        <img src={gtaVersionDetails.image} className='image' />
+        <div>{gtaVersionDetails.information}</div>
       </div>
-    </>
+    </div>
   );
 };

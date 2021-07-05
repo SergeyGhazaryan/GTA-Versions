@@ -8,7 +8,7 @@ namespace GTAVersions.Data.Interfaces
         Task<User> GetUserByUsername(string username);
         Task<User> GetUserById(int id);
         Task<int> CreateUser(string firstName, string lastName, string username, string passwordHash);
-        Task<User> EditUser(string firstName, string lastName, string username, int id);
+        Task<User> EditUser(int id, string firstName, string lastName, string username);
         Task<User> ChangePassword(int id, string passwordHash);
         Task<User> GetCurrentUser(int id);
     }

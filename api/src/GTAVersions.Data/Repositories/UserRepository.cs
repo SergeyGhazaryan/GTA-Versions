@@ -37,7 +37,7 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<User> EditUser(string firstName, string lastName, string username, int id)
+        public async Task<User> EditUser(int id, string firstName, string lastName, string username)
         {
             var query = "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, Username = @Username WHERE Id = @Id";
             var param = new { Id = id, FirstName = firstName, LastName = lastName, Username = username };

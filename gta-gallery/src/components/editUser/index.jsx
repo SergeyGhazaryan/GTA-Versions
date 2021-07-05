@@ -3,7 +3,6 @@ import { editUser } from '../../services/userService';
 import { useHistory } from 'react-router-dom';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
-import { Header } from '../header';
 
 import './styles.scss';
 
@@ -44,19 +43,16 @@ export const EditUser = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className='edit-user-container'>
-        <div className='edit-user'>
-          <h3 className='edit-user-header'>Edit User</h3>
-          <div>
-            <InputFields fieldsArray={inputFields} />
-          </div>
-          <div className='edit-user-button'>
-            <Button onClick={handleEditUser} text='Edit user' />
-          </div>
+    <div className='edit-user-container'>
+      <div className='edit-user'>
+        <h3 className='edit-user-header'>Edit User</h3>
+        <div>
+          <InputFields fieldsArray={inputFields} />
+        </div>
+        <div className='edit-user-button'>
+          <Button onClick={handleEditUser} text='Edit user' />
         </div>
       </div>
-    </>
+    </div>
   );
 };

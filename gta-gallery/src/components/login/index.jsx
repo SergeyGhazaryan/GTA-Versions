@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
 import { Warning } from '../warning';
-import { login } from '../../services';
+import { login as loginRequest } from '../../services';
 import { NavLink } from 'react-router-dom';
+import { login } from '../../store/auth/actions';
 
 import './styles.scss';
 
 export const Login = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -34,9 +37,10 @@ export const Login = () => {
   const handleLogin = async () => {
     if (usernameValue && passwordValue && usernameValue !== passwordValue) {
       setWarning(false);
-      const token = await login(usernameValue, passwordValue);
+      const token = await loginRequest(usernameValue, passwordValue);
       if (token) {
         localStorage.setItem('token', token);
+        dispatch(login(token));
         history.push('/');
       }
     } else {

@@ -1,16 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { EditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
 import { getCurrentUser } from '../../services/userService';
 import { isEmpty } from 'lodash';
+import { logout } from '../../store/auth/actions';
 
 import './styles.scss';
 
 export const Header = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [currentUser, setCurrentUser] = useState({});
+
+  let authenticated = useSelector((state) => state.auth.authenticated);
 
   const handleEditPage = () => {
     history.push('/me/edit');
@@ -23,11 +28,17 @@ export const Header = () => {
   const handleLogout = () => {
     localStorage.setItem('token', '');
     history.push('/login');
+    dispatch(logout());
   };
 
   const getUser = async () => {
     const data = await getCurrentUser();
-    setCurrentUser(data);
+    if (data) {
+      setCurrentUser(data);
+      if (authenticated == null) {
+        authenticated = true;
+      }
+    }
   };
 
   const backToHome = () => {
@@ -43,7 +54,7 @@ export const Header = () => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [authenticated]);
 
   const menu = (
     <Menu>
@@ -64,11 +75,13 @@ export const Header = () => {
       <div className='header-title' onClick={() => backToHome()}>
         GTA Versions
       </div>
-      <Dropdown.Button
-        overlay={menu}
-        placement='bottomCenter'
-        icon={userInfo}
-      />
+      {authenticated !== false && (
+        <Dropdown.Button
+          overlay={menu}
+          placement='bottomCenter'
+          icon={userInfo}
+        />
+      )}
     </div>
   );
 };

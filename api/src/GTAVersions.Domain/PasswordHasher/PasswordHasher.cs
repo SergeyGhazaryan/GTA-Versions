@@ -34,8 +34,7 @@ namespace GTAVersions.Domain.PasswordHasher
             }
         }
 
-        public bool Check(string passwordHash, string passwo
-            rd)
+        public bool Check(string passwordHash, string password)
         {
             var parts = passwordHash.Split('.', 3);
 

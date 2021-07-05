@@ -5,8 +5,9 @@ import { getInputType } from '../functions/index';
 export const InputFields = ({ fieldsArray }) => {
   return (
     <div>
-      {(fieldsArray || []).map((v) => (
+      {(fieldsArray || []).map((v, i) => (
         <Input
+          key={i}
           name={v.name}
           label={v.label}
           onChange={v.onChange}

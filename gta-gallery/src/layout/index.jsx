@@ -3,7 +3,6 @@ import { getAllVersions } from '../services';
 import { Button } from '../components/button';
 import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
 import { GtaVersion } from '../components/gtaVersion';
-import { Header } from '../components/header';
 
 import './styles.scss';
 
@@ -26,30 +25,24 @@ const Layout = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className='version-container'>
-        <div className='button-container'>
-          <div className='add-button'>
-            <Button
-              onClick={() => setAddModalVisible(true)}
-              text='ADD VERSION'
+    <div className='version-container'>
+      <div className='button-container'>
+        <div className='add-button'>
+          <Button onClick={() => setAddModalVisible(true)} text='ADD VERSION' />
+          {addModalVisible && (
+            <AddVersionModal
+              isOpen={addModalVisible}
+              onCancel={toggleAddDialog}
             />
-            {addModalVisible && (
-              <AddVersionModal
-                isOpen={addModalVisible}
-                onCancel={toggleAddDialog}
-              />
-            )}
-          </div>
-        </div>
-        <div className='gta-version'>
-          {(versions || []).map((v) => (
-            <GtaVersion key={v.id} image={v.image} name={v.name} id={v.id} />
-          ))}
+          )}
         </div>
       </div>
-    </>
+      <div className='gta-version'>
+        {(versions || []).map((v) => (
+          <GtaVersion key={v.id} image={v.image} name={v.name} id={v.id} />
+        ))}
+      </div>
+    </div>
   );
 };
 

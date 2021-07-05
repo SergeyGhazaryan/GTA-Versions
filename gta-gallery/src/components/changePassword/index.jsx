@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
 import { changePassword } from '../../services';
-import { Header } from '../header';
 
 import './styles.scss';
 
@@ -50,19 +49,16 @@ export const ChangePassword = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className='password-container'>
-        <div className='password'>
-          <h3 className='password-header'>Change Password</h3>
-          <div>
-            <InputFields fieldsArray={inputFields} />
-          </div>
-          <div className='password-button'>
-            <Button onClick={handleChangePassword} text='Change password' />
-          </div>
+    <div className='password-container'>
+      <div className='password'>
+        <h3 className='password-header'>Change Password</h3>
+        <div>
+          <InputFields fieldsArray={inputFields} />
+        </div>
+        <div className='password-button'>
+          <Button onClick={handleChangePassword} text='Change password' />
         </div>
       </div>
-    </>
+    </div>
   );
 };
