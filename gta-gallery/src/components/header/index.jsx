@@ -16,7 +16,7 @@ export const Header = () => {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  let authenticated = useSelector((state) => state.auth.authenticated);
+  const authenticated = useSelector((state) => state.auth.authenticated);
 
   const handleEditPage = () => {
     history.push('/me/edit');
