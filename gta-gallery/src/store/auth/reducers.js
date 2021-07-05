@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './types';
+import { LOGIN, LOGOUT, GET_CURRENT_USER } from './types';
 
 const initialState = {
   authenticated: null,
@@ -18,6 +18,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         token: null,
         authenticated: false,
+      };
+    case GET_CURRENT_USER:
+      return {
+        ...state,
+        authenticated: action.payload == null ? true : false,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import { Menu, Dropdown } from 'antd';
 import { getCurrentUser } from '../../services/userService';
 import { isEmpty } from 'lodash';
 import { logout } from '../../store/auth/actions';
+import { getCurrentUser as defaultUser } from '../../store/auth/actions';
 
 import './styles.scss';
 
@@ -36,7 +37,7 @@ export const Header = () => {
     if (data) {
       setCurrentUser(data);
       if (authenticated == null) {
-        authenticated = true;
+        dispatch(defaultUser(authenticated));
       }
     }
   };
