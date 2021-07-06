@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
 import { Warning } from '../warning';
 import { login as loginRequest } from '../../services';
-import { NavLink } from 'react-router-dom';
 import { login } from '../../store/auth/actions';
 
 import './styles.scss';

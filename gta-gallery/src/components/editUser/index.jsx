@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { editUser } from '../../services/userService';
 import { useHistory } from 'react-router-dom';
+import { editUser } from '../../services/userService';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
 

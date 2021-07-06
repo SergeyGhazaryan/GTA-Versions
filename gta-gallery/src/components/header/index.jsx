@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { EditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
-import { getCurrentUser } from '../../services/userService';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'lodash';
+import { getCurrentUser } from '../../services/userService';
 import { logout } from '../../store/auth/actions';
 import { getCurrentUser as defaultUser } from '../../store/auth/actions';
 

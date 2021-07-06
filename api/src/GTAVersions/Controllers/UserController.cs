@@ -20,15 +20,6 @@ namespace GTAVersions.Controllers
             _userService = userService;
         }
 
-        [HttpPut("me/settings")]
-        public async Task<IActionResult> EditUser([FromBody] EditUserDTO editUserDTO)
-        {
-            var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
-            var editedUser = await _userService.EditUser(currentUserId, editUserDTO);
-
-            return Ok(editedUser);
-        }
-
         [HttpGet("me")]
         public async Task<IActionResult> GetCurrentUser()
         {
@@ -36,6 +27,15 @@ namespace GTAVersions.Controllers
             var currentUser = await _userService.GetCurrentUser(currentUserId);
 
             return Ok(currentUser);
+        }
+
+        [HttpPut("me/settings")]
+        public async Task<IActionResult> EditUser([FromBody] EditUserDTO editUserDTO)
+        {
+            var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
+            var editedUser = await _userService.EditUser(currentUserId, editUserDTO);
+
+            return Ok(editedUser);
         }
     }
 }
