@@ -76,7 +76,7 @@ export const Header = () => {
       <div className='header-title' onClick={() => backToHome()}>
         GTA Versions
       </div>
-      {authenticated !== false && (
+      {authenticated && (
         <Dropdown.Button
           overlay={menu}
           placement='bottomCenter'
