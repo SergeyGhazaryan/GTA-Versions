@@ -76,6 +76,10 @@ export const Signup = () => {
     return;
   };
 
+  const handleBack = () => {
+    history.push('/login');
+  };
+
   return (
     <div className='signup-container'>
       <div className='signup'>
@@ -85,6 +89,9 @@ export const Signup = () => {
         </div>
         <div className='signup-button'>
           <Button onClick={handleSignup} text='Signup' />
+        </div>
+        <div className='back-button'>
+          <Button onClick={handleBack} text='Back' />
         </div>
       </div>
     </div>
