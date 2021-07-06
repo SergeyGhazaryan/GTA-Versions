@@ -6,8 +6,8 @@ namespace GTAVersions.Domain.Interfaces
 {
     public interface IAuthService
     {
-        Task<AccessToken> Login(SignInUserDTO request);
-        Task<AccessToken> Signup(SignUpUserDTO request);
-        Task<UserDTO> ChangePassword(ChangePasswordDTO request, string currentUserId);
+        Task<AccessToken> Login(string firstName, string lastName, string username, string password);
+        Task<AccessToken> Signup(string firstName, string lastName, string username, string password);
+        Task<UserDTO> ChangePassword(string newPassword, string oldPassword, int currentUserId);
     }
 }

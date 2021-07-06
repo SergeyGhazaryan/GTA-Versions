@@ -1,16 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { deleteVersion } from '../../services';
 import { PopConfirm } from '../popConfirm';
 
 import './styles.scss';
 
-export const GtaVersion = ({ image, name, id }) => {
-  const onDelete = () => {
-    if (!id) return;
-    deleteVersion(id);
-  };
-
+export const GtaVersion = ({ id, image, name, onDelete }) => {
   return (
     <div className='container'>
       <div className='version-header'>

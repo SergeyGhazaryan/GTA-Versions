@@ -24,16 +24,16 @@ namespace GTAVersions.Controllers
         public async Task<IActionResult> GetCurrentUser()
         {
             var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
-            var currentUser = await _userService.GetCurrentUser(currentUserId);
+            var currentUser = await _userService.GetUserById(currentUserId);
 
             return Ok(currentUser);
         }
 
         [HttpPut("me/settings")]
-        public async Task<IActionResult> EditUser([FromBody] EditUserDTO editUserDTO)
+        public async Task<IActionResult> EditUser([FromBody] EditUserDTO model)
         {
             var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
-            var editedUser = await _userService.EditUser(currentUserId, editUserDTO);
+            var editedUser = await _userService.EditUser(currentUserId, model.FirstName, model.LastName, model.Username);
 
             return Ok(editedUser);
         }

@@ -18,57 +18,56 @@ namespace GTAVersions.Domain.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<AccessToken> Login(SignInUserDTO request)
+        public async Task<AccessToken> Login(string firstName, string lastName, string username, string password)
         {
-            var userDTO = await _userService.GetUserByUsername(request.Username);
+            var userDTO = await _userService.GetUserByUsername(username);
 
             if (userDTO == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            var verified = _passwordHasher.Check(userDTO.PasswordHash, request.Password);
+            var verified = _passwordHasher.Check(userDTO.PasswordHash, password);
 
             if (!verified)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
-            var token = await _userService.UpdateAndReturnUserToken(userDTO);
+            var token = await _userService.UpdateUserToken(userDTO.Id, userDTO.Username);
 
             return token;
         }
 
-        public async Task<AccessToken> Signup(SignUpUserDTO request)
+        public async Task<AccessToken> Signup(string firstName, string lastName, string username, string password)
         {
-            var passwordHash = _passwordHasher.PasswordHash(request.Password);
-            var createdUserId = await _userService.CreateUser(request.FirstName, request.LastName, request.Username, passwordHash);
+            var passwordHash = _passwordHasher.PasswordHash(password);
+            var createdUser = await _userService.CreateUser(firstName, lastName, username, passwordHash);
 
-            if (createdUserId == null)
+            if (createdUser == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            var createdUser = await _userService.GetUserById(createdUserId);
-            var token = await _userService.UpdateAndReturnUserToken(createdUser);
+            var newUser = await _userService.GetUserById(createdUser.Id);
+            var token = await _userService.UpdateUserToken(newUser.Id, newUser.Username);
 
             return token;
         }
 
-        public async Task<UserDTO> ChangePassword(ChangePasswordDTO request, string currentUserId)
+        public async Task<UserDTO> ChangePassword(string newPassword, string oldPassword, int currentUserId)
         {
-            var id = int.Parse(currentUserId);
-            var currentUser = await _userService.GetUserById(id);
+            var currentUser = await _userService.GetUserById(currentUserId);
 
-            var verified = _passwordHasher.Check(currentUser.PasswordHash, request.OldPassword);
+            var verified = _passwordHasher.Check(currentUser.PasswordHash, oldPassword);
 
             if (!verified)
             {
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
-            var passwordHash = _passwordHasher.PasswordHash(request.NewPassword);
-            var changedPassword = await _userService.ChangePassword(id, passwordHash);
+            var passwordHash = _passwordHasher.PasswordHash(newPassword);
+            var changedPassword = await _userService.ChangePassword(currentUserId, passwordHash);
 
             return changedPassword;
         }

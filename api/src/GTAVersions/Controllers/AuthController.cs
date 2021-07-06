@@ -22,7 +22,7 @@ namespace GTAVersions.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] SignInUserDTO model)
         {
-            var token = await _authService.Login(model);
+            var token = await _authService.Login(model.FirstName, model.LastName, model.Username, model.Password);
 
             return Ok(token);
         }
@@ -30,7 +30,7 @@ namespace GTAVersions.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> Signup([FromBody] SignUpUserDTO model)
         {
-            var token = await _authService.Signup(model);
+            var token = await _authService.Signup(model.FirstName, model.LastName, model.Username, model.Password);
 
             return Ok(token);
         }
@@ -39,9 +39,8 @@ namespace GTAVersions.Controllers
         [HttpPatch("settings")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO model)
         {
-            var currentUserId = HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-
-            var changedPassword = await _authService.ChangePassword(model, currentUserId);
+            var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
+            var changedPassword = await _authService.ChangePassword(model.NewPassword, model.OldPassword, currentUserId);
 
             return Ok(changedPassword);
         }

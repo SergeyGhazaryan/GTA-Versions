@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GTAVersions.Data.Entities;
 using GTAVersions.Data.Interfaces;
 using GTAVersions.Domain.DTO;
 using GTAVersions.Domain.Interfaces;
@@ -29,15 +28,15 @@ namespace GTAVersions.Domain.Services
             return gtaVersions.Adapt<List<GTAVersionDTO>>();
         }
 
-        public async Task<GTAVersionDTO> CreateGTAVersion(CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<int> CreateGTAVersion(string image, string name, string information)
         {
-            var gtaVersion = await _gtaVersionRepository.CreateGTAVersion(createGTAVersionDTO.Adapt<GTAVersion>());
-            return gtaVersion.Adapt<GTAVersionDTO>();
+            var gtaVersionId = await _gtaVersionRepository.CreateGTAVersion(image, name, information);
+            return gtaVersionId;
         }
 
-        public async Task<GTAVersionDTO> UpdateGTAVersion(string id, UpdateGTAVersionDTO createGTAVersionDTO)
+        public async Task<GTAVersionDTO> UpdateGTAVersion(string id, string image, string name, string information)
         {
-            var gtaVersion = await _gtaVersionRepository.UpdateGTAVersion(id, createGTAVersionDTO.Adapt<GTAVersion>());
+            var gtaVersion = await _gtaVersionRepository.UpdateGTAVersion(id, image, name, information);
             return gtaVersion.Adapt<GTAVersionDTO>();
         }
 

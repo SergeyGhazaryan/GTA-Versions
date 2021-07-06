@@ -52,13 +52,5 @@ namespace GTAVersions.Data.Repositories
             var result = await _genericRepository.UpdateAsync(query, param);
             return result;
         }
-
-        public async Task<User> GetCurrentUser(int id)
-        {
-            var query = "SELECT * FROM Users WHERE Id = @Id";
-            var param = new { Id = id };
-            var result = await _genericRepository.GetAsync(query, param);
-            return result;
-        }
     }
 }

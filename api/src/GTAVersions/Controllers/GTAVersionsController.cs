@@ -35,17 +35,17 @@ namespace GTAVersions.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateGTAVersion([FromBody] CreateGTAVersionDTO createGTAVersionDTO)
+        public async Task<IActionResult> CreateGTAVersion([FromBody] CreateGTAVersionDTO model)
         {
-            var createdGTAVersion = await _gtaVersionService.CreateGTAVersion(createGTAVersionDTO);
+            var createdGTAVersionId = await _gtaVersionService.CreateGTAVersion(model.Image, model.Name, model.Information);
 
-            return Ok(createdGTAVersion);
+            return Ok(createdGTAVersionId);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, [FromBody] UpdateGTAVersionDTO createGTAVersionDTO)
+        public async Task<IActionResult> UpdateGTAVersion([FromRoute] string id, [FromBody] UpdateGTAVersionDTO model)
         {
-            var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, createGTAVersionDTO);
+            var updatedGTAVersion = await _gtaVersionService.UpdateGTAVersion(id, model.Image, model.Name, model.Information);
 
             return Ok(updatedGTAVersion);
         }

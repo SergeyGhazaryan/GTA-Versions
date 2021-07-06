@@ -34,9 +34,9 @@ namespace GTAVersions.Domain.Services
             return user.Adapt<UserDTO>();
         }
 
-        public async Task<AccessToken> UpdateAndReturnUserToken(UserDTO userDTO)
+        public async Task<AccessToken> UpdateUserToken(int id, string username)
         {
-            var token = await _jwtTokenHandler.GenerateToken(userDTO.Adapt<User>());
+            var token = await _jwtTokenHandler.GenerateToken(id, username);
 
             return new AccessToken
             {
@@ -44,16 +44,17 @@ namespace GTAVersions.Domain.Services
             };
         }
 
-        public async Task<int> CreateUser(string firstName, string lastName, string username, string passwordHash)
+        public async Task<UserDTO> CreateUser(string firstName, string lastName, string username, string passwordHash)
         {
-            var userid = await _userRepository.CreateUser(firstName, lastName, username, passwordHash);
+            var createdUserId = await _userRepository.CreateUser(firstName, lastName, username, passwordHash);
+            var createdUser = await _userRepository.GetUserById(createdUserId);
 
-            return userid;
+            return createdUser.Adapt<UserDTO>();
         }
 
-        public async Task<UserDTO> EditUser(int currentUserId, EditUserDTO editUserDTO)
+        public async Task<UserDTO> EditUser(int currentUserId, string firstName, string lastName, string username)
         {
-            var editedUser = await _userRepository.EditUser(currentUserId, editUserDTO.FirstName, editUserDTO.LastName, editUserDTO.Username);
+            var editedUser = await _userRepository.EditUser(currentUserId, firstName, lastName, username);
 
             return editedUser.Adapt<UserDTO>();
         }
@@ -63,13 +64,6 @@ namespace GTAVersions.Domain.Services
             var changedPassword = await _userRepository.ChangePassword(id, passwordHash);
 
             return changedPassword.Adapt<UserDTO>();
-        }
-
-        public async Task<UserDTO> GetCurrentUser(int currentUserid)
-        {
-            var currentUser = await _userRepository.GetCurrentUser(currentUserid);
-
-            return currentUser.Adapt<UserDTO>();
         }
     }
 }
