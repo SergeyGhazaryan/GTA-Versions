@@ -65,6 +65,7 @@ const Layout = () => {
 
   const closeAddModal = () => {
     setAddModalVisible(!addModalVisible);
+    clearState();
   };
 
   const handleAdd = async () => {
@@ -81,7 +82,6 @@ const Layout = () => {
         name: nameValue,
       });
       setVersions(newVersions);
-      clearState();
       closeAddModal();
     } else {
       setWarning(true);
@@ -105,7 +105,7 @@ const Layout = () => {
             <AddVersionModal
               isOpen={addModalVisible}
               onCancel={closeAddModal}
-              onOk={handleAdd}
+              handleAdd={handleAdd}
               warning={warning}
               inputFields={inputFields}
             />

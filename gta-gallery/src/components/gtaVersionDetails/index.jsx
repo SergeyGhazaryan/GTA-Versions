@@ -66,19 +66,18 @@ export const GTAVersionDetails = () => {
 
   const closeUpdateModal = () => {
     setUpdateModalVisible(!updateModalVisible);
+    clearState();
   };
 
   const handleUpdate = async () => {
     if (id && imageValue && nameValue && informationValue) {
-      let newVersions = gtaVersionDetails;
-      newVersions = {
+      const newVersions = {
         image: imageValue,
         name: nameValue,
         information: informationValue,
       };
       setGTAVersionDetails(newVersions);
       await updateVersion(id, imageValue, nameValue, informationValue);
-      clearState();
       closeUpdateModal();
     } else {
       setWarning(true);
@@ -99,7 +98,7 @@ export const GTAVersionDetails = () => {
               id={id}
               isOpen={updateModalVisible}
               onCancel={closeUpdateModal}
-              onOk={handleUpdate}
+              handleUpdate={handleUpdate}
               warning={warning}
               inputFields={inputFields}
             />

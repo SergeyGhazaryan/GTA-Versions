@@ -5,7 +5,7 @@ import { InputFields } from '../../inputFields';
 export const UpdateVersionModal = ({
   isOpen,
   onCancel,
-  onOk,
+  handleUpdate,
   warning,
   inputFields,
 }) => {
@@ -13,7 +13,7 @@ export const UpdateVersionModal = ({
     <Modal
       isOpen={isOpen}
       onCancel={onCancel}
-      onOk={onOk}
+      onOk={handleUpdate}
       header='Update version'
       warning={warning}
     >

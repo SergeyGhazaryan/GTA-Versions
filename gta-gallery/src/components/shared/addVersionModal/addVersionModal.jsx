@@ -5,7 +5,7 @@ import { InputFields } from '../../inputFields';
 export const AddVersionModal = ({
   isOpen,
   onCancel,
-  onOk,
+  handleAdd,
   warning,
   inputFields,
 }) => {
@@ -13,7 +13,7 @@ export const AddVersionModal = ({
     <Modal
       isOpen={isOpen}
       onCancel={onCancel}
-      onOk={onOk}
+      onOk={handleAdd}
       header='Add new version'
       warning={warning}
     >
