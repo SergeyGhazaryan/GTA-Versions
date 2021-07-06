@@ -4,10 +4,11 @@ import { PopConfirm } from '../popConfirm';
 
 import './styles.scss';
 
-export const GtaVersion = ({ id, image, name, onDelete }) => {
+export const GtaVersion = ({ id, index, image, name, onDelete }) => {
   return (
     <div className='container'>
       <div className='version-header'>
+        <div className='distinctive'>{index}</div>
         <h1 className='name'>{name}</h1>
         <PopConfirm title='Are you sure？' onConfirm={onDelete} text='X' />
       </div>

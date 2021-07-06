@@ -23,6 +23,17 @@
 
 .version-header {
   display: flex;
-  align-items: unset;
+  align-items: baseline;
   justify-content: space-between;
+}
+
+.distinctive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 29px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  font-size: 15px;
 }

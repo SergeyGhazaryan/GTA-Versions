@@ -116,9 +116,10 @@ const Layout = () => {
         {(versions || []).map((v, i) => (
           <GtaVersion
             key={i}
+            id={v.id}
+            index={i + 1}
             image={v.image}
             name={v.name}
-            id={v.id}
             onDelete={() => handleDelete(v.id, i)}
           />
         ))}

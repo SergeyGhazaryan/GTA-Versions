@@ -73,7 +73,7 @@ export const Header = () => {
 
   return (
     <div className='header'>
-      <div className='header-title' onClick={() => backToHome()}>
+      <div className='header-title' onClick={backToHome}>
         GTA Versions
       </div>
       {authenticated && (
