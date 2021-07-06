@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
 import { signup } from '../../services';
+import { signup as defaultSignup } from '../../store/auth/actions';
 
 import './styles.scss';
 
 export const Signup = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [firstNameValue, setFirstNameValue] = useState('');
   const [lastNameValue, setLastNameValue] = useState('');
@@ -66,6 +69,7 @@ export const Signup = () => {
       );
       if (token) {
         localStorage.setItem('token', token);
+        dispatch(defaultSignup(token));
         history.push('/');
       }
     }

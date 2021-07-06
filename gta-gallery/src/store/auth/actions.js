@@ -1,7 +1,12 @@
-import { LOGIN, LOGOUT, GET_CURRENT_USER } from './types';
+import { LOGIN, SIGNUP, LOGOUT, GET_CURRENT_USER } from './types';
 
 export const login = (token) => ({
   type: LOGIN,
+  payload: token,
+});
+
+export const signup = (token) => ({
+  type: SIGNUP,
   payload: token,
 });
 
