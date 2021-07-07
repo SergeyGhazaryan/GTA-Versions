@@ -10,7 +10,7 @@ export const VersionModal = ({
   inputFields,
   deleteImage,
   isRequired = false,
-  versionDetails = {},
+  versionDetails,
 }) => {
   return (
     <Modal
