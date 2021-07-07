@@ -1,13 +1,6 @@
 .modal-children {
   padding: 10px;
-  margin-top: 40px;
-}
-
-.warning {
-  display: flex;
-  justify-content: center;
-  font-family: fantasy;
-  background-color: #d34545;
+  margin-top: 20px;
 }
 
 .delete {
@@ -23,4 +16,13 @@
   font-size: 15px;
   font-style: oblique;
   font-weight: 700;
+}
+
+.modal-image {
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

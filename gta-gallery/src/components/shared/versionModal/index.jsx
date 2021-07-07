@@ -6,9 +6,9 @@ export const VersionModal = ({
   isOpen,
   onCancel,
   handleSave,
-  warning,
   headerText,
   inputFields,
+  isRequired = false,
   versionDetails = {},
 }) => {
   return (
@@ -16,10 +16,14 @@ export const VersionModal = ({
       isOpen={isOpen}
       onCancel={onCancel}
       onOk={handleSave}
+      imageValue={versionDetails.image}
       header={headerText}
-      warning={warning}
     >
-      <InputFields fieldsArray={inputFields} versionDetails={versionDetails} />
+      <InputFields
+        isRequired={isRequired}
+        fieldsArray={inputFields}
+        versionDetails={versionDetails}
+      />
     </Modal>
   );
 };

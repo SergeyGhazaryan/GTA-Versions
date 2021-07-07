@@ -12,13 +12,11 @@ const Layout = () => {
   const [imageValue, setImageValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
-  const [warning, setWarning] = useState(false);
 
   const clearState = () => {
     setImageValue('');
     setNameValue('');
     setInformationValue('');
-    setWarning(false);
   };
 
   const getData = async () => {
@@ -83,8 +81,6 @@ const Layout = () => {
       });
       setVersions(newVersions);
       closeAddModal();
-    } else {
-      setWarning(true);
     }
   };
 
@@ -106,9 +102,9 @@ const Layout = () => {
               isOpen={addModalVisible}
               onCancel={closeAddModal}
               handleSave={handleAdd}
-              warning={warning}
               headerText='Add version'
               inputFields={inputFields}
+              isRequired={true}
             />
           )}
         </div>

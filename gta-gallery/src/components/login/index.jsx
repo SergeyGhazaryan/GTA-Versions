@@ -3,7 +3,6 @@ import { useHistory, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
-import { Warning } from '../warning';
 import { login as loginRequest } from '../../services';
 import { login } from '../../store/auth/actions';
 
@@ -15,8 +14,6 @@ export const Login = () => {
 
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [warning, setWarning] = useState(false);
-  const [warningTextPart, setWarningTextPart] = useState('');
 
   const inputFields = [
     {
@@ -35,21 +32,11 @@ export const Login = () => {
 
   const handleLogin = async () => {
     if (usernameValue && passwordValue && usernameValue !== passwordValue) {
-      setWarning(false);
       const token = await loginRequest(usernameValue, passwordValue);
       if (token) {
         localStorage.setItem('token', token);
         dispatch(login(token));
         history.push('/');
-      }
-    } else {
-      setWarning(true);
-      if (!usernameValue && !passwordValue) {
-        setWarningTextPart('username and password');
-      } else if (!passwordValue) {
-        setWarningTextPart('password');
-      } else if (!usernameValue) {
-        setWarningTextPart('username');
       }
     }
   };
@@ -69,9 +56,6 @@ export const Login = () => {
             <Button text='Signup' />
           </div>
         </NavLink>
-        <div className='login-warning'>
-          {warning && <Warning text={`Please write your ${warningTextPart}`} />}
-        </div>
       </div>
     </div>
   );

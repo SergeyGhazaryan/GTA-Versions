@@ -11,6 +11,7 @@ export const Input = ({
   itemValue,
   inputType,
   versionDetails,
+  isRequired = false,
   currentState = false,
 }) => {
   const handleChange = (e) => {
@@ -33,7 +34,7 @@ export const Input = ({
 
   return (
     <div>
-      <Item name={name} label={label}>
+      <Item name={name} label={label} isRequired={isRequired}>
         <DefaultInput
           defaultValue={currentState ? handleCurrentState(name) : ''}
           type={inputType}

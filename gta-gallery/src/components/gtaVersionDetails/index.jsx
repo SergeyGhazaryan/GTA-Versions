@@ -14,13 +14,11 @@ export const GTAVersionDetails = () => {
   const [imageValue, setImageValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
-  const [warning, setWarning] = useState(false);
 
   const clearState = () => {
     setImageValue('');
     setNameValue('');
     setInformationValue('');
-    setWarning(false);
   };
 
   const getData = async () => {
@@ -54,8 +52,6 @@ export const GTAVersionDetails = () => {
       setGTAVersionDetails(newVersions);
       await updateVersion(id, imageValue, nameValue, informationValue);
       closeUpdateModal();
-    } else {
-      setWarning(true);
     }
   };
 
@@ -99,7 +95,6 @@ export const GTAVersionDetails = () => {
               isOpen={updateModalVisible}
               onCancel={closeUpdateModal}
               handleSave={handleUpdate}
-              warning={warning}
               headerText='Update version'
               inputFields={inputFields}
               versionDetails={gtaVersionDetails}
