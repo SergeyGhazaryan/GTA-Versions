@@ -1,4 +1,4 @@
-.signup-container {
+.password-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,24 +6,18 @@
   flex-direction: column;
 }
 
-.signup {
+.password {
   padding: 50px;
-  border: 5px solid #f68d03;
+  border: 5px solid #ff0000;
   border-radius: 10px;
 }
 
-.signup-button {
+.password-button {
   display: flex;
   justify-content: center;
 }
 
-.back-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.signup-header {
+.password-header {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;

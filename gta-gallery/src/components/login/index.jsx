@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
-import { Warning } from '../warning';
-import { login } from '../../services';
-import { NavLink } from 'react-router-dom';
+import { login } from '../../store/auth/actions';
+import { login as loginRequest } from '../../services';
 
 import './styles.scss';
 
 export const Login = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [warning, setWarning] = useState(false);
-  const [warningTextPart, setWarningTextPart] = useState('');
 
   const inputFields = [
     {
@@ -33,20 +32,11 @@ export const Login = () => {
 
   const handleLogin = async () => {
     if (usernameValue && passwordValue && usernameValue !== passwordValue) {
-      setWarning(false);
-      const token = await login(usernameValue, passwordValue);
+      const token = await loginRequest(usernameValue, passwordValue);
       if (token) {
         localStorage.setItem('token', token);
+        dispatch(login(token));
         history.push('/');
-      }
-    } else {
-      setWarning(true);
-      if (!usernameValue && !passwordValue) {
-        setWarningTextPart('username and password');
-      } else if (!passwordValue) {
-        setWarningTextPart('password');
-      } else if (!usernameValue) {
-        setWarningTextPart('username');
       }
     }
   };
@@ -59,16 +49,13 @@ export const Login = () => {
           <InputFields fieldsArray={inputFields} />
         </div>
         <div className='login-button'>
-          <Button onClick={handleLogin} variant='contained' text='Login' />
+          <Button onClick={handleLogin} text='Login' />
         </div>
         <NavLink to='/signup'>
           <div className='signup-button'>
-            <Button variant='contained' text='Signup' />
+            <Button text='Signup' />
           </div>
         </NavLink>
-        <div className='login-warning'>
-          {warning && <Warning text={`Please write your ${warningTextPart}`} />}
-        </div>
       </div>
     </div>
   );

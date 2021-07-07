@@ -1,19 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { deleteVersion } from '../../services';
 import { PopConfirm } from '../popConfirm';
 
 import './styles.scss';
 
-export const GtaVersion = ({ image, name, id }) => {
-  const onDelete = () => {
-    if (!id) return;
-    deleteVersion(id);
-  };
-
+export const GtaVersion = ({ id, index, image, name, onDelete }) => {
   return (
     <div className='container'>
       <div className='version-header'>
+        <div className='distinctive'>{index}</div>
         <h1 className='name'>{name}</h1>
         <PopConfirm title='Are you sure？' onConfirm={onDelete} text='X' />
       </div>

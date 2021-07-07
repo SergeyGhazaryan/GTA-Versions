@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
+import { signup as defaultSignup } from '../../store/auth/actions';
 import { signup } from '../../services';
 
 import './styles.scss';
 
 export const Signup = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
+  const [firstNameValue, setFirstNameValue] = useState('');
+  const [lastNameValue, setLastNameValue] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
 
   const inputFields = [
+    {
+      name: 'firstName',
+      label: 'First name',
+      onChange: setFirstNameValue,
+      itemValue: firstNameValue,
+    },
+    {
+      name: 'lastName',
+      label: 'Last name',
+      onChange: setLastNameValue,
+      itemValue: lastNameValue,
+    },
     {
       name: 'username',
       label: 'Username',
@@ -39,16 +56,28 @@ export const Signup = () => {
       usernameValue &&
       passwordValue &&
       repeatPasswordValue &&
+      firstNameValue &&
+      lastNameValue &&
       passwordValue === repeatPasswordValue &&
       usernameValue !== passwordValue
     ) {
-      const token = await signup(usernameValue, passwordValue);
+      const token = await signup(
+        firstNameValue,
+        lastNameValue,
+        usernameValue,
+        passwordValue
+      );
       if (token) {
         localStorage.setItem('token', token);
+        dispatch(defaultSignup(token));
         history.push('/');
       }
     }
     return;
+  };
+
+  const handleBack = () => {
+    history.push('/login');
   };
 
   return (
@@ -59,7 +88,10 @@ export const Signup = () => {
           <InputFields fieldsArray={inputFields} />
         </div>
         <div className='signup-button'>
-          <Button onClick={handleSignup} variant='contained' text='Signup' />
+          <Button onClick={handleSignup} text='Signup' />
+        </div>
+        <div className='back-button'>
+          <Button onClick={handleBack} text='Back' />
         </div>
       </div>
     </div>

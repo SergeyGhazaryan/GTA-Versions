@@ -29,18 +29,18 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<int> CreateGTAVersion(GTAVersion gtaVersion)
+        public async Task<int> CreateGTAVersion(string image, string name, string information)
         {
-            var query = $"INSERT INTO GTAVersions (Image, Name, Information) VALUES(@Image, @Name, @Information)";
-            var param = new { Image = gtaVersion.Image, Name = gtaVersion.Name, Information = gtaVersion.Information };
+            var query = $"INSERT INTO GTAVersions (Image, Name, Information) OUTPUT INSERTED.Id VALUES(@Image, @Name, @Information)";
+            var param = new { Image = image, Name = name, Information = information };
             var result = await _genericRepository.CreateAsync(query, param);
             return result;
         }
 
-        public async Task<GTAVersion> UpdateGTAVersion(string id, GTAVersion gtaVersion)
+        public async Task<GTAVersion> UpdateGTAVersion(string id, string image, string name, string information)
         {
             var query = "UPDATE GTAVersions SET Image = @Image, Name = @Name, Information = @Information WHERE Id = @Id";
-            var param = new { Id = id, Image = gtaVersion.Image, Name = gtaVersion.Name, Information = gtaVersion.Information };
+            var param = new { Id = id, Image = image, Name = name, Information = information };
             var result = await _genericRepository.UpdateAsync(query, param);
             return result;
         }

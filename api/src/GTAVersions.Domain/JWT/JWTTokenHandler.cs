@@ -19,15 +19,15 @@ namespace GTAVersions.Domain.JWT
             _jwtOptions = jwtOptions.Value;
         }
 
-        public Task<string> GenerateToken(User user)
+        public Task<string> GenerateToken(int id, string username)
         {
             string issuer = _jwtOptions.Issuer;
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iss, issuer),
-                new Claim(JwtRegisteredClaimNames.NameId, user.Username),
+                new Claim(JwtRegisteredClaimNames.NameId, username),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));

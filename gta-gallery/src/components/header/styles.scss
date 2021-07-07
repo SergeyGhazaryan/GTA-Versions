@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 5px solid #000000;
+  background-color: #c50303b8;
+}
+
+.header-title {
+  cursor: pointer;
+  font-size: 25px;
+  color: #000000;
+  font-family: fantasy;
+  border: 5px double #000000;
+  border-radius: 5px;
+}
+
+.dropdown-field {
+  font-family: fantasy;
+}

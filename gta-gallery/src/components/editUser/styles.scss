@@ -1,4 +1,4 @@
-.signup-container {
+.edit-user-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,24 +6,18 @@
   flex-direction: column;
 }
 
-.signup {
+.edit-user {
   padding: 50px;
-  border: 5px solid #f68d03;
+  border: 5px solid #2b8d6c;
   border-radius: 10px;
 }
 
-.signup-button {
+.edit-user-button {
   display: flex;
   justify-content: center;
 }
 
-.back-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.signup-header {
+.edit-user-header {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
