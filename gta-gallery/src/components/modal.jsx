@@ -8,21 +8,21 @@ export const Modal = ({
   onCancel,
   onOk,
   header,
-  imageValue = '',
+  imageValue,
   deleteImage,
   children,
 }) => {
   return (
     <DefaultModal visible={isOpen} onCancel={onCancel} onOk={onOk}>
       <div className='title'>{header}</div>
-      <div className='image-container'>
-        {imageValue && <img className='modal-image' src={imageValue} />}
-        {imageValue && (
+      {imageValue && (
+        <div className='image-container'>
+          <img className='modal-image' src={imageValue} />
           <div className='delete-image' onClick={deleteImage}>
             x
           </div>
-        )}
-      </div>
+        </div>
+      )}
       <div className='modal-children'>{children}</div>
     </DefaultModal>
   );
