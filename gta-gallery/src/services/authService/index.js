@@ -32,7 +32,7 @@ export const changePassword = async (newPassword, oldPassword) => {
       newPassword,
       oldPassword,
     });
-    return result.data;
+    return result.status == '200';
   } catch (error) {
     console.log(error);
   }

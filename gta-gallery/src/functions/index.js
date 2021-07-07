@@ -4,7 +4,7 @@ export const getInputType = (inputName) => {
       return 'file';
     case 'password':
     case 'repeatPassword':
-    case 'repeatOldPassword':
+    case 'repeatNewPassword':
     case 'oldPassword':
     case 'newPassword':
       return 'password';

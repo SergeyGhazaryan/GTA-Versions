@@ -15,8 +15,7 @@ export const Modal = ({
   return (
     <DefaultModal visible={isOpen} onCancel={onCancel} onOk={onOk}>
       <div className='title'>{header}</div>
-      <div className='modal-header'></div>
-      {children}
+      <div className='modal-children'>{children}</div>
       {warning && <Warning text='You must fill in all the fields' />}
     </DefaultModal>
   );

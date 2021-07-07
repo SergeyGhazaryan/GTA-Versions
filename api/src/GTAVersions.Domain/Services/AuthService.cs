@@ -34,7 +34,7 @@ namespace GTAVersions.Domain.Services
                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
             }
 
-            var token = await _userService.UpdateUserToken(userDTO.Id, userDTO.Username);
+            var token = await _userService.GenerateToken(userDTO.Id, userDTO.Username);
 
             return token;
         }
@@ -44,18 +44,12 @@ namespace GTAVersions.Domain.Services
             var passwordHash = _passwordHasher.PasswordHash(password);
             var createdUser = await _userService.CreateUser(firstName, lastName, username, passwordHash);
 
-            if (createdUser == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-
-            var newUser = await _userService.GetUserById(createdUser.Id);
-            var token = await _userService.UpdateUserToken(newUser.Id, newUser.Username);
+            var token = await _userService.GenerateToken(createdUser.Id, createdUser.Username);
 
             return token;
         }
 
-        public async Task<UserDTO> ChangePassword(string newPassword, string oldPassword, int currentUserId)
+        public async Task ChangePassword(string newPassword, string oldPassword, int currentUserId)
         {
             var currentUser = await _userService.GetUserById(currentUserId);
 
@@ -67,9 +61,7 @@ namespace GTAVersions.Domain.Services
             }
 
             var passwordHash = _passwordHasher.PasswordHash(newPassword);
-            var changedPassword = await _userService.ChangePassword(currentUserId, passwordHash);
-
-            return changedPassword;
+            await _userService.ChangePassword(currentUserId, passwordHash);
         }
     }
 }

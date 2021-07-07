@@ -40,9 +40,9 @@ namespace GTAVersions.Controllers
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO model)
         {
             var currentUserId = int.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub));
-            var changedPassword = await _authService.ChangePassword(model.NewPassword, model.OldPassword, currentUserId);
+            await _authService.ChangePassword(model.NewPassword, model.OldPassword, currentUserId);
 
-            return Ok(changedPassword);
+            return Ok();
         }
     }
 }

@@ -9,17 +9,11 @@ import './styles.scss';
 export const ChangePassword = () => {
   const history = useHistory();
 
-  const [newPasswordValue, setNewPasswordValue] = useState('');
   const [oldPasswordValue, setOldPasswordValue] = useState('');
-  const [repeatOldPasswordValue, setRepeatOldPasswordValue] = useState('');
+  const [newPasswordValue, setNewPasswordValue] = useState('');
+  const [repeatNewPasswordValue, setRepeatNewPasswordValue] = useState('');
 
   const inputFields = [
-    {
-      name: 'newPassword',
-      label: 'New password',
-      onChange: setNewPasswordValue,
-      itemValue: newPasswordValue,
-    },
     {
       name: 'oldPassword',
       label: 'Old password',
@@ -27,23 +21,31 @@ export const ChangePassword = () => {
       itemValue: oldPasswordValue,
     },
     {
-      name: 'repeatOldPassword',
-      label: 'Repeat old password',
-      onChange: setRepeatOldPasswordValue,
-      itemValue: repeatOldPasswordValue,
+      name: 'newPassword',
+      label: 'New password',
+      onChange: setNewPasswordValue,
+      itemValue: newPasswordValue,
+    },
+    {
+      name: 'repeatNewPassword',
+      label: 'Repeat new password',
+      onChange: setRepeatNewPasswordValue,
+      itemValue: repeatNewPasswordValue,
     },
   ];
 
   const handleChangePassword = async () => {
     if (
-      newPasswordValue &&
       oldPasswordValue &&
-      repeatOldPasswordValue &&
-      oldPasswordValue === repeatOldPasswordValue &&
+      newPasswordValue &&
+      repeatNewPasswordValue &&
+      newPasswordValue === repeatNewPasswordValue &&
       newPasswordValue !== oldPasswordValue
     ) {
-      await changePassword(newPasswordValue, oldPasswordValue);
-      history.push('/');
+      const success = await changePassword(newPasswordValue, oldPasswordValue);
+      if (success) {
+        history.push('/');
+      }
     }
     return;
   };

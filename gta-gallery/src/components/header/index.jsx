@@ -27,7 +27,7 @@ export const Header = () => {
   };
 
   const handleLogout = () => {
-    localStorage.setItem('token', '');
+    localStorage.removeItem('token');
     history.push('/login');
     dispatch(logout());
   };
@@ -46,7 +46,7 @@ export const Header = () => {
     history.push('/');
   };
 
-  const userInfo = useMemo(() => {
+  const userInitials = useMemo(() => {
     if (isEmpty(currentUser)) return;
     return `${currentUser.firstName.charAt(0)} ${currentUser.lastName.charAt(
       0
@@ -80,7 +80,7 @@ export const Header = () => {
         <Dropdown.Button
           overlay={menu}
           placement='bottomCenter'
-          icon={userInfo}
+          icon={userInitials}
         />
       )}
     </div>

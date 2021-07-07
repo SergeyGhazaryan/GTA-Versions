@@ -8,9 +8,9 @@ namespace GTAVersions.Domain.Interfaces
     {
         Task<UserDTO> GetUserByUsername(string username);
         Task<UserDTO> GetUserById(int id);
-        Task<AccessToken> UpdateUserToken(int id, string username);
+        Task<AccessToken> GenerateToken(int id, string username);
         Task<UserDTO> CreateUser(string firstName, string lastName, string username, string passwordHash);
         Task<UserDTO> EditUser(int currentUserId, string firstName, string lastName, string username);
-        Task<UserDTO> ChangePassword(int id, string passwordHash);
+        Task ChangePassword(int id, string passwordHash);
     }
 }

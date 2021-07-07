@@ -34,7 +34,7 @@ namespace GTAVersions.Domain.Services
             return user.Adapt<UserDTO>();
         }
 
-        public async Task<AccessToken> UpdateUserToken(int id, string username)
+        public async Task<AccessToken> GenerateToken(int id, string username)
         {
             var token = await _jwtTokenHandler.GenerateToken(id, username);
 
@@ -59,11 +59,9 @@ namespace GTAVersions.Domain.Services
             return editedUser.Adapt<UserDTO>();
         }
 
-        public async Task<UserDTO> ChangePassword(int id, string passwordHash)
+        public async Task ChangePassword(int id, string passwordHash)
         {
-            var changedPassword = await _userRepository.ChangePassword(id, passwordHash);
-
-            return changedPassword.Adapt<UserDTO>();
+            await _userRepository.ChangePassword(id, passwordHash);
         }
     }
 }

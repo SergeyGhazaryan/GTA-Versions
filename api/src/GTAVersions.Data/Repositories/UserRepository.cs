@@ -45,12 +45,11 @@ namespace GTAVersions.Data.Repositories
             return result;
         }
 
-        public async Task<User> ChangePassword(int id, string passwordHash)
+        public async Task ChangePassword(int id, string passwordHash)
         {
             var query = "UPDATE Users SET PasswordHash = @PasswordHash WHERE Id = @Id";
             var param = new { Id = id, PasswordHash = passwordHash };
-            var result = await _genericRepository.UpdateAsync(query, param);
-            return result;
+            await _genericRepository.UpdateAsync(query, param);
         }
     }
 }

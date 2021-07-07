@@ -2,22 +2,24 @@ import React from 'react';
 import { Modal } from '../../modal';
 import { InputFields } from '../../inputFields';
 
-export const AddVersionModal = ({
+export const VersionModal = ({
   isOpen,
   onCancel,
-  handleAdd,
+  handleSave,
   warning,
+  headerText,
   inputFields,
+  versionDetails = {},
 }) => {
   return (
     <Modal
       isOpen={isOpen}
       onCancel={onCancel}
-      onOk={handleAdd}
-      header='Add new version'
+      onOk={handleSave}
+      header={headerText}
       warning={warning}
     >
-      <InputFields fieldsArray={inputFields} />
+      <InputFields fieldsArray={inputFields} versionDetails={versionDetails} />
     </Modal>
   );
 };

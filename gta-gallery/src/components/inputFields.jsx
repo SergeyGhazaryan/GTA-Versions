@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from './input';
 import { getInputType } from '../functions/index';
 
-export const InputFields = ({ fieldsArray }) => {
+export const InputFields = ({ fieldsArray, versionDetails = {} }) => {
   return (
     <div>
       {(fieldsArray || []).map((v, i) => (
@@ -12,6 +12,8 @@ export const InputFields = ({ fieldsArray }) => {
           label={v.label}
           onChange={v.onChange}
           itemValue={v.itemValue}
+          currentState={true}
+          versionDetails={versionDetails}
           inputType={getInputType(v.name)}
         />
       ))}

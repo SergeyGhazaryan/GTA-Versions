@@ -1,7 +1,6 @@
-.modal-header {
+.modal-children {
   padding: 10px;
-  margin-top: 10px;
-  width: 450px;
+  margin-top: 40px;
 }
 
 .warning {
@@ -14,11 +13,9 @@
 .delete {
   color: #000000;
   display: flex;
-  align-items: center;
   justify-content: center;
   border: 1px solid #000000;
   border-radius: 8px;
-  height: 25px;
   width: 25px;
 }
 

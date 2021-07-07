@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllVersions, createVersion, deleteVersion } from '../services';
 import { GtaVersion } from '../components/gtaVersion';
-import { AddVersionModal } from '../components/shared/addVersionModal/addVersionModal';
+import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
 
 import './styles.scss';
@@ -102,25 +102,26 @@ const Layout = () => {
         <div className='add-button'>
           <Button onClick={() => setAddModalVisible(true)} text='ADD VERSION' />
           {addModalVisible && (
-            <AddVersionModal
+            <VersionModal
               isOpen={addModalVisible}
               onCancel={closeAddModal}
-              handleAdd={handleAdd}
+              handleSave={handleAdd}
               warning={warning}
+              headerText='Add version'
               inputFields={inputFields}
             />
           )}
         </div>
       </div>
       <div className='gta-version'>
-        {(versions || []).map((v, i) => (
+        {(versions || []).map((v, index) => (
           <GtaVersion
-            key={i}
+            key={index}
             id={v.id}
-            index={i + 1}
+            index={index + 1}
             image={v.image}
             name={v.name}
-            onDelete={() => handleDelete(v.id, i)}
+            onDelete={() => handleDelete(v.id, index)}
           />
         ))}
       </div>

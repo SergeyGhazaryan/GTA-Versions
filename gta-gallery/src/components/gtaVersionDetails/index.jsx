@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVersion, updateVersion } from '../../services/gtaVersionsService';
-import { UpdateVersionModal } from '../shared/updateVersionModal/updateVersionModal';
+import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
 
 import './styles.scss';
@@ -28,10 +28,6 @@ export const GTAVersionDetails = () => {
     setGTAVersionDetails(data);
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const onFileSelect = (filesArray) => {
     const file = filesArray[0];
 
@@ -42,6 +38,30 @@ export const GTAVersionDetails = () => {
       setImageValue(reader.result);
     };
   };
+
+  const closeUpdateModal = () => {
+    setUpdateModalVisible(!updateModalVisible);
+    clearState();
+  };
+
+  const handleUpdate = async () => {
+    if (id && imageValue && nameValue && informationValue) {
+      const newVersions = {
+        image: imageValue,
+        name: nameValue,
+        information: informationValue,
+      };
+      setGTAVersionDetails(newVersions);
+      await updateVersion(id, imageValue, nameValue, informationValue);
+      closeUpdateModal();
+    } else {
+      setWarning(true);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const inputFields = [
     {
@@ -64,26 +84,6 @@ export const GTAVersionDetails = () => {
     },
   ];
 
-  const closeUpdateModal = () => {
-    setUpdateModalVisible(!updateModalVisible);
-    clearState();
-  };
-
-  const handleUpdate = async () => {
-    if (id && imageValue && nameValue && informationValue) {
-      const newVersions = {
-        image: imageValue,
-        name: nameValue,
-        information: informationValue,
-      };
-      setGTAVersionDetails(newVersions);
-      await updateVersion(id, imageValue, nameValue, informationValue);
-      closeUpdateModal();
-    } else {
-      setWarning(true);
-    }
-  };
-
   return (
     <div className='details-container'>
       <div>
@@ -94,13 +94,15 @@ export const GTAVersionDetails = () => {
             text='UPDATE VERSION'
           />
           {updateModalVisible && (
-            <UpdateVersionModal
+            <VersionModal
               id={id}
               isOpen={updateModalVisible}
               onCancel={closeUpdateModal}
-              handleUpdate={handleUpdate}
+              handleSave={handleUpdate}
               warning={warning}
+              headerText='Update version'
               inputFields={inputFields}
+              versionDetails={gtaVersionDetails}
             />
           )}
         </div>
