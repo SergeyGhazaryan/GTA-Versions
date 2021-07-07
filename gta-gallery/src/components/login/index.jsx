@@ -3,8 +3,8 @@ import { useHistory, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
-import { login as loginRequest } from '../../services';
 import { login } from '../../store/auth/actions';
+import { login as loginRequest } from '../../services';
 
 import './styles.scss';
 

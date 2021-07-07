@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVersion, updateVersion } from '../../services/gtaVersionsService';
 import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
+import { getVersion, updateVersion } from '../../services/gtaVersionsService';
 
 import './styles.scss';
 
@@ -15,15 +15,11 @@ export const GTAVersionDetails = () => {
   const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
 
-  const clearState = () => {
-    setImageValue('');
-    setNameValue('');
-    setInformationValue('');
-  };
-
   const getData = async () => {
     const data = await getVersion(id);
-    setGTAVersionDetails(data);
+    setImageValue(data.image);
+    setNameValue(data.name);
+    setInformationValue(data.information);
   };
 
   const onFileSelect = (filesArray) => {
@@ -39,20 +35,19 @@ export const GTAVersionDetails = () => {
 
   const closeUpdateModal = () => {
     setUpdateModalVisible(!updateModalVisible);
-    clearState();
   };
 
   const handleUpdate = async () => {
-    if (id && imageValue && nameValue && informationValue) {
-      const newVersions = {
-        image: imageValue,
-        name: nameValue,
-        information: informationValue,
-      };
-      setGTAVersionDetails(newVersions);
-      await updateVersion(id, imageValue, nameValue, informationValue);
-      closeUpdateModal();
-    }
+    const newVersions = {
+      image: imageValue,
+      name: nameValue,
+      information: informationValue,
+    };
+    setImageValue(newVersions.image);
+    setNameValue(newVersions.name);
+    setInformationValue(newVersions.information);
+    await updateVersion(id, imageValue, nameValue, informationValue);
+    closeUpdateModal();
   };
 
   useEffect(() => {
@@ -84,7 +79,7 @@ export const GTAVersionDetails = () => {
     <div className='details-container'>
       <div>
         <div className='details-header'>
-          <h1 className='version-name'>{gtaVersionDetails.name}</h1>
+          <h1 className='version-name'>{nameValue}</h1>
           <Button
             onClick={() => setUpdateModalVisible(true)}
             text='UPDATE VERSION'
@@ -97,12 +92,16 @@ export const GTAVersionDetails = () => {
               handleSave={handleUpdate}
               headerText='Update version'
               inputFields={inputFields}
-              versionDetails={gtaVersionDetails}
+              versionDetails={{
+                image: imageValue,
+                name: nameValue,
+                information: informationValue,
+              }}
             />
           )}
         </div>
-        <img src={gtaVersionDetails.image} className='image' />
-        <div>{gtaVersionDetails.information}</div>
+        <img src={imageValue} className='image' />
+        <div>{informationValue}</div>
       </div>
     </div>
   );

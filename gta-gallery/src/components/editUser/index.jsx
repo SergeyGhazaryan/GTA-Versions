@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { editUser } from '../../services/userService';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
+import { editUser } from '../../services/userService';
 
 import './styles.scss';
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getAllVersions, createVersion, deleteVersion } from '../services';
 import { GtaVersion } from '../components/gtaVersion';
 import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
+import { getAllVersions, createVersion, deleteVersion } from '../services';
 
 import './styles.scss';
 

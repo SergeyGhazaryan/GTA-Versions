@@ -4,9 +4,9 @@ import { Menu, Dropdown } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'lodash';
-import { getCurrentUser } from '../../services/userService';
 import { logout } from '../../store/auth/actions';
 import { getCurrentUser as defaultUser } from '../../store/auth/actions';
+import { getCurrentUser } from '../../services/userService';
 
 import './styles.scss';
 

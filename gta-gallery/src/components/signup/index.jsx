@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { InputFields } from '../inputFields';
 import { Button } from '../button';
-import { signup } from '../../services';
 import { signup as defaultSignup } from '../../store/auth/actions';
+import { signup } from '../../services';
 
 import './styles.scss';
 
