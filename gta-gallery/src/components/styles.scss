@@ -26,3 +26,17 @@
   justify-content: center;
   align-items: center;
 }
+
+.delete-image {
+  cursor: pointer;
+  &:hover {
+    color: #ff0000;
+  }
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  align-items: center;
+}

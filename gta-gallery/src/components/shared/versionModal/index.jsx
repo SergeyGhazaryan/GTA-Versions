@@ -8,6 +8,7 @@ export const VersionModal = ({
   handleSave,
   headerText,
   inputFields,
+  deleteImage,
   isRequired = false,
   versionDetails = {},
 }) => {
@@ -17,6 +18,7 @@ export const VersionModal = ({
       onCancel={onCancel}
       onOk={handleSave}
       imageValue={versionDetails.image}
+      deleteImage={deleteImage}
       header={headerText}
     >
       <InputFields

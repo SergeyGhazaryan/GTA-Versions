@@ -9,7 +9,6 @@ import './styles.scss';
 export const GTAVersionDetails = () => {
   const { id } = useParams();
 
-  const [gtaVersionDetails, setGTAVersionDetails] = useState({});
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [imageValue, setImageValue] = useState('');
   const [nameValue, setNameValue] = useState('');
@@ -75,6 +74,10 @@ export const GTAVersionDetails = () => {
     },
   ];
 
+  const deleteImage = () => {
+    setImageValue('');
+  };
+
   return (
     <div className='details-container'>
       <div>
@@ -97,6 +100,7 @@ export const GTAVersionDetails = () => {
                 name: nameValue,
                 information: informationValue,
               }}
+              deleteImage={deleteImage}
             />
           )}
         </div>
