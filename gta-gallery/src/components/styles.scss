@@ -17,26 +17,3 @@
   font-style: oblique;
   font-weight: 700;
 }
-
-.modal-image {
-  width: 100px;
-  height: 100px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.delete-image {
-  cursor: pointer;
-  &:hover {
-    color: #ff0000;
-  }
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column-reverse;
-  align-items: center;
-}

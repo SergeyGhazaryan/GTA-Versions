@@ -1,47 +1,28 @@
 import React from 'react';
 import { Input as DefaultInput } from 'antd';
-import { Item } from './item';
 
-import './styles.scss';
+export const Input = ({ type, onChange, defaultValue }) => {
+  const onFileSelect = (filesArray) => {
+    if (!filesArray) return;
+    const file = filesArray[0];
 
-export const Input = ({
-  name,
-  label,
-  onChange,
-  itemValue,
-  inputType,
-  versionDetails,
-  isRequired = false,
-  currentState = false,
-}) => {
-  const handleChange = (e) => {
-    if (inputType === 'file') {
-      return onChange(e.target.files);
-    }
-    return onChange(e.target.value);
-  };
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
 
-  const handleCurrentState = (name) => {
-    switch (name) {
-      case 'name':
-        return versionDetails.name;
-      case 'information':
-        return versionDetails.information;
-      default:
-        return '';
-    }
+    reader.onload = () => {
+      onChange(reader.result);
+    };
   };
 
   return (
-    <div>
-      <Item name={name} label={label} isRequired={isRequired}>
-        <DefaultInput
-          defaultValue={currentState ? handleCurrentState(name) : ''}
-          type={inputType}
-          onChange={handleChange}
-          value={itemValue}
-        />
-      </Item>
-    </div>
+    <DefaultInput
+      type={type}
+      defaultValue={type === 'file' || !defaultValue ? '' : defaultValue}
+      onChange={
+        type == 'file'
+          ? (e) => onFileSelect(e.target.files)
+          : (e) => onChange(e.target.value)
+      }
+    />
   );
 };

@@ -1,4 +1,4 @@
 export const LOGIN = 'LOGIN';
-export const SIGNUP = 'SIGNUP';
 export const LOGOUT = 'LOGOUT';
-export const GET_CURRENT_USER = 'GET_CURRENT_USER';
+export const SET_USER = 'SET_USER';
+export const GET_USER = 'GET_USER';

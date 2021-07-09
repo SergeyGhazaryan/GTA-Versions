@@ -1,10 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { PopConfirm } from '../popConfirm';
 
 import './styles.scss';
 
 export const GtaVersion = ({ id, index, image, name, onDelete }) => {
+  const history = useHistory();
+  const handleImageClick = () => {
+    history.push(`/gta/${id}`);
+  };
+
   return (
     <div className='container'>
       <div className='version-header'>
@@ -12,9 +17,7 @@ export const GtaVersion = ({ id, index, image, name, onDelete }) => {
         <h1 className='name'>{name}</h1>
         <PopConfirm title='Are you sure？' onConfirm={onDelete} text='X' />
       </div>
-      <NavLink to={`/gta/${id}`} className='nav-link'>
-        <img src={image} className='image' />
-      </NavLink>
+      <img onClick={handleImageClick} src={image} className='image' />
     </div>
   );
 };

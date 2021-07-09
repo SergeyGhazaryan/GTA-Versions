@@ -2,14 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { GtaVersion } from '../components/gtaVersion';
 import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
+import { Input } from '../components/input';
 import { getAllVersions, createVersion, deleteVersion } from '../services';
+import { Form, Upload } from 'antd';
 
 import './styles.scss';
+
+const normFile = (e) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e && e.fileList;
+};
 
 const Layout = () => {
   const [versions, setVersions] = useState([]);
   const [addModalVisible, setAddModalVisible] = useState(false);
-  const [imageValue, setImageValue] = useState('');
+  const [imageValue, setImageValue] = useState({
+    loading: false,
+  });
   const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
 
@@ -29,54 +40,22 @@ const Layout = () => {
     getData();
   }, []);
 
-  const onFileSelect = (filesArray) => {
-    const file = filesArray[0];
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      setImageValue(reader.result);
-    };
-  };
-
-  const inputFields = [
-    {
-      name: 'image',
-      label: 'Image',
-      onChange: onFileSelect,
-      itemValue: imageValue,
-    },
-    {
-      name: 'name',
-      label: 'Name',
-      onChange: setNameValue,
-      itemValue: nameValue,
-    },
-    {
-      name: 'information',
-      label: 'Information',
-      onChange: setInformationValue,
-      itemValue: informationValue,
-    },
-  ];
-
   const closeAddModal = () => {
     setAddModalVisible(!addModalVisible);
     clearState();
   };
 
   const handleAdd = async () => {
-    if (imageValue && nameValue && informationValue) {
+    if (imageUrl && nameValue && informationValue) {
       const newVersions = [...versions];
       const createdVersionId = await createVersion(
-        imageValue,
+        imageUrl,
         nameValue,
         informationValue
       );
       newVersions.push({
         id: createdVersionId,
-        image: imageValue,
+        image: imageUrl,
         name: nameValue,
       });
       setVersions(newVersions);
@@ -92,6 +71,46 @@ const Layout = () => {
     setVersions(versionsArray);
   };
 
+  const getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  };
+
+  const handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      setImageValue({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      getBase64(info.file.originFileObj, (imageUrl) =>
+        setImageValue({
+          imageUrl,
+          loading: false,
+        })
+      );
+    }
+  };
+
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      console.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      console.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  };
+
+  const uploadButton = (
+    <div>
+      <div className='ant-upload-text'>Upload image</div>
+    </div>
+  );
+  const { imageUrl } = imageValue;
+
   return (
     <div className='version-container'>
       <div className='button-container'>
@@ -103,9 +122,58 @@ const Layout = () => {
               onCancel={closeAddModal}
               handleSave={handleAdd}
               headerText='Add version'
-              inputFields={inputFields}
-              isRequired={true}
-            />
+            >
+              <Form>
+                <Form.Item
+                  name='image'
+                  label='Image'
+                  valuePropName='fileList'
+                  getValueFromEvent={normFile}
+                  rules={[{ required: true }]}
+                >
+                  <Upload
+                    name='image'
+                    listType='picture-card'
+                    className='avatar-uploader'
+                    showUploadList={false}
+                    action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+                    beforeUpload={beforeUpload}
+                    onChange={handleChange}
+                  >
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt='avatar'
+                        style={{ width: '100%' }}
+                      />
+                    ) : (
+                      uploadButton
+                    )}
+                  </Upload>
+                </Form.Item>
+                <Form.Item
+                  label='Name'
+                  name='name'
+                  rules={[
+                    { required: true, message: 'Please input your name!' },
+                  ]}
+                >
+                  <Input type='text' onChange={setNameValue} />
+                </Form.Item>
+                <Form.Item
+                  label='Information'
+                  name='information'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your information!',
+                    },
+                  ]}
+                >
+                  <Input type='text' onChange={setInformationValue} />
+                </Form.Item>
+              </Form>
+            </VersionModal>
           )}
         </div>
       </div>
