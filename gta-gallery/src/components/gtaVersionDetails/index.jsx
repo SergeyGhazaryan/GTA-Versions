@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Form, Input, Upload } from 'antd';
 import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
 import { getVersion, updateVersion } from '../../services/gtaVersionsService';
-import { Form, Input, Upload } from 'antd';
 
 import './styles.scss';
 
-const getValueFromEvent = (e) => {
+const getFileList = (e) => {
   if (Array.isArray(e)) {
     return e;
   }
@@ -139,7 +139,7 @@ export const GTAVersionDetails = () => {
                     name='image'
                     label='Image'
                     valuePropName='fileList'
-                    getValueFromEvent={getValueFromEvent}
+                    getValueFromEvent={getFileList}
                   >
                     <Upload
                       name='image'

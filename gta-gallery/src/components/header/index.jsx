@@ -59,6 +59,7 @@ export const Header = () => {
   useEffect(() => {
     getUser();
   }, [authenticated]);
+  
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={handleEditPage} icon={<UserOutlined />}>

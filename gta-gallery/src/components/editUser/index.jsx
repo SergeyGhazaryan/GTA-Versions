@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Form, Input } from 'antd';
 import { Button } from '../button';
 import { editUser, getCurrentUser } from '../../services/userService';
 import { setUser } from '../../store/auth/actions';
-import { useDispatch } from 'react-redux';
 
 import './styles.scss';
 

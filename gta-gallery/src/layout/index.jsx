@@ -7,7 +7,7 @@ import { getAllVersions, createVersion, deleteVersion } from '../services';
 
 import './styles.scss';
 
-const getValueFromEvent = (e) => {
+const getFileList = (e) => {
   if (Array.isArray(e)) {
     return e;
   }
@@ -127,7 +127,7 @@ const Layout = () => {
                   name='image'
                   label='Image'
                   valuePropName='fileList'
-                  getValueFromEvent={getValueFromEvent}
+                  getValueFromEvent={getFileList}
                   rules={[{ required: true }]}
                 >
                   <Upload
