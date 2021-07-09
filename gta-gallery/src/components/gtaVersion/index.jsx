@@ -6,6 +6,7 @@ import './styles.scss';
 
 export const GtaVersion = ({ id, index, image, name, onDelete }) => {
   const history = useHistory();
+  
   const handleImageClick = () => {
     history.push(`/gta/${id}`);
   };

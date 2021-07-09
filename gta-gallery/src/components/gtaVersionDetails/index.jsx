@@ -7,7 +7,7 @@ import { Form, Input, Upload } from 'antd';
 
 import './styles.scss';
 
-const normFile = (e) => {
+const getValueFromEvent = (e) => {
   if (Array.isArray(e)) {
     return e;
   }
@@ -139,7 +139,7 @@ export const GTAVersionDetails = () => {
                     name='image'
                     label='Image'
                     valuePropName='fileList'
-                    getValueFromEvent={normFile}
+                    getValueFromEvent={getValueFromEvent}
                   >
                     <Upload
                       name='image'

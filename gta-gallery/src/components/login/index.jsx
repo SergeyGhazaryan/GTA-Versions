@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Form, Input } from 'antd';
 import { Button } from '../button';
-import { Input } from '../input';
 import { login, setUser } from '../../store/auth/actions';
 import { login as loginRequest } from '../../services';
 import { getCurrentUser } from '../../services/userService';
-import { Form } from 'antd';
 
 import './styles.scss';
 
@@ -44,14 +43,19 @@ export const Login = () => {
             name='username'
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
-            <Input type='text' onChange={setUsernameValue} />
+            <Input
+              type='text'
+              onChange={(e) => setUsernameValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Password'
             name='password'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input type='password' onChange={setPasswordValue} />
+            <Input.Password
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item>
             <div className='submit-button'>

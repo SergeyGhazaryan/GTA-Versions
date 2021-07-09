@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Button } from '../button';
 import { signup } from '../../services';
-import { Form } from 'antd';
-import { Input } from '../input';
+import { Form, Input } from 'antd';
 import { login } from '../../store/auth/actions';
 import { getCurrentUser } from '../../services/userService';
 import { setUser } from '../../store/auth/actions';
@@ -64,7 +63,10 @@ export const Signup = () => {
               { required: true, message: 'Please input your first name!' },
             ]}
           >
-            <Input type='text' onChange={setFirstNameValue} />
+            <Input
+              type='text'
+              onChange={(e) => setFirstNameValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Last name'
@@ -73,30 +75,40 @@ export const Signup = () => {
               { required: true, message: 'Please input your last name!' },
             ]}
           >
-            <Input type='text' onChange={setLastNameValue} />
+            <Input
+              type='text'
+              onChange={(e) => setLastNameValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Username'
             name='username'
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
-            <Input type='text' onChange={setUsernameValue} />
+            <Input
+              type='text'
+              onChange={(e) => setUsernameValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Password'
             name='password'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input type='password' onChange={setPasswordValue} />
+            <Input.Password
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Repeat password'
             name='repeatPassword'
             rules={[
-              { required: true, message: 'Please input your repeat password!' },
+              { required: true, message: 'Please input your password again!' },
             ]}
           >
-            <Input type='password' onChange={setRepeatPasswordValue} />
+            <Input.Password
+              onChange={(e) => setRepeatPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item>
             <div className='submit-button'>

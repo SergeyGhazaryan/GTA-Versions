@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Form, Input } from 'antd';
 import { Button } from '../button';
 import { changePassword } from '../../services';
-import { Form } from 'antd';
-import { Input } from '../input';
 
 import './styles.scss';
 
@@ -42,7 +41,9 @@ export const ChangePassword = () => {
               { required: true, message: 'Please input your old password!' },
             ]}
           >
-            <Input type='password' onChange={setOldPasswordValue} />
+            <Input.Password
+              onChange={(e) => setOldPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='New password'
@@ -51,7 +52,9 @@ export const ChangePassword = () => {
               { required: true, message: 'Please input your new password!' },
             ]}
           >
-            <Input type='password' onChange={setNewPasswordValue} />
+            <Input.Password
+              onChange={(e) => setNewPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label='Repeat new password'
@@ -59,11 +62,13 @@ export const ChangePassword = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input your repeat new password!',
+                message: 'Please input your new password again!',
               },
             ]}
           >
-            <Input type='password' onChange={setRepeatNewPasswordValue} />
+            <Input.Password
+              onChange={(e) => setRepeatNewPasswordValue(e.target.value)}
+            />
           </Form.Item>
           <Form.Item>
             <div className='password-button'>

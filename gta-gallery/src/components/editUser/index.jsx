@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Form, Input } from 'antd';
 import { Button } from '../button';
 import { editUser, getCurrentUser } from '../../services/userService';
-import { Form, Input } from 'antd';
 import { setUser } from '../../store/auth/actions';
 import { useDispatch } from 'react-redux';
 

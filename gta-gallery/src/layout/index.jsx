@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Upload, Input } from 'antd';
 import { GtaVersion } from '../components/gtaVersion';
 import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
-import { Input } from '../components/input';
 import { getAllVersions, createVersion, deleteVersion } from '../services';
-import { Form, Upload } from 'antd';
 
 import './styles.scss';
 
-const normFile = (e) => {
+const getValueFromEvent = (e) => {
   if (Array.isArray(e)) {
     return e;
   }
@@ -128,7 +127,7 @@ const Layout = () => {
                   name='image'
                   label='Image'
                   valuePropName='fileList'
-                  getValueFromEvent={normFile}
+                  getValueFromEvent={getValueFromEvent}
                   rules={[{ required: true }]}
                 >
                   <Upload
@@ -158,7 +157,10 @@ const Layout = () => {
                     { required: true, message: 'Please input your name!' },
                   ]}
                 >
-                  <Input type='text' onChange={setNameValue} />
+                  <Input
+                    type='text'
+                    onChange={(e) => setNameValue(e.target.value)}
+                  />
                 </Form.Item>
                 <Form.Item
                   label='Information'
@@ -170,7 +172,10 @@ const Layout = () => {
                     },
                   ]}
                 >
-                  <Input type='text' onChange={setInformationValue} />
+                  <Input
+                    type='text'
+                    onChange={(e) => setInformationValue(e.target.value)}
+                  />
                 </Form.Item>
               </Form>
             </VersionModal>
