@@ -11,3 +11,18 @@ export const getBase64 = (img, callback) => {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
+
+export const handleChange = (info, setItemValue) => {
+  const file = info.file;
+  if (file.status === 'uploading') {
+    return setItemValue({ loading: true });
+  }
+  if (file.status === 'done') {
+    getBase64(file.originFileObj, (imageUrl) =>
+      setItemValue({
+        imageUrl,
+        loading: false,
+      })
+    );
+  }
+};
