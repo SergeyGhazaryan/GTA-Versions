@@ -47,19 +47,15 @@ export const Header = () => {
 
   const userInitials = useMemo(() => {
     let result = '';
-    if (firstName) {
-      result += firstName.charAt(0) + ' ';
-    }
-    if (lastName) {
-      result += lastName.charAt(0);
-    }
+    if (!firstName || !lastName) return;
+    result += firstName.charAt(0) + ' ' + lastName.charAt(0);
     return result;
   }, [firstName, lastName]);
 
   useEffect(() => {
     getUser();
   }, [authenticated]);
-  
+
   const menu = (
     <Menu>
       <Menu.Item key='1' onClick={handleEditPage} icon={<UserOutlined />}>

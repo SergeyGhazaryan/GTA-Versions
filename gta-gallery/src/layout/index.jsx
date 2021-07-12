@@ -8,9 +8,7 @@ import { getAllVersions, createVersion, deleteVersion } from '../services';
 import './styles.scss';
 
 const getFileList = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
+  if (Array.isArray(e)) return e;
   return e && e.fileList;
 };
 
@@ -77,12 +75,12 @@ const Layout = () => {
   };
 
   const handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      setImageValue({ loading: true });
-      return;
+    const file = info.file;
+    if (file.status === 'uploading') {
+      return setImageValue({ loading: true });
     }
-    if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, (imageUrl) =>
+    if (file.status === 'done') {
+      getBase64(file.originFileObj, (imageUrl) =>
         setImageValue({
           imageUrl,
           loading: false,
@@ -93,13 +91,9 @@ const Layout = () => {
 
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-      console.error('You can only upload JPG/PNG file!');
-    }
+    if (!isJpgOrPng) console.error('You can only upload JPG/PNG file!');
     const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      console.error('Image must smaller than 2MB!');
-    }
+    if (!isLt2M) console.error('Image must smaller than 2MB!');
     return isJpgOrPng && isLt2M;
   };
 
