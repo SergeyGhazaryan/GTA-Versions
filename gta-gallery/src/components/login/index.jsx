@@ -17,7 +17,7 @@ export const Login = () => {
   const [passwordValue, setPasswordValue] = useState('');
 
   const handleLogin = async () => {
-    if (usernameValue && passwordValue && usernameValue !== passwordValue) {
+    if (usernameValue !== passwordValue) {
       const token = await loginRequest(usernameValue, passwordValue);
       if (token) {
         localStorage.setItem('token', token);

@@ -22,11 +22,6 @@ export const Signup = () => {
 
   const handleSignup = async () => {
     if (
-      usernameValue &&
-      passwordValue &&
-      repeatPasswordValue &&
-      firstNameValue &&
-      lastNameValue &&
       passwordValue === repeatPasswordValue &&
       usernameValue !== passwordValue
     ) {

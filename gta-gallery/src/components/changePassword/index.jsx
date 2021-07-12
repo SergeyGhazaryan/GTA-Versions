@@ -15,9 +15,6 @@ export const ChangePassword = () => {
 
   const handleChangePassword = async () => {
     if (
-      oldPasswordValue &&
-      newPasswordValue &&
-      repeatNewPasswordValue &&
       newPasswordValue === repeatNewPasswordValue &&
       newPasswordValue !== oldPasswordValue
     ) {
