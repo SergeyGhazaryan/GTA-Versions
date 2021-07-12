@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { InputFields } from '../inputFields';
+import { Form, Input } from 'antd';
 import { Button } from '../button';
-import { login } from '../../store/auth/actions';
+import { login, setUser } from '../../store/auth/actions';
 import { login as loginRequest } from '../../services';
+import { getCurrentUser } from '../../services/userService';
 
 import './styles.scss';
 
@@ -15,47 +16,56 @@ export const Login = () => {
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
-  const inputFields = [
-    {
-      name: 'username',
-      label: 'Username',
-      onChange: setUsernameValue,
-      itemValue: usernameValue,
-    },
-    {
-      name: 'password',
-      label: 'Password',
-      onChange: setPasswordValue,
-      itemValue: passwordValue,
-    },
-  ];
-
   const handleLogin = async () => {
-    if (usernameValue && passwordValue && usernameValue !== passwordValue) {
+    if (usernameValue !== passwordValue) {
       const token = await loginRequest(usernameValue, passwordValue);
       if (token) {
         localStorage.setItem('token', token);
         dispatch(login(token));
+        const currentUser = await getCurrentUser();
+        dispatch(setUser(currentUser));
         history.push('/');
       }
     }
+  };
+
+  const handleSignup = () => {
+    history.push('/signup');
   };
 
   return (
     <div className='login-container'>
       <div className='login'>
         <h3 className='login-header'>Please Login</h3>
-        <div>
-          <InputFields fieldsArray={inputFields} />
+        <Form>
+          <Form.Item
+            label='Username'
+            name='username'
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input
+              type='text'
+              onChange={(e) => setUsernameValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label='Password'
+            name='password'
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item>
+            <div className='submit-button'>
+              <Button onClick={handleLogin} type='primary' text='Submit' />
+            </div>
+          </Form.Item>
+        </Form>
+        <div className='signup-button'>
+          <Button onClick={handleSignup} type='primary' text='Signup' />
         </div>
-        <div className='login-button'>
-          <Button onClick={handleLogin} text='Login' />
-        </div>
-        <NavLink to='/signup'>
-          <div className='signup-button'>
-            <Button text='Signup' />
-          </div>
-        </NavLink>
       </div>
     </div>
   );

@@ -21,3 +21,15 @@
   align-items: baseline;
   justify-content: space-between;
 }
+
+.delete-image {
+  cursor: pointer;
+  margin-bottom: 20px;
+  &:hover {
+    color: #ff0000;
+  }
+}
+
+.form {
+  margin-top: 10px;
+}

@@ -1,6 +1,9 @@
-import { LOGIN, SIGNUP, LOGOUT, GET_CURRENT_USER } from './types';
+import { LOGIN, LOGOUT, SET_USER, GET_USER } from './types';
 
 const initialState = {
+  firstName: null,
+  lastName: null,
+  username: null,
   authenticated: null,
   token: null,
 };
@@ -8,7 +11,6 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-    case SIGNUP:
       return {
         ...state,
         token: action.payload,
@@ -20,7 +22,14 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         authenticated: false,
       };
-    case GET_CURRENT_USER:
+    case SET_USER:
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        username: action.payload.username,
+      };
+    case GET_USER:
       return {
         ...state,
         authenticated: action.payload == null ? true : false,

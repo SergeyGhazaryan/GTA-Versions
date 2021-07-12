@@ -18,18 +18,14 @@ const App = () => {
       <Switch>
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        <PrivateRoute exact path='/me/edit'>
-          <EditUser />
-        </PrivateRoute>
-        <PrivateRoute exact path='/me/change/password'>
-          <ChangePassword />
-        </PrivateRoute>
-        <PrivateRoute exact path='/'>
-          <Layout />
-        </PrivateRoute>
-        <PrivateRoute exact path='/gta/:id'>
-          <GTAVersionDetails />
-        </PrivateRoute>
+        <PrivateRoute exact path='/me/edit/user' component={EditUser} />
+        <PrivateRoute
+          exact
+          path='/me/edit/password'
+          component={ChangePassword}
+        />
+        <PrivateRoute exact path='/' component={Layout} />
+        <PrivateRoute exact path='/gta/:id' component={GTAVersionDetails} />
       </Switch>
     </Router>
   );

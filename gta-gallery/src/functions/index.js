@@ -1,14 +1,13 @@
-export const getInputType = (inputName) => {
-  switch (inputName) {
-    case 'image':
-      return 'file';
-    case 'password':
-    case 'repeatPassword':
-    case 'repeatNewPassword':
-    case 'oldPassword':
-    case 'newPassword':
-      return 'password';
-    default:
-      return 'text';
-  }
+export const beforeUpload = (file) => {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) alert('You can only upload JPG/PNG file!');
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) alert('Image must smaller than 2MB!');
+  return isJpgOrPng && isLt2M;
+};
+
+export const getBase64 = (img, callback) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
 };

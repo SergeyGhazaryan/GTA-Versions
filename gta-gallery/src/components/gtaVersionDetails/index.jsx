@@ -1,36 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Form, Input, Upload } from 'antd';
 import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
+import { beforeUpload, getBase64 } from '../../functions';
 import { getVersion, updateVersion } from '../../services/gtaVersionsService';
 
 import './styles.scss';
 
+const getFileList = (e) => {
+  return e.fileList;
+};
+
 export const GTAVersionDetails = () => {
   const { id } = useParams();
 
-  const [gtaVersionDetails, setGTAVersionDetails] = useState({});
+  const [form] = Form.useForm();
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
-  const [imageValue, setImageValue] = useState('');
+  const [imageValue, setImageValue] = useState({
+    loading: false,
+  });
   const [nameValue, setNameValue] = useState('');
   const [informationValue, setInformationValue] = useState('');
+  const [version, setVersion] = useState({
+    image: '',
+    name: '',
+    information: '',
+  });
 
   const getData = async () => {
     const data = await getVersion(id);
-    setImageValue(data.image);
+    if (!data) return;
+    setVersion({
+      image: data.image,
+      name: data.name,
+      information: data.information,
+    });
+    setImageValue({ imageUrl: data.image });
     setNameValue(data.name);
     setInformationValue(data.information);
-  };
-
-  const onFileSelect = (filesArray) => {
-    const file = filesArray[0];
-
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      setImageValue(reader.result);
-    };
+    form.resetFields();
   };
 
   const closeUpdateModal = () => {
@@ -38,15 +47,12 @@ export const GTAVersionDetails = () => {
   };
 
   const handleUpdate = async () => {
-    const newVersions = {
-      image: imageValue,
+    setVersion({
+      image: imageUrl,
       name: nameValue,
       information: informationValue,
-    };
-    setImageValue(newVersions.image);
-    setNameValue(newVersions.name);
-    setInformationValue(newVersions.information);
-    await updateVersion(id, imageValue, nameValue, informationValue);
+    });
+    await updateVersion(id, imageUrl, nameValue, informationValue);
     closeUpdateModal();
   };
 
@@ -54,54 +60,106 @@ export const GTAVersionDetails = () => {
     getData();
   }, []);
 
-  const inputFields = [
-    {
-      name: 'image',
-      label: 'Image',
-      onChange: onFileSelect,
-      itemValue: imageValue,
-    },
-    {
-      name: 'name',
-      label: 'Name',
-      onChange: setNameValue,
-      itemValue: nameValue,
-    },
-    {
-      name: 'information',
-      label: 'Information',
-      onChange: setInformationValue,
-      itemValue: informationValue,
-    },
-  ];
+  const handleChange = (info) => {
+    const file = info.file;
+    if (file.status === 'uploading') {
+      return setImageValue({ loading: true });
+    }
+    if (file.status === 'done') {
+      getBase64(file.originFileObj, (imageUrl) =>
+        setImageValue({
+          imageUrl,
+          loading: false,
+        })
+      );
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      <div className='ant-upload-text'>Upload image</div>
+    </div>
+  );
+  const { imageUrl } = imageValue;
+
+  const deleteImage = () => {
+    setImageValue({ imageUrl: '' });
+  };
 
   return (
     <div className='details-container'>
       <div>
         <div className='details-header'>
-          <h1 className='version-name'>{nameValue}</h1>
+          <h1 className='version-name'>{version.name}</h1>
           <Button
             onClick={() => setUpdateModalVisible(true)}
             text='UPDATE VERSION'
           />
           {updateModalVisible && (
             <VersionModal
-              id={id}
               isOpen={updateModalVisible}
               onCancel={closeUpdateModal}
               handleSave={handleUpdate}
               headerText='Update version'
-              inputFields={inputFields}
-              versionDetails={{
-                image: imageValue,
-                name: nameValue,
-                information: informationValue,
-              }}
-            />
+            >
+              <div className='form'>
+                {imageUrl && (
+                  <span className='delete-image' onClick={deleteImage}>
+                    X
+                  </span>
+                )}
+                <Form
+                  form={form}
+                  initialValues={{
+                    name: nameValue,
+                    information: informationValue,
+                  }}
+                >
+                  <Form.Item
+                    name='image'
+                    label='Image'
+                    valuePropName='fileList'
+                    getValueFromEvent={getFileList}
+                  >
+                    <Upload
+                      name='image'
+                      listType='picture-card'
+                      className='avatar-uploader'
+                      showUploadList={false}
+                      beforeUpload={beforeUpload}
+                      onChange={handleChange}
+                      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+                    >
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt='avatar'
+                          style={{ width: '100%' }}
+                        />
+                      ) : (
+                        uploadButton
+                      )}
+                    </Upload>
+                  </Form.Item>
+                  <Form.Item label='Name' name='name'>
+                    <Input
+                      type='text'
+                      onChange={(e) => setNameValue(e.target.value)}
+                    />
+                  </Form.Item>
+                  <Form.Item label='Information' name='information'>
+                    <Input
+                      type='text'
+                      onChange={(e) => setInformationValue(e.target.value)}
+                    />
+                  </Form.Item>
+                </Form>
+              </div>
+            </VersionModal>
           )}
         </div>
-        <img src={imageValue} className='image' />
-        <div>{informationValue}</div>
+        {version.image && <img src={version.image} className='image' />}
+        <div>{version.information}</div>
       </div>
     </div>
   );

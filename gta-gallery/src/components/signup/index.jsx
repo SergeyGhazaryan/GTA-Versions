@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { InputFields } from '../inputFields';
+import { Form, Input } from 'antd';
 import { Button } from '../button';
-import { signup as defaultSignup } from '../../store/auth/actions';
 import { signup } from '../../services';
+import { login } from '../../store/auth/actions';
+import { getCurrentUser } from '../../services/userService';
+import { setUser } from '../../store/auth/actions';
 
 import './styles.scss';
 
@@ -18,46 +20,10 @@ export const Signup = () => {
   const [passwordValue, setPasswordValue] = useState('');
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('');
 
-  const inputFields = [
-    {
-      name: 'firstName',
-      label: 'First name',
-      onChange: setFirstNameValue,
-      itemValue: firstNameValue,
-    },
-    {
-      name: 'lastName',
-      label: 'Last name',
-      onChange: setLastNameValue,
-      itemValue: lastNameValue,
-    },
-    {
-      name: 'username',
-      label: 'Username',
-      onChange: setUsernameValue,
-      itemValue: usernameValue,
-    },
-    {
-      name: 'password',
-      label: 'Password',
-      onChange: setPasswordValue,
-      itemValue: passwordValue,
-    },
-    {
-      name: 'repeatPassword',
-      label: 'Repeat password',
-      onChange: setRepeatPasswordValue,
-      itemValue: repeatPasswordValue,
-    },
-  ];
-
   const handleSignup = async () => {
     if (
-      usernameValue &&
       passwordValue &&
       repeatPasswordValue &&
-      firstNameValue &&
-      lastNameValue &&
       passwordValue === repeatPasswordValue &&
       usernameValue !== passwordValue
     ) {
@@ -69,7 +35,9 @@ export const Signup = () => {
       );
       if (token) {
         localStorage.setItem('token', token);
-        dispatch(defaultSignup(token));
+        dispatch(login(token));
+        const currentUser = await getCurrentUser();
+        dispatch(setUser(currentUser));
         history.push('/');
       }
     }
@@ -84,12 +52,67 @@ export const Signup = () => {
     <div className='signup-container'>
       <div className='signup'>
         <h3 className='signup-header'>Please Signup</h3>
-        <div>
-          <InputFields fieldsArray={inputFields} />
-        </div>
-        <div className='signup-button'>
-          <Button onClick={handleSignup} text='Signup' />
-        </div>
+        <Form>
+          <Form.Item
+            label='First name'
+            name='firstName'
+            rules={[
+              { required: true, message: 'Please input your first name!' },
+            ]}
+          >
+            <Input
+              type='text'
+              onChange={(e) => setFirstNameValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label='Last name'
+            name='lastName'
+            rules={[
+              { required: true, message: 'Please input your last name!' },
+            ]}
+          >
+            <Input
+              type='text'
+              onChange={(e) => setLastNameValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label='Username'
+            name='username'
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input
+              type='text'
+              onChange={(e) => setUsernameValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label='Password'
+            name='password'
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            label='Repeat password'
+            name='repeatPassword'
+            rules={[
+              { required: true, message: 'Please input your password again!' },
+            ]}
+          >
+            <Input.Password
+              onChange={(e) => setRepeatPasswordValue(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item>
+            <div className='submit-button'>
+              <Button onClick={handleSignup} type='primary' text='Submit' />
+            </div>
+          </Form.Item>
+        </Form>
         <div className='back-button'>
           <Button onClick={handleBack} text='Back' />
         </div>

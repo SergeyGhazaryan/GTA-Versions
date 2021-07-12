@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { EditOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { isEmpty } from 'lodash';
 import { logout } from '../../store/auth/actions';
-import { getCurrentUser as defaultUser } from '../../store/auth/actions';
+import { getUser as defaultUser, setUser } from '../../store/auth/actions';
 import { getCurrentUser } from '../../services/userService';
 
 import './styles.scss';
@@ -14,16 +13,16 @@ export const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [currentUser, setCurrentUser] = useState({});
-
   const authenticated = useSelector((state) => state.auth.authenticated);
+  const firstName = useSelector((state) => state.auth.firstName);
+  const lastName = useSelector((state) => state.auth.lastName);
 
   const handleEditPage = () => {
-    history.push('/me/edit');
+    history.push('/me/edit/user');
   };
 
   const handleChangePassword = () => {
-    history.push('/me/change/password');
+    history.push('/me/edit/password');
   };
 
   const handleLogout = () => {
@@ -35,7 +34,7 @@ export const Header = () => {
   const getUser = async () => {
     const data = await getCurrentUser();
     if (data) {
-      setCurrentUser(data);
+      dispatch(setUser(data));
       if (authenticated == null) {
         dispatch(defaultUser(authenticated));
       }
@@ -47,11 +46,11 @@ export const Header = () => {
   };
 
   const userInitials = useMemo(() => {
-    if (isEmpty(currentUser)) return;
-    return `${currentUser.firstName.charAt(0)} ${currentUser.lastName.charAt(
-      0
-    )}`;
-  }, [currentUser]);
+    let result = '';
+    if (!firstName || !lastName) return;
+    result += firstName.charAt(0) + ' ' + lastName.charAt(0);
+    return result;
+  }, [firstName, lastName]);
 
   useEffect(() => {
     getUser();
