@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Form, Input, Upload } from 'antd';
 import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
-import { beforeUpload, getBase64 } from '../../functions';
+import { beforeUpload, handleChange } from '../../functions';
 import { getVersion, updateVersion } from '../../services/gtaVersionsService';
 
 import './styles.scss';
@@ -60,21 +60,6 @@ export const GTAVersionDetails = () => {
     getData();
   }, []);
 
-  const handleChange = (info) => {
-    const file = info.file;
-    if (file.status === 'uploading') {
-      return setImageValue({ loading: true });
-    }
-    if (file.status === 'done') {
-      getBase64(file.originFileObj, (imageUrl) =>
-        setImageValue({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
-  };
-
   const uploadButton = (
     <div>
       <div className='ant-upload-text'>Upload image</div>
@@ -127,7 +112,7 @@ export const GTAVersionDetails = () => {
                       className='avatar-uploader'
                       showUploadList={false}
                       beforeUpload={beforeUpload}
-                      onChange={handleChange}
+                      onChange={(info) => handleChange(info, setImageValue)}
                       action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                     >
                       {imageUrl ? (

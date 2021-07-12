@@ -3,7 +3,7 @@ import { Form, Upload, Input } from 'antd';
 import { GtaVersion } from '../components/gtaVersion';
 import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
-import { beforeUpload, getBase64 } from '../functions/index';
+import { beforeUpload, handleChange } from '../functions/index';
 import { getAllVersions, createVersion, deleteVersion } from '../services';
 
 import './styles.scss';
@@ -68,21 +68,6 @@ const Layout = () => {
     setVersions(versionsArray);
   };
 
-  const handleChange = (info) => {
-    const file = info.file;
-    if (file.status === 'uploading') {
-      return setImageValue({ loading: true });
-    }
-    if (file.status === 'done') {
-      getBase64(file.originFileObj, (imageUrl) =>
-        setImageValue({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
-  };
-
   const uploadButton = (
     <div>
       <div className='ant-upload-text'>Upload image</div>
@@ -117,7 +102,7 @@ const Layout = () => {
                     showUploadList={false}
                     action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                     beforeUpload={beforeUpload}
-                    onChange={handleChange}
+                    onChange={(info) => handleChange(info, setImageValue)}
                   >
                     {imageUrl ? (
                       <img
