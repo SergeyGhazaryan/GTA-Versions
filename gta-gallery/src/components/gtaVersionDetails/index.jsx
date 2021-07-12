@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import { Form, Input, Upload } from 'antd';
 import { VersionModal } from '../shared/versionModal';
 import { Button } from '../button';
+import { beforeUpload, getBase64 } from '../../functions';
 import { getVersion, updateVersion } from '../../services/gtaVersionsService';
 
 import './styles.scss';
 
 const getFileList = (e) => {
-  if (Array.isArray(e)) return e;
-  return e && e.fileList;
+  return e.fileList;
 };
 
 export const GTAVersionDetails = () => {
@@ -60,12 +60,6 @@ export const GTAVersionDetails = () => {
     getData();
   }, []);
 
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-  };
-
   const handleChange = (info) => {
     const file = info.file;
     if (file.status === 'uploading') {
@@ -79,14 +73,6 @@ export const GTAVersionDetails = () => {
         })
       );
     }
-  };
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) console.error('You can only upload JPG/PNG file!');
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) console.error('Image must smaller than 2MB!');
-    return isJpgOrPng && isLt2M;
   };
 
   const uploadButton = (
@@ -140,9 +126,9 @@ export const GTAVersionDetails = () => {
                       listType='picture-card'
                       className='avatar-uploader'
                       showUploadList={false}
-                      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                       beforeUpload={beforeUpload}
                       onChange={handleChange}
+                      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                     >
                       {imageUrl ? (
                         <img

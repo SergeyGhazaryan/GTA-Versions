@@ -3,13 +3,13 @@ import { Form, Upload, Input } from 'antd';
 import { GtaVersion } from '../components/gtaVersion';
 import { VersionModal } from '../components/shared/versionModal';
 import { Button } from '../components/button';
+import { beforeUpload, getBase64 } from '../functions/index';
 import { getAllVersions, createVersion, deleteVersion } from '../services';
 
 import './styles.scss';
 
 const getFileList = (e) => {
-  if (Array.isArray(e)) return e;
-  return e && e.fileList;
+  return e.fileList;
 };
 
 const Layout = () => {
@@ -68,12 +68,6 @@ const Layout = () => {
     setVersions(versionsArray);
   };
 
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-  };
-
   const handleChange = (info) => {
     const file = info.file;
     if (file.status === 'uploading') {
@@ -87,14 +81,6 @@ const Layout = () => {
         })
       );
     }
-  };
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) console.error('You can only upload JPG/PNG file!');
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) console.error('Image must smaller than 2MB!');
-    return isJpgOrPng && isLt2M;
   };
 
   const uploadButton = (
